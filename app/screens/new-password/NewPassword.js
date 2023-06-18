@@ -1,4 +1,4 @@
-// //Reset Password, where you enter new password, and confirm password
+// Reset Password, where you enter new password, and confirm password
 
 // import 'react-native-gesture-handler';
 // import { StatusBar } from 'expo-status-bar';
@@ -132,6 +132,7 @@
 //   marginTop: 20,
 //   fontWeight: 'bold',
 //   textAlign: 'center',
+//   fontSize: 20,
 // },
 // resetParagraph: {
 //   textAlign: 'center',
