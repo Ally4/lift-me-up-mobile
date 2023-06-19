@@ -1331,12 +1331,19 @@ export default function App() {
            borderRadius: 10,
            borderColor:"#2FCBD8",
            borderWidth:1,
-           width:300,
-           marginTop:20,
-           marginLeft:40
+           width:350,
+           marginTop:-60,
+           marginLeft:20
            }}
            placeholder={'Search'}
             />
+        <View style={{marginLeft: 20, marginTop: 20, borderWidth:1, borderColor:"grey", borderRadius: 10, width:350, padding:10}}>
+          <TouchableOpacity ><Text style={{fontWeight:'bold', fontSize:20}}> Search</Text><Image source={require("./app/assets/photos/pharmacy.png")} style={{ marginLeft: 290, width:40, height:40, marginTop:10}}/></TouchableOpacity>
+        </View>
+            {/* <TouchableOpacity ><Text>Alation Hospital</Text><Image source={require("./app/assets/photos/pharmacy.png")} style={{marginTop:-25, marginLeft:300, width:35, height:35}}/></TouchableOpacity>
+            <TouchableOpacity ><Text>Kibru Hospital</Text><Image source={require("./app/assets/photos/pharmacy.png")} style={{marginTop:-25, marginLeft:300, width:35, height:35}}/></TouchableOpacity>
+            <TouchableOpacity ><Text>Naol Hospital</Text><Image source={require("./app/assets/photos/pharmacy.png")} style={{marginTop:-25, marginLeft:300, width:35, height:35}}/></TouchableOpacity>
+            <TouchableOpacity ><Text>Yanet Hospital</Text><Image source={require("./app/assets/photos/pharmacy.png")} style={{marginTop:-25, marginLeft:300, width:35, height:35}}/></TouchableOpacity> */}
         {/* <Image source={require("./app/assets/photos/logo.png")} style={{marginTop:200}}/> */}
         {/* <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SignupScreen')}> */}
         {/* <Stack.Screen name="Signu[" component={SignupScreen} /> */}
