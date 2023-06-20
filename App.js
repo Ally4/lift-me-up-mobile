@@ -1913,6 +1913,14 @@ export default function App() {
             </View> */}
         </View>
                  <Text style={{fontSize:25, marginLeft:10, marginTop:20}}>Sample Collection Point</Text>
+        <View style={{width:350, marginLeft:10, borderRadius:50,padding:2}}>
+          <View style={{backgroundColor:'white', width:'50%', padding:15}}>
+            <TouchableOpacity><Text>Hospital</Text></TouchableOpacity>
+          </View>
+          <View style={{backgroundColor:'#2FCBD8', width:'50%', marginLeft:'50%', marginTop:-49.5, padding:15}}>
+            <TouchableOpacity><Text style={{marginLeft:50, color:'white', fontWeight:'bold', fontSize:15}}>Others</Text></TouchableOpacity>
+          </View>
+        </View>
         {/* <View style={{backgroundColor:"green", flex:1}}></View> */}
         {/* </Stack.Navigator> */}
         {/* </NavigationContainer> */}
