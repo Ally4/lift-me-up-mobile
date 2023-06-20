@@ -1725,14 +1725,17 @@ export default function App() {
         </View>
         <Text style={{fontWeight:'bold', fontSize:30, marginLeft:20}}>Alation Hospital<Image source={require("./app/assets/photos/correct.png")} style={{ marginLeft: 150, width:15, height:15}}/></Text>
         <Text style={{color:"grey", marginLeft:20, fontSize:15}}>7545 bedfort Avenue Omaha NE 68134</Text>
-        <View style={{shadowColor:'grey', marginTop:20, padding:20}}>
-          <View>
-            <Text style={{fontWeight:'bold', marginLeft:20, fontSize:20}}>Price</Text><Text style={{fontWeight:'bold', marginLeft:20, fontSize:20}}>50$</Text>
+        <View style={{borderColor:'grey', borderWidth:1, borderRadius:10, borderOpacity:0.4, marginTop:20, padding:20, width:350, marginLeft:20}}>
+          <View style={{marginBottom:20}}>
+            <Text style={{fontWeight:'bold', fontSize:20}}>Price</Text><Text style={{fontWeight:'bold', marginLeft:270, marginTop:-25, fontSize:20}}>50$</Text>
           </View>
           <View>
-            <Text style={{fontWeight:'bold', marginLeft:20, fontSize:20}}>Turnaround Time</Text><Text style={{fontWeight:'bold', marginLeft:20, fontSize:20}}>1h</Text>
+            <Text style={{fontWeight:'bold', fontSize:20}}>Turnaround Time</Text><Text style={{fontWeight:'bold', marginLeft:270, marginTop:-25, fontSize:20}}>1h</Text>
           </View>
         </View>
+        <TouchableOpacity style={styles.buttonOrder} onPress={() => console.log('Button pressed')}> 
+          <Text style={styles.textOrder}>Order</Text>
+        </TouchableOpacity>
         {/* <Text style={{fontWeight:'bold', fontSize:20, marginTop:10, marginLeft:20, marginBottom:10}}>Available Lab Tests</Text> */}
         {/* <TextInput
           style={{
@@ -1805,25 +1808,25 @@ button: {
 },
 buttonText: {
   color: '#2FCBD8',
-  fontSize: 16,
+  fontSize: 20,
   fontWeight: 'bold',
   textAlign: 'center',
 },
-button1: {
+buttonOrder: {
   backgroundColor: '#2FCBD8',
-  padding: 10,
-  borderRadius: 5,
+  padding: 20,
+  borderRadius: 10,
   borderColor:"white",
   borderWidth:2,
-  width:300,
+  width:350,
   marginTop:20,
-  marginLeft:40
+  marginLeft:20
 
   // justifyContent:"center"    its not working in js engine: hermes
 },
-buttonText1: {
+textOrder: {
   color: 'white',
-  fontSize: 16,
+  fontSize: 20,
   fontWeight: 'bold',
   textAlign: 'center',
 },
