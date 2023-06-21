@@ -1858,7 +1858,10 @@
 
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View, Image, Button, TouchableOpacity, TextInput } from 'react-native';
+import React, { useState } from 'react';
+import { Picker } from '@react-native-picker/picker';
+import { SafeAreaView, StyleSheet, Text, View, Image, Button, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import ImagePicker from 'react-native-image-picker';
 // import { NavigationContainer} from '@react-navigation/native';
 import SignupScreen from './app/screens/SignupScreen';
 import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
@@ -1874,13 +1877,17 @@ export default function App() {
 
 
 
-  const [selectedGender, setSelectedGender] = useState('');
+  // const [selectedGender, setSelectedGender] = useState('');
 
-  const handleGenderSelect = (gender) => {
-    setSelectedGender(gender);
+  // const handleGenderSelect = (gender) => {
+  //   setSelectedGender(gender);
+  // };
+
+  const [selectedOption, setSelectedOption] = useState('');
+
+  const handleOptionChange = (option) => {
+    setSelectedOption(option);
   };
-
-
 
 
 
@@ -1889,6 +1896,7 @@ export default function App() {
 
   return (
       <SafeAreaView> 
+        <ScrollView>
       {/* <NavigationContainer> */}
       {/* <Stack.Navigator> */}
         {/* <View style={{backgroundColor:"black", width:250, height:250, borderRadius:150, opacity:0.2, top: -90, left:-90}}></View> */}
@@ -1930,11 +1938,11 @@ export default function App() {
         </View>
         <Text style={{fontSize:25, marginLeft:10, marginTop:20}}>Sample Collection Point</Text>
         <View style={{width:350, marginLeft:10, borderRadius:10,padding:1, backgroundColor:'#2FCBD8', marginTop:10}}>
-          <View style={{backgroundColor:'white', width:'50%', padding:15, borderRadius:10}}>
-            <TouchableOpacity><Text style={{marginLeft:50, fontWeight:'bold',}}>Hospital</Text></TouchableOpacity>
+          <View style={{backgroundColor:'#2FCBD8', width:'50%', padding:15, borderRadius:10}}>
+            <TouchableOpacity><Text style={{marginLeft:50, fontWeight:'bold', color:'white'}}>Hospital</Text></TouchableOpacity>
           </View>
-          <View style={{backgroundColor:'#2FCBD8', width:'50%', marginLeft:'50%', marginTop:-49.5, padding:15, borderRadius:10}}>
-            <TouchableOpacity><Text style={{marginLeft:50, color:'white', fontWeight:'bold', fontSize:15}}>Others</Text></TouchableOpacity>
+          <View style={{backgroundColor:'white', width:'50%', marginLeft:'50%', marginTop:-49.5, padding:15, borderBottomRightRadius:10, borderTopRightRadius:10}}>
+            <TouchableOpacity><Text style={{marginLeft:50, fontWeight:'bold', fontSize:15}}>Others</Text></TouchableOpacity>
           </View>
         </View>
         <TextInput
@@ -1950,25 +1958,110 @@ export default function App() {
            }}
            placeholder={'Name'}
            />
-
-
-
-               <View>
-      <TouchableOpacity onPress={() => handleGenderSelect('male')}>
-        <Text>{selectedGender === 'male' ? 'Selected' : 'Select'} Male</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={() => handleGenderSelect('female')}>
-        <Text>{selectedGender === 'female' ? 'Selected' : 'Select'} Female</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={() => handleGenderSelect('other')}>
-        <Text>{selectedGender === 'other' ? 'Selected' : 'Select'} Other</Text>
-      </TouchableOpacity>
-    </View>
+                   <TextInput
+           style={{
+             backgroundColor: 'white',
+             padding: 10,
+             borderRadius: 5,
+             borderColor:"#2FCBD8",
+             borderWidth:1,
+             width:350,
+             marginTop:20,
+             marginLeft:10
+           }}
+           placeholder={'Male or Female'}
+           />
+                   <TextInput
+           style={{
+             backgroundColor: 'white',
+             padding: 10,
+             borderRadius: 5,
+             borderColor:"#2FCBD8",
+             borderWidth:1,
+             width:350,
+             marginTop:20,
+             marginLeft:10
+           }}
+           placeholder={'Age'}
+           />
+                   <TextInput
+           style={{
+             backgroundColor: 'white',
+             padding: 10,
+             borderRadius: 5,
+             borderColor:"#2FCBD8",
+             borderWidth:1,
+             width:350,
+             marginTop:20,
+             marginLeft:10
+           }}
+           placeholder={'Hospital Name'}
+           />
+                   <TextInput
+           style={{
+             backgroundColor: 'white',
+             padding: 10,
+             borderRadius: 5,
+             borderColor:"#2FCBD8",
+             borderWidth:1,
+             width:350,
+             marginTop:20,
+             marginLeft:10
+           }}
+           placeholder={'Department'}
+           />
+                   <TextInput
+           style={{
+             backgroundColor: 'white',
+             padding: 10,
+             borderRadius: 5,
+             borderColor:"#2FCBD8",
+             borderWidth:1,
+             width:350,
+             marginTop:20,
+             marginLeft:10
+           }}
+           placeholder={'Room number'}
+           />
+                   <TextInput
+           style={{
+             backgroundColor: 'white',
+             padding: 10,
+             borderRadius: 5,
+             borderColor:"#2FCBD8",
+             borderWidth:1,
+             width:350,
+             marginTop:20,
+             marginLeft:10
+           }}
+           placeholder={'Phone Number'}
+           />
+          <Text style={{fontSize:25, marginLeft:10, marginTop:20}}>Payment Method</Text>
+          <Text style={{fontSize:25, marginLeft:10, marginTop:20}}>If Mobile Pay, Send a screen shot</Text>
         {/* <View style={{backgroundColor:"green", flex:1}}></View> */}
         {/* </Stack.Navigator> */}
         {/* </NavigationContainer> */}
+            <View>
+      <Picker
+        selectedValue={selectedOption}
+        onValueChange={handleOptionChange}
+                  style={{
+             backgroundColor: 'white',
+             padding: 10,
+             borderRadius: 5,
+             borderColor:"#2FCBD8",
+             borderWidth:1,
+             width:350,
+             marginTop:20,
+             marginLeft:10
+           }}
+      >
+        <Picker.Item label="Select your payment mode" style={{color:'#2FCBD8'}}/>
+        <Picker.Item label="Cash" value="option1" />
+        <Picker.Item label="Mobile Pay" value="option2" />
+      </Picker>
+    </View>
+        </ScrollView>
       </SafeAreaView>
   );
 }
