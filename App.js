@@ -1871,6 +1871,22 @@ import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
 export default function App() {
 
 
+
+
+
+  const [selectedGender, setSelectedGender] = useState('');
+
+  const handleGenderSelect = (gender) => {
+    setSelectedGender(gender);
+  };
+
+
+
+
+
+
+
+
   return (
       <SafeAreaView> 
       {/* <NavigationContainer> */}
@@ -1912,15 +1928,44 @@ export default function App() {
             />
             </View> */}
         </View>
-                 <Text style={{fontSize:25, marginLeft:10, marginTop:20}}>Sample Collection Point</Text>
-        <View style={{width:350, marginLeft:10, borderRadius:50,padding:2}}>
-          <View style={{backgroundColor:'white', width:'50%', padding:15}}>
-            <TouchableOpacity><Text>Hospital</Text></TouchableOpacity>
+        <Text style={{fontSize:25, marginLeft:10, marginTop:20}}>Sample Collection Point</Text>
+        <View style={{width:350, marginLeft:10, borderRadius:10,padding:1, backgroundColor:'#2FCBD8', marginTop:10}}>
+          <View style={{backgroundColor:'white', width:'50%', padding:15, borderRadius:10}}>
+            <TouchableOpacity><Text style={{marginLeft:50, fontWeight:'bold',}}>Hospital</Text></TouchableOpacity>
           </View>
-          <View style={{backgroundColor:'#2FCBD8', width:'50%', marginLeft:'50%', marginTop:-49.5, padding:15}}>
+          <View style={{backgroundColor:'#2FCBD8', width:'50%', marginLeft:'50%', marginTop:-49.5, padding:15, borderRadius:10}}>
             <TouchableOpacity><Text style={{marginLeft:50, color:'white', fontWeight:'bold', fontSize:15}}>Others</Text></TouchableOpacity>
           </View>
         </View>
+        <TextInput
+           style={{
+             backgroundColor: 'white',
+             padding: 10,
+             borderRadius: 5,
+             borderColor:"#2FCBD8",
+             borderWidth:1,
+             width:350,
+             marginTop:20,
+             marginLeft:10
+           }}
+           placeholder={'Name'}
+           />
+
+
+
+               <View>
+      <TouchableOpacity onPress={() => handleGenderSelect('male')}>
+        <Text>{selectedGender === 'male' ? 'Selected' : 'Select'} Male</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => handleGenderSelect('female')}>
+        <Text>{selectedGender === 'female' ? 'Selected' : 'Select'} Female</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => handleGenderSelect('other')}>
+        <Text>{selectedGender === 'other' ? 'Selected' : 'Select'} Other</Text>
+      </TouchableOpacity>
+    </View>
         {/* <View style={{backgroundColor:"green", flex:1}}></View> */}
         {/* </Stack.Navigator> */}
         {/* </NavigationContainer> */}
