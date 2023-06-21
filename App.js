@@ -1890,6 +1890,23 @@ export default function App() {
   };
 
 
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleImageUpload = () => {
+    ImagePicker.showImagePicker({ title: 'Select Image' }, (response) => {
+      if (response.didCancel) {
+        console.log('Image selection was canceled.');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else {
+        const source = { uri: response.uri };
+        setSelectedImage(source);
+      }
+    });
+  };
+
+
+
 
 
 
@@ -2037,7 +2054,6 @@ export default function App() {
            placeholder={'Phone Number'}
            />
           <Text style={{fontSize:25, marginLeft:10, marginTop:20}}>Payment Method</Text>
-          <Text style={{fontSize:25, marginLeft:10, marginTop:20}}>If Mobile Pay, Send a screen shot</Text>
         {/* <View style={{backgroundColor:"green", flex:1}}></View> */}
         {/* </Stack.Navigator> */}
         {/* </NavigationContainer> */}
@@ -2061,6 +2077,22 @@ export default function App() {
         <Picker.Item label="Mobile Pay" value="option2" />
       </Picker>
     </View>
+
+
+    <View>
+      <Text style={{fontSize:15, marginLeft:10, marginTop:20}}>If Mobile Pay, Send a screen shot</Text>
+      <TouchableOpacity source={require("./app/assets/photos/photo-camera.png")} onPress={handleImageUpload} >
+      {selectedImage && <Image source={selectedImage} style={{ width: 200, height: 200 }} />}
+      </TouchableOpacity>
+    </View>
+    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SignupScreen')}>
+         {/* <Stack.Screen name="Signu[" component={SignupScreen} /> */}
+       <Text style={styles.buttonText}>Login</Text>
+     </TouchableOpacity>
+     <TouchableOpacity style={styles.button1} onPress={() => console.log('Button pressed')}>
+       <Text style={styles.buttonText1}>Sign Up</Text>
+     </TouchableOpacity>
+
         </ScrollView>
       </SafeAreaView>
   );
