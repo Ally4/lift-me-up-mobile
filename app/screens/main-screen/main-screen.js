@@ -2,8 +2,8 @@ import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, Text, View, Image, Button, TouchableOpacity, TextInput, FlatList, } from 'react-native';
 // import { NavigationContainer} from '@react-navigation/native';
-import SignupScreen from './app/screens/SignupScreen';
-import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
+// import SignupScreen from './app/screens/SignupScreen';
+// import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
 // import { NavigationContainer } from '@react-navigation/native';
 // import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -29,9 +29,9 @@ export default function App() {
       {/* <Stack.Navigator> */}
         <View style={{backgroundColor:"#2FCBD8", width:250, height:250, borderRadius:150, top: -90, left:-90}}></View>
         <View>
-        <Image source={require("./app/assets/photos/profile.png")} style={{marginTop:-150, marginLeft:10, width:50, height:50}}/>
-        <Image source={require("./app/assets/photos/logo-blue.png")} style={{marginTop:-40, marginLeft:135}}/>
-        <Image source={require("./app/assets/photos/bell.png")} style={{marginTop:-30,marginLeft:330, width:35, height:35}}/>
+        <Image source={require("../../assets/photos/profile.png")} style={{marginTop:-150, marginLeft:10, width:50, height:50}}/>
+        <Image source={require("../../assets/photos/logo-blue.png")} style={{marginTop:-40, marginLeft:135}}/>
+        <Image source={require("../../assets/photos/bell.png")} style={{marginTop:-30,marginLeft:330, width:35, height:35}}/>
         </View>
         <Text style={styles.helloText}>Hello, <Text style={styles.abebeText}>Abebe!</Text></Text>
         <Text style={styles.testText}>Which facility or test are you looking for today?</Text>
@@ -65,7 +65,7 @@ export default function App() {
         )}
       />
          <Text style={styles.labText}>Our Facilities</Text>
-         <Image source={require("./app/assets/photos/plus.png")} style={{width:100, height:100, marginTop:260, marginLeft:280}}/>
+         <Image source={require("../../assets/photos/plus.png")} style={{width:100, height:100, marginTop:260, marginLeft:280}}/>
         {/* <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SignupScreen')}> */}
         {/* <Stack.Screen name="Signu[" component={SignupScreen} /> */}
       {/* <Text style={styles.buttonText}>Login</Text> */}

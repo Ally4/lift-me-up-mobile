@@ -1,12 +1,12 @@
 import 'react-native-gesture-handler';
-import { StatusBar } from 'expo-status-bar';
+// import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
 import { SafeAreaView, StyleSheet, Text, View, Image, Button, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 // import { NavigationContainer} from '@react-navigation/native';
-import SignupScreen from './app/screens/SignupScreen';
-import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
+// import SignupScreen from '../../screens/SignupScreen';
+// import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
 // import { NavigationContainer } from '@react-navigation/native';
 // import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -60,7 +60,7 @@ export default function OrderOther() {
       {/* <Stack.Navigator> */}
         {/* <View style={{backgroundColor:"black", width:250, height:250, borderRadius:150, opacity:0.2, top: -90, left:-90}}></View> */}
         <View style={{backgroundColor:'#2FCBD8', borderBottomRightRadius:30, borderBottomLeftRadius:30}}>
-        <TouchableOpacity ><Image source={require("./app/assets/photos/left-arrow.png")} style={{marginTop:50, marginLeft:10, width:40, height:40}}/><Text style={styles.orderText}>Order</Text></TouchableOpacity>
+        <TouchableOpacity ><Image source={require("../../assets/photos/left-arrow.png")} style={{marginTop:50, marginLeft:10, width:40, height:40}}/><Text style={styles.orderText}>Order</Text></TouchableOpacity>
         <View >
          <View style={{marginTop:20, padding:20, width:350, marginLeft:20}}>
           <View style={{marginBottom:20}}>
@@ -77,7 +77,7 @@ export default function OrderOther() {
           </View>
         </View>
         </View>
-        {/* <Image source={require("./app/assets/photos/colab.png")} style={{marginBottom:20, marginLeft:70}}/> */}
+        {/* <Image source={require("../../assets/photos/colab.png")} style={{marginBottom:20, marginLeft:70}}/> */}
         {/* <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SignupScreen')}> */}
         {/* <Stack.Screen name="Signu[" component={SignupScreen} /> */}
       {/* <Text style={styles.buttonText}>Login</Text> */}

@@ -1,8 +1,8 @@
 import 'react-native-gesture-handler';
-import { StatusBar } from 'expo-status-bar';
+// import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, Text, View, Image, Button, TouchableOpacity, TextInput } from 'react-native';
 // import { NavigationContainer} from '@react-navigation/native';
-import SignupScreen from './app/screens/SignupScreen';
+// import SignupScreen from './app/screens/SignupScreen';
 // import { NavigationContainer } from '@react-navigation/native';
 // import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -18,7 +18,7 @@ export default function Search() {
       {/* <Stack.Navigator> */}
         <View style={{backgroundColor:"#2FCBD8", width:250, height:250, borderRadius:150, top: -90, left:-90}}></View>
         <View>
-          <TouchableOpacity ><Image source={require("./app/assets/photos/left-arrow.png")} style={{marginTop:-160, marginLeft:10, width:40, height:40}}/></TouchableOpacity>
+          <TouchableOpacity ><Image source={require("../../assets/photos/left-arrow.png")} style={{marginTop:-160, marginLeft:10, width:40, height:40}}/></TouchableOpacity>
           <Text style={{fontWeight:'bold', fontSize:30, marginTop:-160, marginLeft:140, color:"#2FCBD8",}}>Search</Text>
         </View>
         <TextInput
@@ -35,16 +35,16 @@ export default function Search() {
            placeholder={'Search'}
             />
         <View style={{marginLeft: 20, marginTop: 20, borderWidth:1, borderColor:"grey", borderRadius: 10, width:350, padding:10}}>
-          <TouchableOpacity ><Text style={{fontWeight:'bold', fontSize:20}}> Alation Hospital</Text><Image source={require("./app/assets/photos/correct.png")} style={{ marginLeft: 150, width:15, height:15, marginTop:-25}}/><Image source={require("./app/assets/photos/pharmacy.png")} style={{ marginLeft: 290, width:40, height:40, marginTop:-20}}/></TouchableOpacity>
+          <TouchableOpacity ><Text style={{fontWeight:'bold', fontSize:20}}> Alation Hospital</Text><Image source={require("../../assets/photos/correct.png")} style={{ marginLeft: 150, width:15, height:15, marginTop:-25}}/><Image source={require("../../assets/photos/pharmacy.png")} style={{ marginLeft: 290, width:40, height:40, marginTop:-20}}/></TouchableOpacity>
         </View>
         <View style={{marginLeft: 20, marginTop: 20, borderWidth:1, borderColor:"grey", borderRadius: 10, width:350, padding:10}}>
-          <TouchableOpacity ><Text style={{fontWeight:'bold', fontSize:20}}> Kibru Hospital</Text><Image source={require("./app/assets/photos/correct.png")} style={{ marginLeft: 150, width:15, height:15, marginTop:-25}}/><Image source={require("./app/assets/photos/pharmacy.png")} style={{ marginLeft: 290, width:40, height:40, marginTop:-20}}/></TouchableOpacity>
+          <TouchableOpacity ><Text style={{fontWeight:'bold', fontSize:20}}> Kibru Hospital</Text><Image source={require("../../assets/photos/correct.png")} style={{ marginLeft: 150, width:15, height:15, marginTop:-25}}/><Image source={require("../../assets/photos/pharmacy.png")} style={{ marginLeft: 290, width:40, height:40, marginTop:-20}}/></TouchableOpacity>
         </View>
         <View style={{marginLeft: 20, marginTop: 20, borderWidth:1, borderColor:"grey", borderRadius: 10, width:350, padding:10}}>
-          <TouchableOpacity ><Text style={{fontWeight:'bold', fontSize:20}}> Naol Hospital</Text><Image source={require("./app/assets/photos/correct.png")} style={{ marginLeft: 150, width:15, height:15, marginTop:-25}}/><Image source={require("./app/assets/photos/pharmacy.png")} style={{ marginLeft: 290, width:40, height:40, marginTop:-20}}/></TouchableOpacity>
+          <TouchableOpacity ><Text style={{fontWeight:'bold', fontSize:20}}> Naol Hospital</Text><Image source={require("../../assets/photos/correct.png")} style={{ marginLeft: 150, width:15, height:15, marginTop:-25}}/><Image source={require("../../assets/photos/pharmacy.png")} style={{ marginLeft: 290, width:40, height:40, marginTop:-20}}/></TouchableOpacity>
         </View>
         <View style={{marginLeft: 20, marginTop: 20, borderWidth:1, borderColor:"grey", borderRadius: 10, width:350, padding:10}}>
-          <TouchableOpacity ><Text style={{fontWeight:'bold', fontSize:20}}> Yanet Hospital</Text><Image source={require("./app/assets/photos/correct.png")} style={{ marginLeft: 150, width:15, height:15, marginTop:-25}}/><Image source={require("./app/assets/photos/pharmacy.png")} style={{ marginLeft: 290, width:40, height:40, marginTop:-20}}/></TouchableOpacity>
+          <TouchableOpacity ><Text style={{fontWeight:'bold', fontSize:20}}> Yanet Hospital</Text><Image source={require("../../assets/photos/correct.png")} style={{ marginLeft: 150, width:15, height:15, marginTop:-25}}/><Image source={require("../../assets/photos/pharmacy.png")} style={{ marginLeft: 290, width:40, height:40, marginTop:-20}}/></TouchableOpacity>
         </View>
             {/* <TouchableOpacity ><Text>Alation Hospital</Text><Image source={require("./app/assets/photos/pharmacy.png")} style={{marginTop:-25, marginLeft:300, width:35, height:35}}/></TouchableOpacity>
             <TouchableOpacity ><Text>Kibru Hospital</Text><Image source={require("./app/assets/photos/pharmacy.png")} style={{marginTop:-25, marginLeft:300, width:35, height:35}}/></TouchableOpacity>

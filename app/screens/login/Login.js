@@ -18,7 +18,7 @@ export default function Login() {
       {/* <NavigationContainer> */}
       {/* <Stack.Navigator> */}
         <View style={{backgroundColor:"black", width:250, height:250, borderRadius:150, opacity:0.2, top: -90, left:-90}}></View>
-        <Image source={require("./app/assets/photos/colab.png")} style={{marginBottom:20, marginLeft:70}}/>
+        <Image source={require("../../assets/photos/colab.png")} style={{marginBottom:20, marginLeft:70}}/>
         {/* <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SignupScreen')}> */}
         {/* <Stack.Screen name="Signu[" component={SignupScreen} /> */}
       {/* <Text style={styles.buttonText}>Login</Text> */}
@@ -61,10 +61,10 @@ export default function Login() {
            <View style={styles.line} /> 
            </View>
            <TouchableOpacity style={styles.button2}>
-            <Text style={styles.buttonText}><Image source={require("./app/assets/photos/google.png")} style={{width:20, height:20}}/>  GOOGLE</Text>
+            <Text style={styles.buttonText}><Image source={require("../../assets/photos/google.png")} style={{width:20, height:20}}/>  GOOGLE</Text>
             </TouchableOpacity>
            <Text style={{marginLeft:90}}>Do you have an account?<TouchableOpacity ><Text style={{ color: '#2FCBD8', marginTop:2}}> Signup</Text></TouchableOpacity></Text>
-           <Image source={require("./app/assets/photos/acubed.png")} style={{marginBottom:20, marginLeft:150}}/>
+           <Image source={require("../../assets/photos/acubed.png")} style={{marginBottom:20, marginLeft:150}}/>
         </View>
         {/* <View style={{backgroundColor:"green", flex:1}}></View> */}
         {/* </Stack.Navigator> */}

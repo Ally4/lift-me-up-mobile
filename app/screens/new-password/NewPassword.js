@@ -2,8 +2,8 @@ import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, Text, View, Image, Button, TouchableOpacity, TextInput } from 'react-native';
 // import { NavigationContainer} from '@react-navigation/native';
-import SignupScreen from './app/screens/SignupScreen';
-import { CheckBox } from 'react-native-elements';
+// import SignupScreen from './app/screens/SignupScreen';
+// import { CheckBox } from 'react-native-elements';
 // import { NavigationContainer } from '@react-navigation/native';
 // import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -18,7 +18,7 @@ export default function App() {
       {/* <NavigationContainer> */}
       {/* <Stack.Navigator> */}
         <View style={{backgroundColor:"black", width:250, height:250, borderRadius:150, opacity:0.2, top: -90, left:-90}}></View>
-        <Image source={require("./app/assets/photos/colab.png")} style={{marginBottom:20, marginLeft:70}}/>
+        <Image source={require("../../assets/photos/colab.png")} style={{marginBottom:20, marginLeft:70}}/>
         {/* <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SignupScreen')}> */}
         {/* <Stack.Screen name="Signu[" component={SignupScreen} /> */}
       {/* <Text style={styles.buttonText}>Login</Text> */}
