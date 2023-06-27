@@ -1,5 +1,3 @@
-// // details
-
 // import 'react-native-gesture-handler';
 // import { StatusBar } from 'expo-status-bar';
 // import { SafeAreaView, StyleSheet, Text, View, Image, Button, TouchableOpacity, TextInput } from 'react-native';
