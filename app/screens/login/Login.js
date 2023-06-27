@@ -1,8 +1,8 @@
 import 'react-native-gesture-handler';
-import { StatusBar } from 'expo-status-bar';
+// import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, Text, View, Image, Button, TouchableOpacity, TextInput } from 'react-native';
 // import { NavigationContainer} from '@react-navigation/native';
-import SignupScreen from '../signup/Signup';
+// import SignupScreen from '../signup/Signup';
 import { CheckBox } from 'react-native-elements';
 // import { NavigationContainer } from '@react-navigation/native';
 // import { createNativeStackNavigator } from '@react-navigation/native-stack';
