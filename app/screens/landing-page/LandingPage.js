@@ -1,14 +1,12 @@
-import 'react-native-gesture-handler';
-import { SafeAreaView, StyleSheet, Text, View, Image, Button, TouchableOpacity } from 'react-native';
+import * as React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity,} from 'react-native';
 
-
-export default function Landing({ navigation }) {
-
-
+export default function LandingPage({navigation}) {
   return (
-      <SafeAreaView style={styles.container}>
+            <SafeAreaView style={styles.container}>
         <View style={{backgroundColor:"black", width:250, height:250, borderRadius:150, opacity:0.2, top: -90, left:-90}}></View>
-        <Image source={require("../../assets/photos/logo.png")} style={{marginTop:200}}/>
+        <Image source={require("../../assets/photos/logo.png")} style={{marginTop:150}}/>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
       <Text style={styles.buttonText}>Login</Text>
     </TouchableOpacity>
@@ -17,7 +15,8 @@ export default function Landing({ navigation }) {
     </TouchableOpacity>
       </SafeAreaView>
   );
-}
+};
+
 
 const styles = StyleSheet.create({
   container: {
