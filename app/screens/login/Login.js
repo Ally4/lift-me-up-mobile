@@ -9,7 +9,7 @@ import LoginSlice from '../../../LoginSlice';  //slice or reducer
 export default function Login() {
 
   // We use the useSelector hook to access the balance state from the store
-  const login = useSelector((state) => state.login.value);
+  // const login = useSelector((state) => state.login.value);
 
   // This is to pass value in the text fields
   const [text, setText] = useState();
@@ -46,7 +46,7 @@ export default function Login() {
             marginLeft:40
           }}
           placeholder={'Email'}
-          value={text}
+          // value={text}
           onChangeText={setText}
           />
         <TextInput
@@ -61,7 +61,7 @@ export default function Login() {
             marginLeft:40
           }}
           placeholder={'Password'}
-          value={text}
+          // value={text}
           onChangeText={setText}
           />
         {/* <View style={{ marginTop: 20 }}>
