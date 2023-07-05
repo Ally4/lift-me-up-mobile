@@ -2,8 +2,8 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import { store } from "./app/redux/store/Store";
-import { Provider } from "react-redux";
+// import { store } from "./app/redux/store/Store";
+// import { Provider } from "react-redux";
 
 import LandingPage from './app/screens/landing-page/LandingPage';
 import Login from './app/screens/login/Login'
@@ -28,10 +28,10 @@ const App = () => {
 
 
 
-export default () => {
-  return (
-    <Provider store={store}>
-      <App />
-    </Provider>
-  );
-};
+// export default () => {
+//   return (
+//     <Provider store={store}>
+//       <App />
+//     </Provider>
+//   );
+// };
