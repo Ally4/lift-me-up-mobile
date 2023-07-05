@@ -1,9 +1,32 @@
 import 'react-native-gesture-handler';
+import React, { useState} from 'react';
 import { SafeAreaView, StyleSheet, Text, View, Image, Button, TouchableOpacity, TextInput } from 'react-native';
 import { CheckBox } from 'react-native-elements';
+import { useSelector, useDispatch } from 'react-redux'; //for the redux
+import LoginSlice from '../../../LoginSlice';  //slice or reducer
 
 
 export default function Login() {
+
+  // We use the useSelector hook to access the balance state from the store
+  const login = useSelector((state) => state.login.value);
+
+  // This is to pass value in the text fields
+  const [text, setText] = useState();
+
+  //This is to dispatch the action in the screen
+  const dispatch = useDispatch();
+
+
+  //Here gooes the function of login and it mainly called onSubmit or handleSubmit; we pass in the dispatch of actions, in the dispatch we pass in LoginSlice(reducer), in the reducer we pass in the text, but also down we put the new value of text, so far setted to empty
+    function handleSubmit() {
+      dispatch(LoginSlice(text));
+      setText('');
+  }
+
+
+
+
 
 
   return (
@@ -22,7 +45,9 @@ export default function Login() {
             marginTop:20,
             marginLeft:40
           }}
-          placeholder={'Email or Phone Number'}
+          placeholder={'Email'}
+          value={text}
+          onChangeText={setText}
           />
         <TextInput
           style={{
@@ -36,13 +61,41 @@ export default function Login() {
             marginLeft:40
           }}
           placeholder={'Password'}
+          value={text}
+          onChangeText={setText}
           />
+        {/* <View style={{ marginTop: 20 }}>
+            <Text style={{ fontSize: 20 }}>Current Balance: {login}$</Text>      this is how it could be if proceeding with the example of balance
+        </View> */}
+
+
+{/* <View style={{ marginTop: 20 }}>
+            <Button
+                title="Deposit"
+                onPress={() => {
+                    // We dispatch the deposit action to the store with payload 10
+                    dispatch(deposit(10));
+                }}
+            />
+        </View>                                                                                and the these are the actions that would change the initial state, also with the dispatch
+        <View style={{ marginTop: 20 }}>
+            <Button
+                title="Withdraw"
+                onPress={() => {
+                    // We dispatch the withdraw action to the store with payload 10
+                    dispatch(withdraw(10));
+                }}
+            />
+        </View> */}
+
+
+
           <TouchableOpacity style={styles.button1} onPress={() => console.log('Button pressed')}> 
             <Text style={styles.buttonText1}>Login</Text>
            </TouchableOpacity>
            <View style={{marginLeft:20}}><Text><CheckBox title='Remember Me' color='#2FCBD8'></CheckBox> Forgotten Password?</Text></View>
            <View style={styles.lineBox}>
-           <View style={styles.line} /> 
+           <View style={styles.line} onPress={handleSubmit} /> 
            <Text style={styles.lineText}>Or Login</Text>
            <View style={styles.line} /> 
            </View>
