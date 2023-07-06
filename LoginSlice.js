@@ -20,7 +20,10 @@ export const LoginSlice = createSlice({
       axios.post('http://localhost:1234/api/v1/auth/login' , {email , password}).then((res)=>{
         if(res.user){
         state.userData = res.user
-        }})
+        }
+      // This is to set the token in the local storage
+      localStorage.setItem('userToken', token)
+      })
     },
     withdraw: (state, action) => {
       // This is the reducer function for the withdraw action

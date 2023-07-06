@@ -90,7 +90,7 @@ export default function Login() {
 
 
 
-          <TouchableOpacity style={styles.button1} onPress={() => console.log('Button pressed')}> 
+          <TouchableOpacity style={styles.button1} onPress={handleSubmit}> 
             <Text style={styles.buttonText1}>Login</Text>
            </TouchableOpacity>
            <View style={{marginLeft:20}}><Text><CheckBox title='Remember Me' color='#2FCBD8'></CheckBox> Forgotten Password?</Text></View>
