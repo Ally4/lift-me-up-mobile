@@ -6,7 +6,7 @@ import { SafeAreaView, StyleSheet, Text, View, Image, Button, TouchableOpacity, 
 import ImagePicker from 'react-native-image-picker';
 
 
-export default function OrderOther() {
+export default function OrderOther({ navigation }) {
 
   const [selectedOption, setSelectedOption] = useState('');
 
@@ -40,7 +40,7 @@ export default function OrderOther() {
       <SafeAreaView> 
         <ScrollView>
         <View style={{backgroundColor:'#2FCBD8', borderBottomRightRadius:30, borderBottomLeftRadius:30}}>
-        <TouchableOpacity ><Image source={require("../../assets/photos/left-arrow.png")} style={{marginTop:50, marginLeft:10, width:40, height:40}}/><Text style={styles.orderText}>Order</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.goBack()} ><Image source={require("../../assets/photos/left-arrow.png")} style={{marginTop:50, marginLeft:10, width:40, height:40}}/><Text style={styles.orderText}>Order</Text></TouchableOpacity>
         <View >
          <View style={{marginTop:20, padding:20, width:350, marginLeft:20}}>
           <View style={{marginBottom:20}}>

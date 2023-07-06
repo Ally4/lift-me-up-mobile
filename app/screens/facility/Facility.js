@@ -3,7 +3,7 @@ import 'react-native-gesture-handler';
 import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
 
 
-export default function Facility() {
+export default function Facility({ navigation }) {
 
 
   return (
@@ -11,7 +11,7 @@ export default function Facility() {
       <ScrollView >
         <View style={{backgroundColor:"#2FCBD8", width:250, height:250, borderRadius:150, top: -90, left:-90}}></View>
         <View>
-          <TouchableOpacity ><Image source={require("../../assets/photos/left-arrow.png")} style={{marginTop:-160, marginLeft:10, width:40, height:40}}/></TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.goBack()}><Image source={require("../../assets/photos/left-arrow.png")} style={{marginTop:-160, marginLeft:10, width:40, height:40}}/></TouchableOpacity>
           <Text style={{fontWeight:'bold', fontSize:30, marginTop:-160, marginLeft:140, color:"#2FCBD8",}}>Facility</Text>
         </View>
         <View>

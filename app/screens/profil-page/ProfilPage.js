@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 // import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, Alert, ScrollView} from 'react-native';
 
-export default function ProfilPage() {
+export default function ProfilPage({ navigation }) {
 
 
 
@@ -28,7 +28,7 @@ export default function ProfilPage() {
         <TouchableOpacity onPress={createTwoButtonAlert}><Image source={require("../../assets/photos/dots.png")} style={{marginTop:-200, marginLeft:320, width:40, height:40}}/></TouchableOpacity>
         </View>
         <View>
-        <TouchableOpacity ><Image source={require("../../assets/photos/left-arrow.png")} style={{marginTop:-200, marginLeft:10, width:40, height:40}}/></TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.goBack()} ><Image source={require("../../assets/photos/left-arrow.png")} style={{marginTop:-200, marginLeft:10, width:40, height:40}}/></TouchableOpacity>
         </View>
         <Image source={require("../../assets/photos/profile.png")} style={{marginTop:-60, marginLeft:140, width:130, height:130}}/>
         <Text style={styles.helloText}>Abebe David <Image source={require("../../assets/photos/edit.png")} style={{width:25, height:25}}/></Text>
