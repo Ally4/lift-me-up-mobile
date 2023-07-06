@@ -1,10 +1,10 @@
 import * as React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity,} from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
 
 export default function LandingPage({navigation}) {
   return (
             <SafeAreaView style={styles.container}>
+              <ScrollView >
         <View style={{backgroundColor:"black", width:250, height:250, borderRadius:150, opacity:0.2, top: -90, left:-90}}></View>
         <Image source={require("../../assets/photos/logo.png")} style={{marginTop:150}}/>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
@@ -13,6 +13,7 @@ export default function LandingPage({navigation}) {
     <TouchableOpacity style={styles.button1} onPress={() => console.log('Button pressed')}>
       <Text style={styles.buttonText1}>Sign Up</Text>
     </TouchableOpacity>
+    </ScrollView>
       </SafeAreaView>
   );
 };

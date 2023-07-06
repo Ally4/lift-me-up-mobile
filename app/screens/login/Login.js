@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useState} from 'react';
-import { SafeAreaView, StyleSheet, Text, View, Image, Button, TouchableOpacity, TextInput } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux'; //for the redux
 import LoginSlice from '../../../LoginSlice';  //slice or reducer
@@ -30,7 +30,8 @@ export default function Login() {
 
 
   return (
-      <SafeAreaView style={styles.container}> 
+      <SafeAreaView style={styles.container}>
+        <ScrollView > 
         <View style={{backgroundColor:"black", width:250, height:250, borderRadius:150, opacity:0.2, top: -90, left:-90}}></View>
         <Image source={require("../../assets/photos/colab.png")} style={{marginBottom:20, marginLeft:70}}/>
         <View style={{backgroundColor:"white", flex:2, borderTopRightRadius:30, borderTopLeftRadius:30}}>
@@ -105,6 +106,7 @@ export default function Login() {
            <Text style={{marginLeft:90}}>Do you have an account?<TouchableOpacity ><Text style={{ color: '#2FCBD8', marginTop:2}}> Signup</Text></TouchableOpacity></Text>
            <Image source={require("../../assets/photos/acubed.png")} style={{marginBottom:20, marginLeft:150}}/>
         </View>
+        </ScrollView>
       </SafeAreaView>
   );
 }

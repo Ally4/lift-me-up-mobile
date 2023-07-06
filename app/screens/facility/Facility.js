@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 // import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
 
 
 export default function Facility() {
@@ -8,6 +8,7 @@ export default function Facility() {
 
   return (
       <SafeAreaView style={styles.container}> 
+      <ScrollView >
         <View style={{backgroundColor:"#2FCBD8", width:250, height:250, borderRadius:150, top: -90, left:-90}}></View>
         <View>
           <TouchableOpacity ><Image source={require("../../assets/photos/left-arrow.png")} style={{marginTop:-160, marginLeft:10, width:40, height:40}}/></TouchableOpacity>
@@ -40,6 +41,7 @@ export default function Facility() {
         <View style={{ borderRadius:30, borderColor: '#A5A6A6',borderOpacity:0.4, padding:5, borderWidth: 2, width:370, marginLeft:10, marginBottom:10}}>
           <Text style={styles.previousResultText}>Lymane                                          <TouchableOpacity onPress={() => navigation.navigate('SignupScreen')}><Image source={require("../../assets/photos/right-arrow-black.png")} style={{width:20, height:20}}/></TouchableOpacity></Text>
         </View>
+        </ScrollView>
       </SafeAreaView>
   );
 }

@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 // import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, Alert} from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, Alert, ScrollView} from 'react-native';
 
 export default function ProfilPage() {
 
@@ -22,6 +22,7 @@ export default function ProfilPage() {
 
   return (
       <SafeAreaView style={styles.container1}> 
+      <ScrollView >
         <View style={{backgroundColor:"#2FCBD8", width:500, height:250}}></View>
         <View>
         <TouchableOpacity onPress={createTwoButtonAlert}><Image source={require("../../assets/photos/dots.png")} style={{marginTop:-200, marginLeft:320, width:40, height:40}}/></TouchableOpacity>
@@ -47,6 +48,7 @@ export default function ProfilPage() {
          <View style={{ borderRadius:30, borderColor: '#A5A6A6', borderWidth: 2, width:370, marginLeft:10}}>
          <Text style={styles.previousResultText}>Previous Test Results                <TouchableOpacity onPress={() => navigation.navigate('SignupScreen')}><Image source={require("../../assets/photos/arrow-down-sign-to-navigate.png")} style={{width:20, height:20}}/></TouchableOpacity></Text>
          </View>
+         </ScrollView>
       </SafeAreaView>
   );
 }

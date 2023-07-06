@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 // import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View, Image, TextInput, FlatList, } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Image, TextInput, FlatList, ScrollView } from 'react-native';
 
 
 export default function App() {
@@ -18,6 +18,7 @@ export default function App() {
 
   return (
       <SafeAreaView style={styles.container1}> 
+      <ScrollView >
         <View style={{backgroundColor:"#2FCBD8", width:250, height:250, borderRadius:150, top: -90, left:-90}}></View>
         <View>
         <Image source={require("../../assets/photos/profile.png")} style={{marginTop:-150, marginLeft:10, width:50, height:50}}/>
@@ -57,6 +58,7 @@ export default function App() {
       />
          <Text style={styles.labText}>Our Facilities</Text>
          <Image source={require("../../assets/photos/plus.png")} style={{width:100, height:100, marginTop:260, marginLeft:280}}/>
+         </ScrollView>
       </SafeAreaView>
   );
 }

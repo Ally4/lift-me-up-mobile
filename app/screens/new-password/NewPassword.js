@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 // import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 
 
 export default function App() {
@@ -8,6 +8,7 @@ export default function App() {
 
   return (
       <SafeAreaView style={styles.container}> 
+      <ScrollView >
         <View style={{backgroundColor:"black", width:250, height:250, borderRadius:150, opacity:0.2, top: -90, left:-90}}></View>
         <Image source={require("../../assets/photos/colab.png")} style={{marginBottom:20, marginLeft:70}}/>
         <View style={{backgroundColor:"white", flex:2, borderTopRightRadius:30, borderTopLeftRadius:30}}>
@@ -42,6 +43,7 @@ export default function App() {
             <Text style={styles.buttonText1}>Confirm</Text>
            </TouchableOpacity>
         </View>
+        </ScrollView>
       </SafeAreaView>
   );
 }

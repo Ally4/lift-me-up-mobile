@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 // import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
 import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
 
 
@@ -9,6 +9,7 @@ export default function App() {
 
   return (
       <SafeAreaView style={styles.container}> 
+      <ScrollView >
         <View style={{backgroundColor:"black", width:250, height:250, borderRadius:150, opacity:0.2, top: -90, left:-90}}></View>
         <Image source={require("../../assets/photos/colab.png")} style={{marginBottom:20, marginLeft:70}}/>
         <View style={{backgroundColor:"white", flex:2, borderTopRightRadius:30, borderTopLeftRadius:30}}>
@@ -28,6 +29,7 @@ export default function App() {
            </TouchableOpacity>
            <Text style={{marginLeft:60}}>If you did not receive the code :<TouchableOpacity ><Text style={{ color: '#2FCBD8', marginTop:2}}> Resend</Text></TouchableOpacity></Text>
         </View>
+        </ScrollView>
       </SafeAreaView>
   );
 }
