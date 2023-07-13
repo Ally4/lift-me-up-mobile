@@ -3,7 +3,8 @@ import React, { useState} from 'react';
 import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux'; //for the redux
-import LoginSlice from '../../../LoginSlice';  //slice or reducer
+import { useAppDispatch, } from '../../../root'
+import {login} from '../../../LoginSlice';  //slice or reducer
 
 
 export default function Login() {
@@ -12,18 +13,21 @@ export default function Login() {
   // const login = useSelector((state) => state.login.value);
 
   // This is to pass value in the text fields
-  const [text, setText] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
 
   //This is to dispatch the action in the screen
   const dispatch = useDispatch();
 
 
   //Here gooes the function of login and it mainly called onSubmit or handleSubmit; we pass in the dispatch of actions, in the dispatch we pass in LoginSlice(reducer), in the reducer we pass in the text, but also down we put the new value of text, so far setted to empty
-    function handleSubmit() {
-      dispatch(LoginSlice(text));
-      setText('');
+    async function handleSubmit() {
+      console.log('cred abc ===>', {email, password});
+      dispatch(await login({email, password}));
+      setEmail('');
+      setPassword('');
   }
-
 
 
 
@@ -47,8 +51,8 @@ export default function Login() {
             marginLeft:40
           }}
           placeholder={'Email'}
-          // value={text}
-          onChangeText={setText}
+          value={email}
+          onChangeText={setEmail}
           />
         <TextInput
           style={{
@@ -62,8 +66,8 @@ export default function Login() {
             marginLeft:40
           }}
           placeholder={'Password'}
-          // value={text}
-          onChangeText={setText}
+          value={password}
+          onChangeText={setPassword}
           />
         {/* <View style={{ marginTop: 20 }}>
             <Text style={{ fontSize: 20 }}>Current Balance: {login}$</Text>      this is how it could be if proceeding with the example of balance
