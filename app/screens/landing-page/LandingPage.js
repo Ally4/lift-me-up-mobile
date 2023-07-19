@@ -10,7 +10,7 @@ export default function LandingPage({navigation}) {
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
       <Text style={styles.buttonText}>Login</Text>
     </TouchableOpacity>
-    <TouchableOpacity style={styles.button1} onPress={() => console.log('Button pressed')}>
+    <TouchableOpacity style={styles.button1} onPress={() => navigation.navigate('Signup')}>
       <Text style={styles.buttonText1}>Sign Up</Text>
     </TouchableOpacity>
     </ScrollView>

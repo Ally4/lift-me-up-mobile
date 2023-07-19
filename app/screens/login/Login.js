@@ -1,36 +1,73 @@
 import 'react-native-gesture-handler';
 import React, { useState} from 'react';
-import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView, Button } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux'; //for the redux
-import { useAppDispatch, } from '../../../root'
-import {login} from '../../../LoginSlice';  //slice or reducer
+// import { useAppDispatch, } from '../../../root'
+// import {login} from '../../../LoginSlice';  //slice or reducer
+import { useNavigation } from '@react-navigation/native'; // Import the necessary function
+
+import { loginStart, loginSuccess, loginFailure } from '../../features/auth/authSlice'; 
+import api from '../../api'; // Import the API service
 
 
 export default function Login() {
 
-  // We use the useSelector hook to access the balance state from the store
-  // const login = useSelector((state) => state.login.value);
 
-  // This is to pass value in the text fields
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+console.log('================================')
 
+  const navigation = useNavigation(); // Get the navigation object
 
-  //This is to dispatch the action in the screen
+  console.log('================================111')
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
   const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.auth.isLoading);
+  const error = useSelector((state) => state.auth.error);
+
+  console.log('================================222')
+
+  const handleLogin = async () => {
+    if (!username || !password) {
+      dispatch(loginFailure('Please enter both username and password.'));
+      return;
+    }
+
+    console.log('================================444')
+
+    dispatch(loginStart());
+
+    try {
+      const response = await api({ email: username, password })
+      console.log('..................', response)
+
+      if (response.data.token) {
+        // Store the token in Redux or AsyncStorage (for persistent storage)
+        dispatch(loginSuccess({ user: response.data.user, token: response.data.token }));
 
 
-  //Here gooes the function of login and it mainly called onSubmit or handleSubmit; we pass in the dispatch of actions, in the dispatch we pass in LoginSlice(reducer), in the reducer we pass in the text, but also down we put the new value of text, so far setted to empty
-    async function handleSubmit() {
-      console.log('cred abc ===>', {email, password});
-      dispatch(await login({email, password}));
-      setEmail('');
-      setPassword('');
-  }
+        // Navigate to the next screen after successful login
+        navigation.navigate('Main'); // Replace 'Home' with the name of your target screenif (response.data.token) {
+        // Store the token in Redux or AsyncStorage (for persistent storage)
+        dispatch(loginSuccess({ user: response.data.user, token: response.data.token }));
 
 
+        // Navigate to the next screen after successful login
+        navigation.navigate('Main'); // Replace 'Home' with the name of your target screen
+      } else {
+        // Simulate login failure
+        dispatch(loginFailure('Invalid username or password.'));
+      }
+    } catch (error) {
+      console.log('the error ................', error, JSON.stringify(error))
+      // Handle API errors (e.g., network issues, server errors, etc.)
+      dispatch(loginFailure('An error occurred during login.'));
+    }
+  };
 
+  console.log('================================333')
 
 
   return (
@@ -51,8 +88,12 @@ export default function Login() {
             marginLeft:40
           }}
           placeholder={'Email'}
-          value={email}
-          onChangeText={setEmail}
+
+          value={username}
+          onChangeText={(text) => setUsername(text)}
+
+          // value={email}
+          // onChangeText={setEmail}
           />
         <TextInput
           style={{
@@ -66,46 +107,29 @@ export default function Login() {
             marginLeft:40
           }}
           placeholder={'Password'}
+
           value={password}
-          onChangeText={setPassword}
+          onChangeText={(text) => setPassword(text)}
+
+          // value={password}
+          // onChangeText={setPassword}
           />
-        {/* <View style={{ marginTop: 20 }}>
-            <Text style={{ fontSize: 20 }}>Current Balance: {login}$</Text>      this is how it could be if proceeding with the example of balance
-        </View> */}
 
-
-{/* <View style={{ marginTop: 20 }}>
-            <Button
-                title="Deposit"
-                onPress={() => {
-                    // We dispatch the deposit action to the store with payload 10
-                    dispatch(deposit(10));
-                }}
-            />
-        </View>                                                                                and the these are the actions that would change the initial state, also with the dispatch
-        <View style={{ marginTop: 20 }}>
-            <Button
-                title="Withdraw"
-                onPress={() => {
-                    // We dispatch the withdraw action to the store with payload 10
-                    dispatch(withdraw(10));
-                }}
-            />
-        </View> */}
-
-
-
-          <TouchableOpacity style={styles.button1} onPress={handleSubmit}> 
+          <TouchableOpacity style={styles.button1} 
+          onPress={() => handleLogin()}
+          > 
             <Text style={styles.buttonText1}>Login</Text>
            </TouchableOpacity>
            <View style={{marginLeft:20}}><Text><CheckBox title='Remember Me' color='#2FCBD8'></CheckBox> Forgotten Password?</Text></View>
            <View style={styles.lineBox}>
-           <View style={styles.line} onPress={handleSubmit} /> 
+           <View style={styles.line} 
+          //  onPress={handleSubmit} 
+           /> 
            <Text style={styles.lineText}>Or Login</Text>
            <View style={styles.line} /> 
            </View>
-           <TouchableOpacity style={styles.button2}>
-            <Text style={styles.buttonText}><Image source={require("../../assets/photos/google.png")} style={{width:20, height:20}}/>  GOOGLE</Text>
+           <TouchableOpacity style={styles.button2} onPress={() =>  console.log('==============>>>>>>>>>> for the check', handleLogin)}>
+            <Text style={styles.buttonText}><Image source={require("../../assets/photos/google.png")} style={{width:20, height:20}}  />  GOOGLE</Text>
             </TouchableOpacity>
            <Text style={{marginLeft:90}}>Do you have an account?<TouchableOpacity ><Text style={{ color: '#2FCBD8', marginTop:2}}> Signup</Text></TouchableOpacity></Text>
            <Image source={require("../../assets/photos/acubed.png")} style={{marginBottom:20, marginLeft:150}}/>

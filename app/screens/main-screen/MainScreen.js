@@ -3,7 +3,7 @@ import 'react-native-gesture-handler';
 import { SafeAreaView, StyleSheet, Text, View, Image, TextInput, FlatList, ScrollView } from 'react-native';
 
 
-export default function App() {
+export default function MainScreen() {
 
 
 
