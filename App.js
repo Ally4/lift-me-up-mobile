@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 
 import LandingPage from './app/screens/landing-page/LandingPage';
 import Login from './app/screens/login/Login'
-// import Signup from './app/screens/signup/Signup'
+import Signup from './app/screens/signup/Signup'
 import Main from './app/screens/main-screen/MainScreen'
 
 const Stack = createNativeStackNavigator();
@@ -24,7 +24,7 @@ const App = () => {
           // options={{title: 'Welcome'}}
         />
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-        {/* <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} /> */}
+        <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
         <Stack.Screen name="Main" component={Main} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>

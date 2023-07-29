@@ -8,7 +8,20 @@
     "ios": "expo start --ios",
     "web": "expo start --web"
   },
+  "expo": {
+    "ios": {
+      "config": {
+        "usesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "config": {
+        "usesNonExemptEncryption": false
+      }
+    }
+  },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-masked-view/masked-view": "0.2.8",
     "@react-native-picker/picker": "2.4.8",
@@ -17,6 +30,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
     "expo": "~48.0.6",
+    "expo-secure-store": "~12.1.1",
     "expo-status-bar": "~1.4.4",
     "react": "^18.2.0",
     "react-input-code": "^1.0.10",

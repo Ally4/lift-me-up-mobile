@@ -1,72 +1,64 @@
 import 'react-native-gesture-handler';
+import axios from 'axios';
+import React, { useState} from 'react';
 // import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native'; // Import the necessary function
 import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import { signupStart, signupSuccess, signupFailure } from '../../features/auth/authSignupSlice';
 
 // import { registerUser } from '../../../authActions';
 
 
 export default function App() {
 
+  const navigation = useNavigation(); // Get the navigation object
 
-//   const dispatch = useDispatch()
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [gender, setGender] = useState('');
+  const [address, setAddress] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
 
-//   const navigate = useNavigate()
-
-
-//   const [fname, setFname] = useState('')
-//   const [lname, setLname] = useState('')
-//   const [email, setEmail] = useState('')
-//   const [dob, setDob] = useState('')
-//   const [gender, setGender] = useState('')
-//   const [address, setAddress] = useState('')
-//   const [phone, setPhone] = useState('')
-//   const [password, setPassword] = useState('')
-//   const [cpassword, setCpassword] = useState('')
-//   const [addRequestStatus, setAddRequestStatus] = useState('idle')
-
-
-//   const onFnameChanged = e => setFname(e.target.value)
-//   const onLnameChanged = e => setLname(e.target.value)
-//   const onEmailChanged = e => setEmail(e.target.value)
-//   const onDobChanged = e => setDob(e.target.value)
-//   const onGenderChanged = e => setGender(e.target.value)
-//   const onAddressChanged = e => setAddress(e.target.value)
-//   const onPhoneChanged = e => setPhone(e.target.value)
-//   const onPasswordChanged = e => setPassword(e.target.value)
-//   const onCpasswordChanged = e => setCpassword(e.target.value)
-
-//   const canSave = [fname, lname, email, dob, gender, address, phone, password, cpassword].every(Boolean) && addRequestStatus === 'idle';
+  const dispatch = useDispatch();
+  // const isLoading = useSelector((state) => state.auth.isLoading);
+  // const error = useSelector((state) => state.auth.error);
 
 
+  const handleSignup = async () => {
+    if (!firstName || !lastName || !email || !dateOfBirth || !password || !confirmPassword || !gender || !address || !phoneNumber) {
+      dispatch(signupFailure('Please enter both email and password.'));
+      return;
+    }
 
-//   const onSaveNewUser = () => {
-//     if (canSave) {
-//         try {
-//             setAddRequestStatus('pending')
-//             dispatch(registerUser({ fname, lname, email, dob, gender, address, phone, password, cpassword })).unwrap()
+    dispatch(signupStart());
 
-//             setFname('')
-//             setLname('')
-//             setEmail('')
-//             setDob('')
-//             setGender('')
-//             setAddress('')
-//             setPhone('')
-//             setPassword('')
-//             setCpassword('')
-//             navigate('Main')
-//         } catch (err) {
-//             console.error('Failed to save the post', err)
-//         } finally {
-//             setAddRequestStatus('idle')
-//         }
-//     }
+    try {
+      const response = await axios.post("https://acubed-backend-production.up.railway.app/api/v1/auth/register",{ firstName, lastName, email, dateOfBirth, password, confirmPassword, gender, address, phoneNumber })
 
-// }
+      if ((response.data.status).toString() === '201') {
+
+        // Navigate to the next screen after successful login
+        navigation.navigate('Main'); // Replace 'Home' with the name of your target screenif (response.data.token) {
+        // Store the token in Redux or AsyncStorage (for persistent storage)
+        dispatch(signupSuccess({ user: response.data.user, token: response.data.token }));
 
 
+        // Navigate to the next screen after successful login
+        navigation.navigate('Main'); // Replace 'Home' with the name of your target screen
+      } else {
+        // Simulate login failure
+        dispatch(signupFailure('Invalid username or password.'));
+      }
+    } catch (error) {
+      // Handle API errors (e.g., network issues, server errors, etc.)
+      dispatch(signupFailure('An error occurred during login.'));
+    }
+  };
 
 
   return (
@@ -87,7 +79,7 @@ export default function App() {
             marginLeft:40
           }}
           placeholder={'First Name'}
-          onChange={onFnameChanged}
+          onChangeText={(text) => setFirstName(text)}
           />
         <TextInput
           style={{
@@ -100,10 +92,10 @@ export default function App() {
             marginTop:20,
             marginLeft:40
           }}
-          onChange={onLnameChanged}
           placeholder={'Last Name'}
+          onChangeText={(text) => setLastName(text)}
           />
-        <TextInput
+                  <TextInput
           style={{
             backgroundColor: 'white',
             padding: 10,
@@ -114,8 +106,8 @@ export default function App() {
             marginTop:20,
             marginLeft:40
           }}
-          onChange={onEmailChanged}
           placeholder={'Email'}
+          onChangeText={(text) => setEmail(text)}
           />
         <TextInput
           style={{
@@ -128,9 +120,9 @@ export default function App() {
             marginTop:20,
             marginLeft:40
           }}
-          onChange={onDobChanged}
-          placeholder={'Date of birth'}
-          />
+          placeholder={'Date of Birth'}
+          onChangeText={(text) => setDateOfBirth(text)}
+          />       
           <TextInput
           style={{
             backgroundColor: 'white',
@@ -142,52 +134,27 @@ export default function App() {
             marginTop:20,
             marginLeft:40
           }}
-          onChange={onGenderChanged}
-          placeholder={'Gender'}
-          />
-          <TextInput
-          style={{
-            backgroundColor: 'white',
-            padding: 10,
-            borderRadius: 5,
-            borderColor:"#2FCBD8",
-            borderWidth:1,
-            width:300,
-            marginTop:20,
-            marginLeft:40
-          }}
-          onChange={onAddressChanged}
-          placeholder={'Address'}
-          />
-          <TextInput
-          style={{
-            backgroundColor: 'white',
-            padding: 10,
-            borderRadius: 5,
-            borderColor:"#2FCBD8",
-            borderWidth:1,
-            width:300,
-            marginTop:20,
-            marginLeft:40
-          }}
-          onChange={onPhoneChanged}
-          placeholder={'Phone number'}
-          />
-        <TextInput
-          style={{
-            backgroundColor: 'white',
-            padding: 10,
-            borderRadius: 5,
-            borderColor:"#2FCBD8",
-            borderWidth:1,
-            width:300,
-            marginTop:20,
-            marginLeft:40
-          }}
-          onChange={onPasswordChanged}
+          secureTextEntry={true}
+          onChangeText={(text) => setPassword(text)}
           type='password'
           placeholder={'Password'}
           />
+          <TextInput
+          style={{
+            backgroundColor: 'white',
+            padding: 10,
+            borderRadius: 5,
+            borderColor:"#2FCBD8",
+            borderWidth:1,
+            width:300,
+            marginTop:20,
+            marginLeft:40
+          }}
+          secureTextEntry={true}
+          onChangeText={(text) => setConfirmPassword(text)}
+          type='password'
+          placeholder={'Confirm Password'}
+          />
         <TextInput
           style={{
             backgroundColor: 'white',
@@ -199,16 +166,43 @@ export default function App() {
             marginTop:20,
             marginLeft:40
           }}
-          onChange={onCpasswordChanged}
-          type='password'
-          placeholder={'Confirm Password'}
+          onChangeText={(text) => setGender(text)}
+          placeholder={'Gender'}
+          />
+        <TextInput
+          style={{
+            backgroundColor: 'white',
+            padding: 10,
+            borderRadius: 5,
+            borderColor:"#2FCBD8",
+            borderWidth:1,
+            width:300,
+            marginTop:20,
+            marginLeft:40
+          }}
+          onChangeText={(text) => setAddress(text)}
+          placeholder={'Address'}
+          />
+        <TextInput
+          style={{
+            backgroundColor: 'white',
+            padding: 10,
+            borderRadius: 5,
+            borderColor:"#2FCBD8",
+            borderWidth:1,
+            width:300,
+            marginTop:20,
+            marginLeft:40
+          }}
+          onChangeText={(text) => setPhoneNumber(text)}
+          placeholder={'Phone Number'}
           />
           <TouchableOpacity style={styles.button1}
-          //  onPress={onSaveNewUser}
+          onPress={() => handleSignup()}
            > 
             <Text style={styles.buttonText1}>Sign Up</Text>
            </TouchableOpacity>
-           <Text style={{marginLeft:90}}>Do you have an account?<TouchableOpacity ><Text style={{ color: '#2FCBD8', marginTop:2}}> Login</Text></TouchableOpacity></Text>
+           <Text style={{marginLeft:90}}>Do you have an account?<TouchableOpacity onPress={() => navigation.navigate('Login')} ><Text style={{ color: '#2FCBD8', marginTop:2}}> Login</Text></TouchableOpacity></Text>
            <Image source={require("../../assets/photos/acubed.png")} style={{marginBottom:20, marginLeft:150}}/>
         </View>
         </ScrollView>

@@ -1,6 +1,7 @@
 import 'react-native-gesture-handler';
 // import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View, Image, TextInput, FlatList, ScrollView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 
 
 export default function MainScreen() {
@@ -15,12 +16,15 @@ export default function MainScreen() {
       { id: '5', title: 'Home nursing' },
     ];
 
+    const navigation = useNavigation();
+
 
   return (
       <SafeAreaView style={styles.container1}> 
       <ScrollView >
         <View style={{backgroundColor:"#2FCBD8", width:250, height:250, borderRadius:150, top: -90, left:-90}}></View>
         <View>
+        <TouchableOpacity onPress={() => navigation.goBack()} ><Image source={require("../../assets/photos/left-arrow.png")} style={{marginTop:-220, marginLeft:10, width:40, height:40}}/></TouchableOpacity>
         <Image source={require("../../assets/photos/profile.png")} style={{marginTop:-150, marginLeft:10, width:50, height:50}}/>
         <Image source={require("../../assets/photos/logo-blue.png")} style={{marginTop:-40, marginLeft:135}}/>
         <Image source={require("../../assets/photos/bell.png")} style={{marginTop:-30,marginLeft:330, width:35, height:35}}/>
