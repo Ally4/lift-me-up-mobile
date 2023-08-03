@@ -9,7 +9,6 @@ export default function App() {
 
   return (
       <SafeAreaView style={styles.container}> 
-      <ScrollView >
         <View style={{backgroundColor:"black", width:250, height:250, borderRadius:150, opacity:0.2, top: -90, left:-90}}></View>
         <Image source={require("../../assets/photos/colab.png")} style={{marginBottom:20, marginLeft:70}}/>
         <View style={{backgroundColor:"white", flex:2, borderTopRightRadius:30, borderTopLeftRadius:30}}>
@@ -29,7 +28,12 @@ export default function App() {
            </TouchableOpacity>
            <Text style={{marginLeft:60}}>If you did not receive the code :<TouchableOpacity ><Text style={{ color: '#2FCBD8', marginTop:2}}> Resend</Text></TouchableOpacity></Text>
         </View>
-        </ScrollView>
+    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
+      <Text style={styles.buttonText}>Login</Text>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.button1} onPress={() => navigation.navigate('Signup')}>
+      <Text style={styles.buttonText1}>Sign Up</Text>
+    </TouchableOpacity>
       </SafeAreaView>
   );
 }

@@ -38,13 +38,15 @@ export default function Login() {
 
       if (response.data.token) {
 
+        AsyncStorage.setItem({key:'AccessToken', value: response.data.token})
+
         // Navigate to the next screen after successful login
         navigation.navigate('Main'); // Replace 'Home' with the name of your target screenif (response.data.token) {
         // Store the token in Redux or AsyncStorage (for persistent storage)
         dispatch(loginSuccess({ user: response.data.user, token: response.data.token }));
 
 
-        // AsyncStorage.setItem('AccessToken', response.data.token)
+        AsyncStorage.setItem({key:'AccessToken', value: response.data.token})
 
         // Navigate to the next screen after successful login
         navigation.navigate('Main'); // Replace 'Home' with the name of your target screen
@@ -115,7 +117,7 @@ export default function Login() {
           > 
             <Text style={styles.buttonText1}>Login</Text>
            </TouchableOpacity>
-           <View style={{marginLeft:20}}><Text><CheckBox title='Remember Me' color='#2FCBD8'></CheckBox> Forgotten Password?</Text></View>
+           <View style={{marginLeft:20}} ><Text><CheckBox title='Remember Me' color='#2FCBD8'></CheckBox> <TouchableOpacity onPress={() => navigation.navigate('ResetEmailScreen')}><Text style={{ color: '#2FCBD8', marginTop:2, marginLeft: 50}}> Forgot the password</Text></TouchableOpacity></Text></View>
            <View style={styles.lineBox}>
            <View style={styles.line} 
           //  onPress={handleSubmit} 
