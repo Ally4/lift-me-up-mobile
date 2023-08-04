@@ -17,11 +17,8 @@ export default function App() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [gender, setGender] = useState('');
-  const [address, setAddress] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
 
   const dispatch = useDispatch();
@@ -30,7 +27,7 @@ export default function App() {
 
 
   const handleSignup = async () => {
-    if (!firstName || !lastName || !email || !dateOfBirth || !password || !confirmPassword || !gender || !address || !phoneNumber) {
+    if (!firstName || !lastName || !email || !password || !confirmPassword || !phoneNumber) {
       dispatch(signupFailure('Please enter both email and password.'));
       return;
     }
@@ -38,7 +35,7 @@ export default function App() {
     dispatch(signupStart());
 
     try {
-      const response = await axios.post("https://acubed-backend-production.up.railway.app/api/v1/auth/register",{ firstName, lastName, email, dateOfBirth, password, confirmPassword, gender, address, phoneNumber })
+      const response = await axios.post("https://acubed-backend-production.up.railway.app/api/v1/auth/register",{ firstName, lastName, email, password, confirmPassword, phoneNumber })
 
       if ((response.data.status).toString() === '201') {
 
@@ -108,21 +105,7 @@ export default function App() {
           }}
           placeholder={'Email'}
           onChangeText={(text) => setEmail(text)}
-          />
-        <TextInput
-          style={{
-            backgroundColor: 'white',
-            padding: 10,
-            borderRadius: 5,
-            borderColor:"#2FCBD8",
-            borderWidth:1,
-            width:300,
-            marginTop:20,
-            marginLeft:40
-          }}
-          placeholder={'Date of Birth'}
-          onChangeText={(text) => setDateOfBirth(text)}
-          />       
+          />    
           <TextInput
           style={{
             backgroundColor: 'white',
@@ -154,34 +137,6 @@ export default function App() {
           onChangeText={(text) => setConfirmPassword(text)}
           type='password'
           placeholder={'Confirm Password'}
-          />
-        <TextInput
-          style={{
-            backgroundColor: 'white',
-            padding: 10,
-            borderRadius: 5,
-            borderColor:"#2FCBD8",
-            borderWidth:1,
-            width:300,
-            marginTop:20,
-            marginLeft:40
-          }}
-          onChangeText={(text) => setGender(text)}
-          placeholder={'Gender'}
-          />
-        <TextInput
-          style={{
-            backgroundColor: 'white',
-            padding: 10,
-            borderRadius: 5,
-            borderColor:"#2FCBD8",
-            borderWidth:1,
-            width:300,
-            marginTop:20,
-            marginLeft:40
-          }}
-          onChangeText={(text) => setAddress(text)}
-          placeholder={'Address'}
           />
         <TextInput
           style={{
