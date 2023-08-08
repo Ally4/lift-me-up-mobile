@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native'; // Import the necessar
 import { useSelector, useDispatch } from 'react-redux';
 
 import { resetStart, resetSuccess, resetFailure } from '../../features/auth/authResetSlice'; 
-// import AsyncStorage from '@react-native-community/async-storage';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ResetPasswordEmail() {
 
