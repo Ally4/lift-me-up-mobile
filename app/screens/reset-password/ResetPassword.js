@@ -16,8 +16,8 @@ export default function ResetPasswordEmail() {
   const dispatch = useDispatch();
 
   const handleReset = async () => {
-    if (!email || !password) {
-      dispatch(resetFailure('Please enter both email and password.'));
+    if (!email ) {
+      dispatch(resetFailure('Please enter your email.'));
       return;
     }
 
@@ -40,11 +40,11 @@ export default function ResetPasswordEmail() {
         navigation.navigate('Pin-Screen'); // Replace 'Home' with the name of your target screen
       } else {
         // Simulate login failure
-        dispatch(resetFailure('Invalid username or password.'));
+        dispatch(resetFailure('Invalid email'));
       }
     } catch (error) {
       // Handle API errors (e.g., network issues, server errors, etc.)
-      dispatch(resetFailure('An error occurred during login.'));
+      dispatch(resetFailure('An error occurred when sending the coden.'));
     }
   };
 
@@ -71,7 +71,7 @@ export default function ResetPasswordEmail() {
           }}
           value={setEmail}
           onChangeText={(text) => setEmail(text)}
-          placeholder={'Email or Phone Number'}
+          placeholder={'Email'}
           />
           <TouchableOpacity style={styles.button1} onPress={() => handleReset()}> 
             <Text style={styles.buttonText1}>Verify</Text>
