@@ -10,6 +10,7 @@ import Login from './app/screens/login/Login'
 import Signup from './app/screens/signup/Signup'
 import Main from './app/screens/main-screen/MainScreen'
 import ResetEmailScreen from './app/screens/reset-password/ResetPassword'
+import PinScreen from './app/screens/reset-password-pin-screen/ResetPasswordScreenPin'
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +29,7 @@ const App = () => {
         <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
         <Stack.Screen name="Main" component={Main} options={{ headerShown: false }} />
         <Stack.Screen name="ResetEmailScreen" component={ResetEmailScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Pin-Screen" component={PinScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
     </Provider>

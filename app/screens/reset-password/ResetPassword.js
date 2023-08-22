@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler';
 // import { StatusBar } from 'expo-status-bar';
+import axios from 'axios';
 import React, { useState} from 'react';
 import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; // Import the necessary function
@@ -16,18 +17,27 @@ export default function ResetPasswordEmail() {
   const dispatch = useDispatch();
 
   const handleReset = async () => {
+
+    console.log("======================================= in the screen")
+
     if (!email ) {
       dispatch(resetFailure('Please enter your email.'));
       return;
     }
 
+    console.log("======================================= in the screen, to check for the email")
+
     dispatch(resetStart());
 
+    console.log("======================================= in the screen, calling the dispatch start")
+
     try {
+
+      console.log("======================================= in the screen, now in the try")
       const response = await axios.post("https://acubed-backend-production.up.railway.app/api/v1/auth/forgotten-link",{ email })
 
 
-      if (response.data.token) {
+      if (response.data.status === 201) {
 
         // AsyncStorage.setItem({key:'Token', value: response.data.token})
 

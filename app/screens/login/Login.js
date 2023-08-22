@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import axios from 'axios'
+import axios from 'axios';
 import React, { useState} from 'react';
 import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView, Button } from 'react-native';
 import { CheckBox } from 'react-native-elements';
