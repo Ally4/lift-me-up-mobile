@@ -2,11 +2,15 @@ import 'react-native-gesture-handler';
 // import { StatusBar } from 'expo-status-bar';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, FlatList, ScrollView } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect, useState } from 'react';
+
 
 
 export default function MainScreen() {
 
-
+  const navigation = useNavigation();
+  const [name, setName] =  useState('')
 
     const data = [
       { id: '1', title: 'Urine Analysis' },
@@ -16,8 +20,19 @@ export default function MainScreen() {
       { id: '5', title: 'Home nursing' },
     ];
 
-    const navigation = useNavigation();
 
+    const getData = async ()=>{
+      try {
+        const username = await AsyncStorage.getItem('name')
+        setName(username);
+      } catch (error) {
+        
+      }
+    }
+
+    useEffect(()=>{
+      getData();
+    },[])
 
   return (
       <SafeAreaView style={styles.container1}> 
@@ -29,7 +44,7 @@ export default function MainScreen() {
         <Image source={require("../../assets/photos/logo-blue.png")} style={{marginTop:-40, marginLeft:135}}/>
         <Image source={require("../../assets/photos/bell.png")} style={{marginTop:-30,marginLeft:330, width:35, height:35}}/>
         </View>
-        <Text style={styles.helloText}>Hello, <Text style={styles.abebeText}>Abebe!</Text></Text>
+        <Text style={styles.helloText}>Hello, <Text style={styles.abebeText}>{name}!</Text></Text>
         <Text style={styles.testText}>Which facility or test are you looking for today?</Text>
         <TextInput
          style={{
@@ -56,7 +71,7 @@ export default function MainScreen() {
           borderColor:"#2FCBD8",
           borderWidth:2,
           width:150}}>
-            <Text>{item.title}</Text>
+           <TouchableOpacity onPress={() => navigation.navigate('Login')} ><Text>{item.title}</Text></TouchableOpacity>
           </View>
         )}
       />
@@ -79,7 +94,7 @@ button: {
   width:300,
   marginLeft:40
 
-  // justifyContent:"center"    its not working in js engine: hermes
+  
 },
 button2: {
   backgroundColor: 'white',
@@ -91,7 +106,7 @@ button2: {
   borderWidth: 2,
   borderColor: "#2FCBD8",
 
-  // justifyContent:"center"    its not working in js engine: hermes
+  
 },
 buttonText: {
   color: '#000',
@@ -109,7 +124,7 @@ button1: {
   marginTop:20,
   marginLeft:40
 
-  // justifyContent:"center"    its not working in js engine: hermes
+  
 },
 buttonText1: {
   color: 'white',

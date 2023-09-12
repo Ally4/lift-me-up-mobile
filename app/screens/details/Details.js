@@ -47,7 +47,7 @@ button: {
   width:300,
   marginLeft:40
 
-  // justifyContent:"center"    its not working in js engine: hermes
+  
 },
 buttonText: {
   color: '#2FCBD8',
@@ -65,7 +65,7 @@ buttonOrder: {
   marginTop:20,
   marginLeft:20
 
-  // justifyContent:"center"    its not working in js engine: hermes
+  
 },
 textOrder: {
   color: 'white',

@@ -20,6 +20,9 @@ export default function ProfilPage({ navigation }) {
 
 
 
+
+
+
   return (
       <SafeAreaView style={styles.container1}> 
       <ScrollView >
@@ -30,7 +33,17 @@ export default function ProfilPage({ navigation }) {
         <View>
         <TouchableOpacity onPress={() => navigation.goBack()} ><Image source={require("../../assets/photos/left-arrow.png")} style={{marginTop:-200, marginLeft:10, width:40, height:40}}/></TouchableOpacity>
         </View>
+
+
+
+
         <Image source={require("../../assets/photos/profile.png")} style={{marginTop:-60, marginLeft:140, width:130, height:130}}/>
+
+
+
+
+
+        
         <Text style={styles.helloText}>Abebe David <Image source={require("../../assets/photos/edit.png")} style={{width:25, height:25}}/></Text>
          <Text style={styles.labText}>Personal Information</Text>
          <View style={{ borderRadius:30, borderColor: '#A5A6A6', borderWidth: 2, width:370, marginLeft:10, marginBottom:10}}>
@@ -65,7 +78,7 @@ button: {
   width:300,
   marginLeft:40
 
-  // justifyContent:"center"    its not working in js engine: hermes
+  
 },
 button2: {
   backgroundColor: 'white',
@@ -77,7 +90,7 @@ button2: {
   borderWidth: 2,
   borderColor: "#2FCBD8",
 
-  // justifyContent:"center"    its not working in js engine: hermes
+  
 },
 buttonText: {
   color: '#000',
@@ -95,7 +108,7 @@ button1: {
   marginTop:20,
   marginLeft:40
 
-  // justifyContent:"center"    its not working in js engine: hermes
+  
 },
 buttonText1: {
   color: 'white',

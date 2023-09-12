@@ -30,7 +30,7 @@ button: {
   borderRadius: 5,
   width:300,
   marginLeft:40
-  // justifyContent:"center"    its not working in js engine: hermes
+  
 },
 buttonText: {
   color: '#2FCBD8',
@@ -47,7 +47,7 @@ button1: {
   width:300,
   marginTop:20,
   marginLeft:40
-  // justifyContent:"center"    its not working in js engine: hermes
+  
 },
 buttonText1: {
   color: 'white',

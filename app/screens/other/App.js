@@ -48,7 +48,7 @@
 //   width:300,
 //   marginLeft:40
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // buttonText: {
 //   color: '#2FCBD8',
@@ -66,7 +66,7 @@
 //   marginTop:20,
 //   marginLeft:40
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // buttonText1: {
 //   color: 'white',
@@ -203,7 +203,7 @@
 //   width:300,
 //   marginLeft:40
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // buttonText: {
 //   color: '#2FCBD8',
@@ -221,7 +221,7 @@
 //   marginTop:20,
 //   marginLeft:40
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // buttonText1: {
 //   color: 'white',
@@ -328,7 +328,7 @@
 //   width:300,
 //   marginLeft:40
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // button2: {
 //   backgroundColor: 'white',
@@ -340,7 +340,7 @@
 //   borderWidth: 2,
 //   borderColor: "#2FCBD8",
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // buttonText: {
 //   color: '#000',
@@ -358,7 +358,7 @@
 //   marginTop:20,
 //   marginLeft:40
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // buttonText1: {
 //   color: 'white',
@@ -454,7 +454,7 @@
 //   width:300,
 //   marginLeft:40
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // button2: {
 //   backgroundColor: 'white',
@@ -466,7 +466,7 @@
 //   borderWidth: 2,
 //   borderColor: "#2FCBD8",
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // buttonText: {
 //   color: '#000',
@@ -484,7 +484,7 @@
 //   marginTop:20,
 //   marginLeft:40
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // buttonText1: {
 //   color: 'white',
@@ -589,7 +589,7 @@
 //   width:300,
 //   marginLeft:40
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // button2: {
 //   backgroundColor: 'white',
@@ -601,7 +601,7 @@
 //   borderWidth: 2,
 //   borderColor: "#2FCBD8",
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // buttonText: {
 //   color: '#000',
@@ -619,7 +619,7 @@
 //   marginTop:20,
 //   marginLeft:40
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // buttonText1: {
 //   color: 'white',
@@ -741,7 +741,7 @@
 //   width:300,
 //   marginLeft:40
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // button2: {
 //   backgroundColor: 'white',
@@ -753,7 +753,7 @@
 //   borderWidth: 2,
 //   borderColor: "#2FCBD8",
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // buttonText: {
 //   color: '#000',
@@ -771,7 +771,7 @@
 //   marginTop:20,
 //   marginLeft:40
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // buttonText1: {
 //   color: 'white',
@@ -928,7 +928,7 @@
 //   width:300,
 //   marginLeft:40
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // button2: {
 //   backgroundColor: 'white',
@@ -940,7 +940,7 @@
 //   borderWidth: 2,
 //   borderColor: "#2FCBD8",
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // buttonText: {
 //   color: '#000',
@@ -958,7 +958,7 @@
 //   marginTop:20,
 //   marginLeft:40
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // buttonText1: {
 //   color: 'white',
@@ -1161,7 +1161,7 @@
 //   width:300,
 //   marginLeft:40
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // button2: {
 //   backgroundColor: 'white',
@@ -1173,7 +1173,7 @@
 //   borderWidth: 2,
 //   borderColor: "#2FCBD8",
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // buttonText: {
 //   color: '#000',
@@ -1191,7 +1191,7 @@
 //   marginTop:20,
 //   marginLeft:40
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // buttonText1: {
 //   color: 'white',
@@ -1382,7 +1382,7 @@
 //   width:300,
 //   marginLeft:40
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // buttonText: {
 //   color: '#2FCBD8',
@@ -1400,7 +1400,7 @@
 //   marginTop:20,
 //   marginLeft:40
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // buttonText1: {
 //   color: 'white',
@@ -1507,7 +1507,7 @@
 //   width:300,
 //   marginLeft:40
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // buttonText: {
 //   color: '#2FCBD8',
@@ -1525,7 +1525,7 @@
 //   marginTop:20,
 //   marginLeft:40
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // buttonText1: {
 //   color: 'white',
@@ -1644,7 +1644,7 @@
 //   width:300,
 //   marginLeft:40
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // buttonText: {
 //   color: '#2FCBD8',
@@ -1662,7 +1662,7 @@
 //   marginTop:20,
 //   marginLeft:40
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // buttonText1: {
 //   color: 'white',
@@ -1804,7 +1804,7 @@
 //   width:300,
 //   marginLeft:40
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // buttonText: {
 //   color: '#2FCBD8',
@@ -1822,7 +1822,7 @@
 //   marginTop:20,
 //   marginLeft:20
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // textOrder: {
 //   color: 'white',
@@ -2111,7 +2111,7 @@ button: {
   width:300,
   marginLeft:40
 
-  // justifyContent:"center"    its not working in js engine: hermes
+  
 },
 button2: {
   backgroundColor: 'white',
@@ -2123,7 +2123,7 @@ button2: {
   borderWidth: 2,
   borderColor: "#2FCBD8",
 
-  // justifyContent:"center"    its not working in js engine: hermes
+  
 },
 buttonText: {
   color: '#000',
@@ -2141,7 +2141,7 @@ button1: {
   marginTop:20,
   marginLeft:40
 
-  // justifyContent:"center"    its not working in js engine: hermes
+  
 },
 orderText: {
   color: 'white',
@@ -2183,7 +2183,7 @@ confirmOrder: {
   width:350,
   marginLeft:20
 
-  // justifyContent:"center"    its not working in js engine: hermes
+  
 },
 confirmOrderText: {
   color: 'white',
@@ -2201,7 +2201,7 @@ cancelOrder: {
   marginTop:20,
   marginLeft:20,
   marginBottom:20,
-  // justifyContent:"center"    its not working in js engine: hermes
+  
 },
 cancelOrderText: {
   color: '#2FCBD8',
@@ -2475,7 +2475,7 @@ cancelOrderText: {
 //   width:300,
 //   marginLeft:40
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // button2: {
 //   backgroundColor: 'white',
@@ -2487,7 +2487,7 @@ cancelOrderText: {
 //   borderWidth: 2,
 //   borderColor: "#2FCBD8",
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // buttonText: {
 //   color: '#000',
@@ -2505,7 +2505,7 @@ cancelOrderText: {
 //   marginTop:20,
 //   marginLeft:40
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // orderText: {
 //   color: 'white',
@@ -2547,7 +2547,7 @@ cancelOrderText: {
 //   width:350,
 //   marginLeft:20
 
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // confirmOrderText: {
 //   color: 'white',
@@ -2565,7 +2565,7 @@ cancelOrderText: {
 //   marginTop:20,
 //   marginLeft:20,
 //   marginBottom:20,
-//   // justifyContent:"center"    its not working in js engine: hermes
+//   
 // },
 // cancelOrderText: {
 //   color: '#2FCBD8',

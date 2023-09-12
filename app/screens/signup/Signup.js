@@ -3,16 +3,15 @@ import axios from 'axios';
 import React, { useState} from 'react';
 // import { StatusBar } from 'expo-status-bar';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigation } from '@react-navigation/native'; // Import the necessary function
+import { useNavigation } from '@react-navigation/native'; 
 import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import { signupStart, signupSuccess, signupFailure } from '../../features/auth/authSignupSlice';
-
-// import { registerUser } from '../../../authActions';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export default function App() {
 
-  const navigation = useNavigation(); // Get the navigation object
+  const navigation = useNavigation(); 
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -22,38 +21,25 @@ export default function App() {
   const [phoneNumber, setPhoneNumber] = useState('');
 
   const dispatch = useDispatch();
-  // const isLoading = useSelector((state) => state.auth.isLoading);
-  // const error = useSelector((state) => state.auth.error);
-
-
   const handleSignup = async () => {
     if (!firstName || !lastName || !email || !password || !confirmPassword || !phoneNumber) {
       dispatch(signupFailure('Please enter both email and password.'));
       return;
     }
-
     dispatch(signupStart());
-
     try {
       const response = await axios.post("https://acubed-backend-production.up.railway.app/api/v1/auth/register",{ firstName, lastName, email, password, confirmPassword, phoneNumber })
-
       if ((response.data.status).toString() === '201') {
-
-        // Navigate to the next screen after successful login
-        navigation.navigate('Main'); // Replace 'Home' with the name of your target screenif (response.data.token) {
-        // Store the token in Redux or AsyncStorage (for persistent storage)
+        await AsyncStorage.setItem('AccessToken', response.data.token)
+        await AsyncStorage.setItem('name', response.data.name)
         dispatch(signupSuccess({ user: response.data.user, token: response.data.token }));
-
-
-        // Navigate to the next screen after successful login
-        navigation.navigate('Main'); // Replace 'Home' with the name of your target screen
+        navigation.navigate('Main');
       } else {
-        // Simulate login failure
-        dispatch(signupFailure('Invalid username or password.'));
+        dispatch(signupFailure('Some of you input is not valid'));
       }
     } catch (error) {
-      // Handle API errors (e.g., network issues, server errors, etc.)
-      dispatch(signupFailure('An error occurred during login.'));
+      console.log('jjjjjjjjjjj', error)
+      dispatch(signupFailure('An error occurred during the signup.'));
     }
   };
 
@@ -92,7 +78,7 @@ export default function App() {
           placeholder={'Last Name'}
           onChangeText={(text) => setLastName(text)}
           />
-                  <TextInput
+          <TextInput
           style={{
             backgroundColor: 'white',
             padding: 10,
@@ -177,7 +163,7 @@ button: {
   width:300,
   marginLeft:40
 
-  // justifyContent:"center"    its not working in js engine: hermes
+  
 },
 buttonText: {
   color: '#2FCBD8',
@@ -195,7 +181,7 @@ button1: {
   marginTop:20,
   marginLeft:40
 
-  // justifyContent:"center"    its not working in js engine: hermes
+  
 },
 buttonText1: {
   color: 'white',

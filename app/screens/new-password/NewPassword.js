@@ -60,7 +60,7 @@ button: {
   width:300,
   marginLeft:40
 
-  // justifyContent:"center"    its not working in js engine: hermes
+  
 },
 button2: {
   backgroundColor: 'white',
@@ -72,7 +72,7 @@ button2: {
   borderWidth: 2,
   borderColor: "#2FCBD8",
 
-  // justifyContent:"center"    its not working in js engine: hermes
+  
 },
 buttonText: {
   color: '#000',
@@ -90,7 +90,7 @@ button1: {
   marginTop:20,
   marginLeft:40
 
-  // justifyContent:"center"    its not working in js engine: hermes
+  
 },
 buttonText1: {
   color: 'white',
