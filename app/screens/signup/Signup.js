@@ -9,36 +9,31 @@ import { signupStart, signupSuccess, signupFailure } from '../../features/auth/a
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-export default function App() {
+export default function Signup() {
 
   const navigation = useNavigation(); 
 
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
+  const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
 
   const dispatch = useDispatch();
   const handleSignup = async () => {
-    if (!firstName || !lastName || !email || !password || !confirmPassword || !phoneNumber) {
+    if (!user || !password || !confirmPassword) {
       dispatch(signupFailure('Please enter both email and password.'));
       return;
     }
     dispatch(signupStart());
     try {
-      const response = await axios.post("https://acubed-backend-production.up.railway.app/api/v1/auth/register",{ firstName, lastName, email, password, confirmPassword, phoneNumber })
+      const response = await axios.post("https://acubed-backend-production.up.railway.app/api/v1/auth/register",{ user, password, confirmPassword})
       if ((response.data.status).toString() === '201') {
         await AsyncStorage.setItem('AccessToken', response.data.token)
-        await AsyncStorage.setItem('name', response.data.name)
         dispatch(signupSuccess({ user: response.data.user, token: response.data.token }));
-        navigation.navigate('Main');
+        navigation.navigate('UpdateProfil');
       } else {
         dispatch(signupFailure('Some of you input is not valid'));
       }
     } catch (error) {
-      console.log('jjjjjjjjjjj', error)
       dispatch(signupFailure('An error occurred during the signup.'));
     }
   };
@@ -61,37 +56,9 @@ export default function App() {
             marginTop:20,
             marginLeft:40
           }}
-          placeholder={'First Name'}
-          onChangeText={(text) => setFirstName(text)}
-          />
-        <TextInput
-          style={{
-            backgroundColor: 'white',
-            padding: 10,
-            borderRadius: 5,
-            borderColor:"#2FCBD8",
-            borderWidth:1,
-            width:300,
-            marginTop:20,
-            marginLeft:40
-          }}
-          placeholder={'Last Name'}
-          onChangeText={(text) => setLastName(text)}
-          />
-          <TextInput
-          style={{
-            backgroundColor: 'white',
-            padding: 10,
-            borderRadius: 5,
-            borderColor:"#2FCBD8",
-            borderWidth:1,
-            width:300,
-            marginTop:20,
-            marginLeft:40
-          }}
-          placeholder={'Email'}
-          onChangeText={(text) => setEmail(text)}
-          />    
+          placeholder={'User'}
+          onChangeText={(text) => setUser(text)}
+          />  
           <TextInput
           style={{
             backgroundColor: 'white',
@@ -123,20 +90,6 @@ export default function App() {
           onChangeText={(text) => setConfirmPassword(text)}
           type='password'
           placeholder={'Confirm Password'}
-          />
-        <TextInput
-          style={{
-            backgroundColor: 'white',
-            padding: 10,
-            borderRadius: 5,
-            borderColor:"#2FCBD8",
-            borderWidth:1,
-            width:300,
-            marginTop:20,
-            marginLeft:40
-          }}
-          onChangeText={(text) => setPhoneNumber(text)}
-          placeholder={'Phone Number'}
           />
           <TouchableOpacity style={styles.button1}
           onPress={() => handleSignup()}

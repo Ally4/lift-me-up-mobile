@@ -45,8 +45,11 @@ export default function Login() {
       <SafeAreaView style={styles.container}>
         <ScrollView > 
         <View style={{backgroundColor:"black", width:250, height:250, borderRadius:150, opacity:0.2, top: -90, left:-90}}></View>
-        <Image source={require("../../assets/photos/colab.png")} style={{marginBottom:20, marginLeft:70}}/>
-        <View style={{backgroundColor:"white", borderTopRightRadius:30, borderTopLeftRadius:30, height:"auto"}}>
+        <View style={styles.nameForm}>
+        <View style={styles.nameLogo}>
+        <Image source={require("../../assets/photos/colab.png")}/>
+        </View>
+        <View style={{backgroundColor:"white", borderTopRightRadius:30, borderTopLeftRadius:30, flex:3}}>
         <TextInput
           style={{
             backgroundColor: 'white',
@@ -94,6 +97,7 @@ export default function Login() {
             </TouchableOpacity>
            <Text style={{marginLeft:90}}>Do you have an account?<TouchableOpacity onPress={() => navigation.navigate('Signup')}><Text style={{ color: '#2FCBD8', marginTop:2}}> Signup</Text></TouchableOpacity></Text>
            <Image source={require("../../assets/photos/acubed.png")} style={{marginBottom:20, marginLeft:150}}/>
+        </View>
         </View>
         </ScrollView>
       </SafeAreaView>
@@ -157,4 +161,11 @@ lineText: {
   marginLeft:25,
   marginTop:15,
 },
+nameForm : {
+  display: 'flex',
+  flex: 1,
+},
+nameLogo : {
+  justifyContent: "center"
+}
 })

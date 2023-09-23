@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "lift-me-up-mobile",
-    "slug": "lift-me-up-mobile",
+    "name": "co-lab",
+    "slug": "co-lab",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./app/assets/icon.png",
+    "icon": "./app/assets/acubed-logo.jpeg",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./app/assets/splash.png",
