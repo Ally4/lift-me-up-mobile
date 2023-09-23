@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "co-lab",
+    "slug": "co-lab",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./app/assets/acubed-logo.jpeg",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./app/assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./app/assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.ally4.liftmeupmobile"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "4cfd6262-49b8-4c19-8119-4e28fe189252"
+      }
+    }
+  }
+}
