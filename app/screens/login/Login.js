@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import axios from 'axios';
-import React, { useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView, Button } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux'; 
@@ -9,9 +9,22 @@ import { useNavigation } from '@react-navigation/native';
 import { loginStart, loginSuccess, loginFailure } from '../../features/auth/authLoginSlice'; 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as SecureStore from 'expo-secure-store';
+import * as WebBrowser from 'expo-web-browser';
+import * as Google from 'expo-auth-session/providers/google';
 
+dotenv.config();
+
+WebBrowser.maybeCompleteAuthSession();  
 
 export default function Login() {
+
+  const [userInfo, setUserInfo] = useState(null);
+
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    androidClientId: process.env.coLabAndroidKey,
+    iosClientId: process.env.coLabIosKey,
+    webClientId: process.env.coLabWebKey,
+  })
 
   const navigation = useNavigation(); 
   const [password, setPassword] = useState('');
@@ -41,6 +54,39 @@ export default function Login() {
     }
   };
 
+
+  useEffect(() => {
+    handleLoginWithGoogle();
+  }, [response])
+
+
+  async function handleLoginWithGoogle() {
+   const user =  await AsyncStorage.getItem("@user");
+   if (!user) {
+      if(response?.type === "success") {
+        await getUserInfo(response.authentication.accessToken);
+      }
+   } else {
+    setUserInfo(JSON.parse());
+   }
+  }
+
+  const getUserInfo = async (token) => {
+    if (!token) return;
+    try {
+      const response = await fetch("https://www.googleapis.com/userinfo/v2/me",{
+        headers: {Authorization: `Bearer ${token}`},
+      });
+      const user = await response.json();
+      await AsyncStorage.setItem("@@user", JSON.stringify(user));
+      setUserInfo(user);
+    } catch(error) {
+      console.log{"This is the error for the login with google"}
+    }
+  }
+
+
+
   return (
       <SafeAreaView style={styles.container}>
         <ScrollView > 
@@ -50,6 +96,7 @@ export default function Login() {
         <Image source={require("../../assets/photos/colab.png")}/>
         </View>
         <View style={{backgroundColor:"white", borderTopRightRadius:30, borderTopLeftRadius:30, flex:3}}>
+          <Text>{JSON.stringify(userInfo, null, 2)}</Text>
         <TextInput
           style={{
             backgroundColor: 'white',
@@ -92,7 +139,7 @@ export default function Login() {
            <Text style={styles.lineText}>Or Login</Text>
            <View style={styles.line} /> 
            </View>
-           <TouchableOpacity style={styles.button2} >
+           <TouchableOpacity style={styles.button2} onPress={() => promptAsync()} >
             <Text style={styles.buttonText}><Image source={require("../../assets/photos/google.png")} style={{width:20, height:20}}  />  GOOGLE</Text>
             </TouchableOpacity>
            <Text style={{marginLeft:90}}>Do you have an account?<TouchableOpacity onPress={() => navigation.navigate('Signup')}><Text style={{ color: '#2FCBD8', marginTop:2}}> Signup</Text></TouchableOpacity></Text>

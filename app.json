@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "co-lab",
-    "slug": "co-lab",
+    "slug": "lift-me-up-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./app/assets/acubed-logo.jpeg",
@@ -15,7 +15,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ally4.liftmeupmobile"
     },
     "android": {
       "adaptiveIcon": {
@@ -31,6 +32,7 @@
       "eas": {
         "projectId": "4cfd6262-49b8-4c19-8119-4e28fe189252"
       }
-    }
+    },
+    "scheme":"lift-me-up-mobile"
   }
 }
