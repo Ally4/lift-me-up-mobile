@@ -63,13 +63,13 @@ try {
     }
     dispatch(updateProfileStart());
     try {
-      const response = await axios.post("https://acubed-backend-production.up.railway.app/api/v1/auth/update-profile",{ firstName, lastName, email, dateOfBirth, gender, phoneNumber, image })
+      const response = await axios.patch("https://acubed-backend-production.up.railway.app/api/v1/auth/update-profile",{ firstName, lastName, email, dateOfBirth, gender, phoneNumber, image })
       if ((response.data.status).toString() === '200') {
         console.log("===========================================", response.data)
         await AsyncStorage.setItem('AccessToken', response.data.token)
         await AsyncStorage.setItem('name', response.data.user)
         dispatch(updateProfileSucess({ user: response.data.user, token: response.data.token }));
-        navigation.navigate('Profil');
+        navigation.navigate('UpdateProfil');
       } else {
         dispatch(updateProfileFailure('Something might be wrong'));
       }
