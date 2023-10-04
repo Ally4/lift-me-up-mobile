@@ -11,8 +11,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as SecureStore from 'expo-secure-store';
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
+// import dotenv from 'dotenv';
 
-dotenv.config();
+// dotenv.config();
 
 WebBrowser.maybeCompleteAuthSession();  
 
@@ -21,9 +22,12 @@ export default function Login() {
   const [userInfo, setUserInfo] = useState(null);
 
   const [request, response, promptAsync] = Google.useAuthRequest({
-    androidClientId: process.env.coLabAndroidKey,
-    iosClientId: process.env.coLabIosKey,
-    webClientId: process.env.coLabWebKey,
+    androidClientId: "940575008691-8q82fgplrpfarutqt2c92uqjfo7lh4nq.apps.googleusercontent.com",
+    iosClientId: "940575008691-3pgp6j422vp7dcvf4176tki3kt2s7he8.apps.googleusercontent.com",
+    webClientId: "940575008691-2jsitr933bn1ij3nur456s3kgnv1qsu2.apps.googleusercontent.com",
+    // androidClientId: process.env.coLabAndroidKey,
+    // iosClientId: process.env.coLabIosKey,
+    // webClientId: process.env.coLabWebKey,
   })
 
   const navigation = useNavigation(); 
@@ -78,10 +82,10 @@ export default function Login() {
         headers: {Authorization: `Bearer ${token}`},
       });
       const user = await response.json();
-      await AsyncStorage.setItem("@@user", JSON.stringify(user));
+      await AsyncStorage.setItem("@user", JSON.stringify(user));
       setUserInfo(user);
     } catch(error) {
-      console.log{"This is the error for the login with google"}
+      console.log("This is the error for the login with google");
     }
   }
 

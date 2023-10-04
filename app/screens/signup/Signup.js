@@ -25,9 +25,22 @@ export default function Signup() {
     }
     dispatch(signupStart());
     try {
-      const response = await axios.post("https://acubed-backend-production.up.railway.app/api/v1/auth/register",{ user, password, confirmPassword})
+      // const response = await axios.post("https://acubed-backend-production.up.railway.app/api/v1/auth/register",{ user, password, confirmPassword});
+      const response = await axios.post("http://172.16.19.200:1234/api/v1/auth/register",{ user, password, confirmPassword});
+
+      // const config = { headers: { Authorization: `${response.data.token}` }};
+      // const bodyParameters = { key: "value" };
+
+      // axios.post( 
+      //   'https://acubed-backend-production.up.railway.app/api/v1/auth/update-profile',
+      //   bodyParameters,
+      //   config
+      // ).then(console.log).catch(console.log);
+
+
       if ((response.data.status).toString() === '201') {
-        await AsyncStorage.setItem('AccessToken', response.data.token)
+        await AsyncStorage.setItem('token', response.data.token)
+        console.log('ppppppppppppppppppppp', response.data.token)
         dispatch(signupSuccess({ user: response.data.user, token: response.data.token }));
         navigation.navigate('UpdateProfil');
       } else {

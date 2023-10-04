@@ -23,6 +23,7 @@ export default function UpdateProfil() {
   const [gender, setGender] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [image, setImage] = useState('');
+  const [secret, setSecret] = useState('');
 
 // This to fetch the image
 // const [image, setImage] = useState();
@@ -35,9 +36,20 @@ const requestPermission = async () => {
   if (!granted) alert("You need to unable permission to access the library")
 }
 
+const getToken = async ()=>{
+  try {
+    const theToken = await AsyncStorage.getItem('token');
+    console.log("kkkkkkkkkkkkkkkkkkkkkk", theToken)
+    // await AsyncStorage.setItem('token', theToken)
+    setSecret(theToken);
+  } catch (error) {
+    
+  }
+}
 
 useEffect(() => {
   requestPermission();
+  getToken();
 }, [])
 
 
@@ -63,13 +75,25 @@ try {
     }
     dispatch(updateProfileStart());
     try {
-      const response = await axios.patch("https://acubed-backend-production.up.railway.app/api/v1/auth/update-profile",{ firstName, lastName, email, dateOfBirth, gender, phoneNumber, image })
+      console.log("ttttttttttttttttttttttttttttttt", secret)
+      // const response = await axios.patch("https://acubed-backend-production.up.railway.app/api/v1/auth/update-profile",{ firstName, lastName, email, dateOfBirth, gender, phoneNumber, image },{
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //     'Authorization': `${secret}`,
+      //   }})
+        const response = await axios.patch("http://172.16.19.200:1234/api/v1/auth/update-profile",{ firstName, lastName, email, dateOfBirth, gender, phoneNumber, image },{
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${secret}`,
+          }})
+
+        console.log('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm', response)
       if ((response.data.status).toString() === '200') {
         console.log("===========================================", response.data)
         await AsyncStorage.setItem('AccessToken', response.data.token)
         await AsyncStorage.setItem('name', response.data.user)
         dispatch(updateProfileSucess({ user: response.data.user, token: response.data.token }));
-        navigation.navigate('UpdateProfil');
+        navigation.navigate('Main');
       } else {
         dispatch(updateProfileFailure('Something might be wrong'));
       }
