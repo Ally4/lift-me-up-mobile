@@ -75,30 +75,44 @@ try {
     }
     dispatch(updateProfileStart());
     try {
-      console.log("ttttttttttttttttttttttttttttttt", secret)
       // const response = await axios.patch("https://acubed-backend-production.up.railway.app/api/v1/auth/update-profile",{ firstName, lastName, email, dateOfBirth, gender, phoneNumber, image },{
       //   headers: {
       //     'Content-Type': 'application/json',
       //     'Authorization': `${secret}`,
       //   }})
-        const response = await axios.patch("http://172.16.19.200:1234/api/v1/auth/update-profile",{ firstName, lastName, email, dateOfBirth, gender, phoneNumber, image },{
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `${secret}`,
-          }})
+      const formData = new FormData();
+      formData.append('firstName', firstName);
+      formData.append('lastName', lastName);
+      formData.append('email', email);
+      formData.append('dateOfBirth', dateOfBirth);
+      formData.append('gender', gender);
+      formData.append('phoneNumber', phoneNumber);
+      formData.append('image', {
+        uri: image,
+        type: 'image/jpg',
+        name: 'image.jpg',
+      });
 
-        console.log('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm', response)
-      if ((response.data.status).toString() === '200') {
+      const response = await axios.patch("https://acubed-backend-production.up.railway.app/api/v1/auth/update-profile", formData ,{
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `${secret}`,
+      }})
+
+      const resultData = response.data;
+      console.log('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm resultData', resultData.data);
+      if ((resultData.status).toString() === '200') {
         console.log("===========================================", response.data)
-        await AsyncStorage.setItem('AccessToken', response.data.token)
-        await AsyncStorage.setItem('name', response.data.user)
-        dispatch(updateProfileSucess({ user: response.data.user, token: response.data.token }));
+        // await AsyncStorage.setItem('AccessToken', secret)
+        // await AsyncStorage.setItem('name', resultData.data?.firstName)
+        dispatch(updateProfileSucess({ user: resultData.data.firstName, token: secret }));
         navigation.navigate('Main');
       } else {
         dispatch(updateProfileFailure('Something might be wrong'));
       }
     } catch (error) {
-      console.log('jjjjjjjjjjj', error)
+      console.log("This is the error on update profile", { firstName, lastName, email, dateOfBirth, gender, phoneNumber, image });
+      console.log('jjjjjjjjjjj', error);
       dispatch(updateProfileFailure('This error is from the server'));
     }
   };
