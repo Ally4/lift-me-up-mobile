@@ -23,6 +23,7 @@ export default function UpdateProfil() {
   const [gender, setGender] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [image, setImage] = useState('');
+  const [secret, setSecret] = useState('');
 
 // This to fetch the image
 // const [image, setImage] = useState();
@@ -35,9 +36,20 @@ const requestPermission = async () => {
   if (!granted) alert("You need to unable permission to access the library")
 }
 
+const getToken = async ()=>{
+  try {
+    const theToken = await AsyncStorage.getItem('token');
+    console.log("kkkkkkkkkkkkkkkkkkkkkk", theToken)
+    // await AsyncStorage.setItem('token', theToken)
+    setSecret(theToken);
+  } catch (error) {
+    
+  }
+}
 
 useEffect(() => {
   requestPermission();
+  getToken();
 }, [])
 
 
@@ -63,18 +75,44 @@ try {
     }
     dispatch(updateProfileStart());
     try {
-      const response = await axios.patch("https://acubed-backend-production.up.railway.app/api/v1/auth/update-profile",{ firstName, lastName, email, dateOfBirth, gender, phoneNumber, image })
-      if ((response.data.status).toString() === '200') {
+      // const response = await axios.patch("https://acubed-backend-production.up.railway.app/api/v1/auth/update-profile",{ firstName, lastName, email, dateOfBirth, gender, phoneNumber, image },{
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //     'Authorization': `${secret}`,
+      //   }})
+      const formData = new FormData();
+      formData.append('firstName', firstName);
+      formData.append('lastName', lastName);
+      formData.append('email', email);
+      formData.append('dateOfBirth', dateOfBirth);
+      formData.append('gender', gender);
+      formData.append('phoneNumber', phoneNumber);
+      formData.append('image', {
+        uri: image,
+        type: 'image/jpg',
+        name: 'image.jpg',
+      });
+
+      const response = await axios.patch("https://acubed-backend-production.up.railway.app/api/v1/auth/update-profile", formData ,{
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `${secret}`,
+      }})
+
+      const resultData = response.data;
+      console.log('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm resultData', resultData.data);
+      if ((resultData.status).toString() === '200') {
         console.log("===========================================", response.data)
-        await AsyncStorage.setItem('AccessToken', response.data.token)
-        await AsyncStorage.setItem('name', response.data.user)
-        dispatch(updateProfileSucess({ user: response.data.user, token: response.data.token }));
-        navigation.navigate('UpdateProfil');
+        // await AsyncStorage.setItem('AccessToken', secret)
+        // await AsyncStorage.setItem('name', resultData.data?.firstName)
+        dispatch(updateProfileSucess({ user: resultData.data.firstName, token: secret }));
+        navigation.navigate('Main');
       } else {
         dispatch(updateProfileFailure('Something might be wrong'));
       }
     } catch (error) {
-      console.log('jjjjjjjjjjj', error)
+      console.log("This is the error on update profile", { firstName, lastName, email, dateOfBirth, gender, phoneNumber, image });
+      console.log('jjjjjjjjjjj', error);
       dispatch(updateProfileFailure('This error is from the server'));
     }
   };

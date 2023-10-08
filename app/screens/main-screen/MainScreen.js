@@ -62,16 +62,56 @@ export default function MainScreen() {
          <Text style={styles.labText}>Lab Tests</Text>
          <FlatList
         horizontal
-        data={data}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
+        // data={data}
+        // keyExtractor={(item) => item.id}
+        renderItem={() => (
           <View style={{ margin: 10,   backgroundColor: 'white',
           padding: 10,
           borderRadius: 10,
           borderColor:"#2FCBD8",
           borderWidth:2,
           width:150}}>
-           <TouchableOpacity onPress={() => navigation.navigate('Login')} ><Text>{item.title}</Text></TouchableOpacity>
+           <TouchableOpacity onPress={() => navigation.navigate('Login')} ><Text>Urine Analysi</Text></TouchableOpacity>
+          </View>
+        )}
+        renderItem1={() => (
+          <View style={{ margin: 10,   backgroundColor: 'white',
+          padding: 10,
+          borderRadius: 10,
+          borderColor:"#2FCBD8",
+          borderWidth:2,
+          width:150}}>
+           <TouchableOpacity onPress={() => navigation.navigate('Login')} ><Text>Serum Sodium</Text></TouchableOpacity>
+          </View>
+        )}
+        renderItem2={() => (
+          <View style={{ margin: 10,   backgroundColor: 'white',
+          padding: 10,
+          borderRadius: 10,
+          borderColor:"#2FCBD8",
+          borderWidth:2,
+          width:150}}>
+           <TouchableOpacity onPress={() => navigation.navigate('Login')} ><Text>Giving specimen</Text></TouchableOpacity>
+          </View>
+        )}
+        renderItem3={() => (
+          <View style={{ margin: 10,   backgroundColor: 'white',
+          padding: 10,
+          borderRadius: 10,
+          borderColor:"#2FCBD8",
+          borderWidth:2,
+          width:150}}>
+           <TouchableOpacity onPress={() => navigation.navigate('Login')} ><Text>Saliva test</Text></TouchableOpacity>
+          </View>
+        )}
+        renderItem4={() => (
+          <View style={{ margin: 10,   backgroundColor: 'white',
+          padding: 10,
+          borderRadius: 10,
+          borderColor:"#2FCBD8",
+          borderWidth:2,
+          width:150}}>
+           <TouchableOpacity onPress={() => navigation.navigate('Login')} ><Text>Home nursing</Text></TouchableOpacity>
           </View>
         )}
       />

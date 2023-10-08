@@ -24,7 +24,7 @@ const App = () => {
         {/* <Stack.Screen name="Home" component={LandingPage} options={{ headerShown: false }}  // options={{title: 'Welcome'}} /> */}
         {/* <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} /> */}
         <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
-        {/* <Stack.Screen name="Main" component={Main} options={{ headerShown: false }} /> */}
+        <Stack.Screen name="Main" component={Main} options={{ headerShown: false }} />
         {/* <Stack.Screen name="ResetEmailScreen" component={ResetEmailScreen} options={{ headerShown: false }} /> */}
         {/* <Stack.Screen name="Pin-Screen" component={PinScreen} options={{ headerShown: false }} /> */}
         <Stack.Screen name="UpdateProfil" component={UpdateProfil} options={{ headerShown: false }} />
