@@ -10,14 +10,24 @@ import { useEffect, useState } from 'react';
 export default function MainScreen() {
 
   const navigation = useNavigation();
-  const [name, setName] =  useState('')
+  const [name, setName] =  useState('');
+  const [picture, setPicture] =  useState('')
+
+  const goToOrderUrine = () => navigation.navigate('Login');
+  const goToOrderSerum = () => navigation.navigate('Login');
+  const goToOrderSpecimen = () => navigation.navigate('Login');
+  const goToOrderSaliva = () => navigation.navigate('Login');
+  const goToOrderNursing = () => navigation.navigate('Login');
+
+
+
 
     const data = [
-      { id: '1', title: 'Urine Analysis' },
-      { id: '2', title: 'Serum Sodium' },
-      { id: '3', title: 'Giving specimen' },
-      { id: '4', title: 'Saliva test' },
-      { id: '5', title: 'Home nursing' },
+      { id: '1', title: 'Urine Analysis', func: goToOrderUrine()},
+      { id: '2', title: 'Serum Sodium', func: goToOrderSerum()},
+      { id: '3', title: 'Giving specimen', func: goToOrderSpecimen() },
+      { id: '4', title: 'Saliva test', func: goToOrderSaliva() },
+      { id: '5', title: 'Home nursing', func: goToOrderNursing() },
     ];
 
 
@@ -30,8 +40,21 @@ export default function MainScreen() {
       }
     }
 
+    const getPic = async ()=>{
+      try {
+        const proPicture = await AsyncStorage.getItem('profilPicture')
+        setPicture(proPicture);
+      } catch (error) {
+        
+      }
+    }
+
     useEffect(()=>{
       getData();
+    },[])
+
+    useEffect(()=>{
+      getPic();
     },[])
 
   return (
@@ -39,8 +62,8 @@ export default function MainScreen() {
       <ScrollView >
         <View style={{backgroundColor:"#2FCBD8", width:250, height:250, borderRadius:150, top: -90, left:-90}}></View>
         <View>
-        <TouchableOpacity onPress={() => navigation.goBack()} ><Image source={require("../../assets/photos/left-arrow.png")} style={{marginTop:-220, marginLeft:10, width:40, height:40}}/></TouchableOpacity>
-        <Image source={require("../../assets/photos/profile.png")} style={{marginTop:-150, marginLeft:10, width:50, height:50}}/>
+        <TouchableOpacity onPress={() => navigation.goBack()} ><Image  source={require("../../assets/photos/left-arrow.png")} style={{marginTop:-220, marginLeft:10, width:40, height:40}}/></TouchableOpacity>
+        <Image src={picture} style={{marginTop:-150, marginLeft:10, width:50, height:50}}/>
         <Image source={require("../../assets/photos/logo-blue.png")} style={{marginTop:-40, marginLeft:135}}/>
         <Image source={require("../../assets/photos/bell.png")} style={{marginTop:-30,marginLeft:330, width:35, height:35}}/>
         </View>
@@ -60,61 +83,26 @@ export default function MainScreen() {
           placeholder={'Search'}
            />
          <Text style={styles.labText}>Lab Tests</Text>
-         <FlatList
+         {/* <FlatList
         horizontal
-        // data={data}
-        // keyExtractor={(item) => item.id}
-        renderItem={() => (
+        data={data}
+        keyExtractor={(item) => item.id}
+        renderItem={(item) => (
           <View style={{ margin: 10,   backgroundColor: 'white',
           padding: 10,
           borderRadius: 10,
           borderColor:"#2FCBD8",
           borderWidth:2,
           width:150}}>
-           <TouchableOpacity onPress={() => navigation.navigate('Login')} ><Text>Urine Analysi</Text></TouchableOpacity>
+           <TouchableOpacity onPress={item.func}><Text>{item.name}</Text></TouchableOpacity>
           </View>
         )}
-        renderItem1={() => (
-          <View style={{ margin: 10,   backgroundColor: 'white',
-          padding: 10,
-          borderRadius: 10,
-          borderColor:"#2FCBD8",
-          borderWidth:2,
-          width:150}}>
-           <TouchableOpacity onPress={() => navigation.navigate('Login')} ><Text>Serum Sodium</Text></TouchableOpacity>
-          </View>
-        )}
-        renderItem2={() => (
-          <View style={{ margin: 10,   backgroundColor: 'white',
-          padding: 10,
-          borderRadius: 10,
-          borderColor:"#2FCBD8",
-          borderWidth:2,
-          width:150}}>
-           <TouchableOpacity onPress={() => navigation.navigate('Login')} ><Text>Giving specimen</Text></TouchableOpacity>
-          </View>
-        )}
-        renderItem3={() => (
-          <View style={{ margin: 10,   backgroundColor: 'white',
-          padding: 10,
-          borderRadius: 10,
-          borderColor:"#2FCBD8",
-          borderWidth:2,
-          width:150}}>
-           <TouchableOpacity onPress={() => navigation.navigate('Login')} ><Text>Saliva test</Text></TouchableOpacity>
-          </View>
-        )}
-        renderItem4={() => (
-          <View style={{ margin: 10,   backgroundColor: 'white',
-          padding: 10,
-          borderRadius: 10,
-          borderColor:"#2FCBD8",
-          borderWidth:2,
-          width:150}}>
-           <TouchableOpacity onPress={() => navigation.navigate('Login')} ><Text>Home nursing</Text></TouchableOpacity>
-          </View>
-        )}
-      />
+      /> */}
+        <TouchableOpacity style={styles.button1}
+          onPress={() => navigation.navigate('Order')}
+           > 
+            <Text style={styles.buttonText1}>Order</Text>
+           </TouchableOpacity>
          <Text style={styles.labText}>Our Facilities</Text>
          <Image source={require("../../assets/photos/plus.png")} style={{width:100, height:100, marginTop:260, marginLeft:280}}/>
          </ScrollView>

@@ -32,24 +32,28 @@ export default function Login() {
 
   const navigation = useNavigation(); 
   const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
+  const [user, setUser] = useState('');
 
   const dispatch = useDispatch();
   const handleLogin = async () => {
-    if (!email || !password) {
-      dispatch(loginFailure('Please enter both email and password.'));
+    if (!user || !password) {
+      dispatch(loginFailure('Please enter both user and password.'));
       return;
     }
     dispatch(loginStart());
     try {
-      const response = await axios.post("https://acubed-backend-production.up.railway.app/api/v1/auth/login",{ email, password })
+      const response = await axios.post("https://acubed-backend-production.up.railway.app/api/v1/auth/login",{ user, password })
+      console.log('qqqqqqqqqqqqqqqqqqqqq...............', response.data.token);
       if (response.data.token) {
+      console.log('qqqqqqqqqqqqqqqqqqqqq', response.data.token, response.data );
        await AsyncStorage.setItem('AccessToken', response.data.token)
        await AsyncStorage.setItem('name', response.data.name)
+       console.log('qqqqqqqqqqqqqqqqqqqqq....>>>>>>>>>>>>>>>>>>>>>', response.data.token, response.data.name );
         dispatch(loginSuccess({ user: response.data.user, token: response.data.token }));
+        console.log('qqqqqqqqqqqqqqqqqqqqq....>>>>>>>>>>>>>>>>>>>>>', response.data.token);
         navigation.navigate('Main'); 
         setPassword('');
-        setEmail('');
+        setUser('');
       } else {
         dispatch(loginFailure('Invalid username or password.'));
       }
@@ -100,7 +104,6 @@ export default function Login() {
         <Image source={require("../../assets/photos/colab.png")}/>
         </View>
         <View style={{backgroundColor:"white", borderTopRightRadius:30, borderTopLeftRadius:30, flex:3}}>
-          <Text>{JSON.stringify(userInfo, null, 2)}</Text>
         <TextInput
           style={{
             backgroundColor: 'white',
@@ -113,7 +116,7 @@ export default function Login() {
             marginLeft:40
           }}
           placeholder={'Email'}
-          onChangeText={(text) => setEmail(text)}
+          onChangeText={(text) => setUser(text)}
           />
         <TextInput
           style={{
@@ -136,7 +139,7 @@ export default function Login() {
           > 
             <Text style={styles.buttonText1}>Login</Text>
            </TouchableOpacity>
-           <View style={{marginLeft:20}} ><Text><CheckBox title='Remember Me' color='#2FCBD8'></CheckBox> <TouchableOpacity onPress={() => navigation.navigate('ResetEmailScreen')}><Text style={{ color: '#2FCBD8', marginTop:2, marginLeft: 50}}> Forgot the password</Text></TouchableOpacity></Text></View>
+           <View style={{marginLeft:20}} ><Text><CheckBox title='Remember Me' color='#2FCBD8'></CheckBox> <TouchableOpacity onPress={() => navigation.navigate('ResetUserScreen')}><Text style={{ color: '#2FCBD8', marginTop:2, marginLeft: 50}}> Forgot the password</Text></TouchableOpacity></Text></View>
            <View style={styles.lineBox}>
            <View style={styles.line} 
            /> 
