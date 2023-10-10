@@ -100,12 +100,10 @@ try {
       }})
 
       const resultData = response.data;
-      console.log('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm resultData', resultData.data);
       if ((resultData.status).toString() === '200') {
-        console.log("===========================================", response.data)
-        // await AsyncStorage.setItem('AccessToken', secret)
-        // await AsyncStorage.setItem('name', resultData.data?.firstName)
-        dispatch(updateProfileSucess({ user: resultData.data.firstName, token: secret }));
+        await AsyncStorage.setItem('profilPicture', resultData.data.profilPicture)
+        await AsyncStorage.setItem('name', resultData.data.firstname)
+        dispatch(updateProfileSucess({ user: resultData.data.firstname, token: secret }));
         navigation.navigate('Main');
       } else {
         dispatch(updateProfileFailure('Something might be wrong'));

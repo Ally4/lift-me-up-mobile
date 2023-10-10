@@ -4,32 +4,45 @@ import React, { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
 import { SafeAreaView, StyleSheet, Text, View, Image, Button, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native'; 
+import { orderStart, orderSuccess, orderFailure } from '../../features/auth/orderSlice';
 
+export default function Order() {
 
-export default function Order({ navigation }) {
+  const navigation = useNavigation(); 
 
-  const [selectedOption, setSelectedOption] = useState('');
+  const [nameOfTest, setNameOfTest] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [sex, setSex] = useState('');
+  const [age, setAge] = useState('');
+  const [accessPoint, setAccessPoint] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [payment, setPayment] = useState('');
 
-  const handleOptionChange = (option) => {
-    setSelectedOption(option);
-  };
+  const dispatch = useDispatch();
+  const handleOrder = async () => {
+    if (!nameOfTest || !firstName || !lastName || !sex || !age || !accessPoint || !phoneNumber || !payment) {
+      dispatch(orderFailure('Please enter both email and password.'));
+      return;
+    }
+    dispatch(orderStart());
+    try {
 
-
-  const [selectedImage, setSelectedImage] = useState(null);
-
-  const handleImageUpload = () => {
-    ImagePicker.showImagePicker({ title: 'Select Image' }, (response) => {
-      if (response.didCancel) {
-        console.log('Image selection was canceled.');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
+      console.log('wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww', await axios.post("https://acubed-backend-production.up.railway.app/api/v1/tests/order-hospital",{ nameOfTest, firstName, lastName, sex, age, accessPoint, phoneNumber, payment}))
+      const response = await axios.post("https://acubed-backend-production.up.railway.app/api/v1/tests/order-hospital",{ nameOfTest, firstName, lastName, sex, age, accessPoint, phoneNumber, payment});
+      console.log('wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww               hhhhhh')
+      if ((response.data.status).toString() === '201') {
+        dispatch(orderSuccess({ user: response.data.user, token: response.data.token }));
+        navigation.navigate('Main');
       } else {
-        const source = { uri: response.uri };
-        setSelectedImage(source);
+        dispatch(orderFailure('Some of you input is not valid'));
       }
-    });
+    } catch (error) {
+      dispatch(orderFailure('An error occurred during the signup.'));
+    }
   };
-
 
 
 
@@ -44,29 +57,33 @@ export default function Order({ navigation }) {
         <View >
          <View style={{marginTop:20, padding:20, width:350, marginLeft:20}}>
           <View style={{marginBottom:20}}>
-            <Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Test Type</Text><Text style={{fontWeight:'bold', marginLeft:180, marginTop:-25, fontSize:20}}>Urine Analysis</Text>
+            <Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Welcome to co-lab order process</Text>
+            {/* <Text style={{fontWeight:'bold', marginLeft:180, marginTop:-25, fontSize:20}}>Urine Analysis</Text> */}
            </View>
           <View style={{marginBottom:20}}>
-            <Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Facility Name</Text><Text style={{fontWeight:'bold', marginLeft:160, marginTop:-25, fontSize:20}}>Alation Hospital</Text>
+            <Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Here we process your lab test in the turn around of 1 hour</Text>
+            {/* <Text style={{fontWeight:'bold', marginLeft:160, marginTop:-25, fontSize:20}}>Alation Hospital</Text> */}
           </View>
           <View style={{marginBottom:20}}>
-            <Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Price</Text><Text style={{fontWeight:'bold', marginLeft:270, marginTop:-25, fontSize:20}}>50$</Text>
+            <Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Just proceed by filling the required field accordingly</Text>
+            {/* <Text style={{fontWeight:'bold', marginLeft:270, marginTop:-25, fontSize:20}}>50$</Text> */}
           </View>
-          <View style={{marginBottom:20}}>
-            <Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Turn Around Time</Text><Text style={{fontWeight:'bold', marginLeft:270, marginTop:-25, fontSize:20}}>1h</Text>
-          </View>
+          {/* <View style={{marginBottom:20}}>
+            <Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Here</Text>
+            <Text style={{fontWeight:'bold', marginLeft:270, marginTop:-25, fontSize:20}}>1h</Text>
+          </View> */}
         </View>
         </View>
         </View>
         <Text style={{fontSize:25, marginLeft:10, marginTop:20}}>Sample Collection Point</Text>
-        <View style={{width:350, marginLeft:10, borderRadius:10,padding:1, backgroundColor:'#2FCBD8', marginTop:10}}>
+        {/* <View style={{width:350, marginLeft:10, borderRadius:10,padding:1, backgroundColor:'#2FCBD8', marginTop:10}}>
           <View style={{backgroundColor:'#2FCBD8', width:'50%', padding:15, borderRadius:10}}>
             <TouchableOpacity><Text style={{marginLeft:50, fontWeight:'bold', color:'white'}}>Hospital</Text></TouchableOpacity>
           </View>
           <View style={{backgroundColor:'white', width:'50%', marginLeft:'50%', marginTop:-49.5, padding:15, borderBottomRightRadius:10, borderTopRightRadius:10}}>
             <TouchableOpacity><Text style={{marginLeft:50, fontWeight:'bold', fontSize:15}}>Others</Text></TouchableOpacity>
           </View>
-        </View>
+        </View> */}
         <TextInput
            style={{
              backgroundColor: 'white',
@@ -78,7 +95,36 @@ export default function Order({ navigation }) {
              marginTop:20,
              marginLeft:10
            }}
-           placeholder={'Name'}
+           placeholder={'Name of the test'}
+           onChangeText={(text) => setNameOfTest(text)}
+           />
+        <TextInput
+           style={{
+             backgroundColor: 'white',
+             padding: 10,
+             borderRadius: 5,
+             borderColor:"#2FCBD8",
+             borderWidth:1,
+             width:350,
+             marginTop:20,
+             marginLeft:10
+           }}
+           placeholder={'First Name'}
+           onChangeText={(text) => setFirstName(text)}
+           />
+                <TextInput
+           style={{
+             backgroundColor: 'white',
+             padding: 10,
+             borderRadius: 5,
+             borderColor:"#2FCBD8",
+             borderWidth:1,
+             width:350,
+             marginTop:20,
+             marginLeft:10
+           }}
+           placeholder={'Last Name'}
+           onChangeText={(text) => setLastName(text)}
            />
                    <TextInput
            style={{
@@ -92,6 +138,7 @@ export default function Order({ navigation }) {
              marginLeft:10
            }}
            placeholder={'Male or Female'}
+           onChangeText={(text) => setSex(text)}
            />
                    <TextInput
            style={{
@@ -105,6 +152,7 @@ export default function Order({ navigation }) {
              marginLeft:10
            }}
            placeholder={'Age'}
+           onChangeText={(text) => setAge(text)}
            />
                    <TextInput
            style={{
@@ -117,9 +165,10 @@ export default function Order({ navigation }) {
              marginTop:20,
              marginLeft:10
            }}
-           placeholder={'Hospital Name'}
+           placeholder={'Hospital Name or access point'}
+           onChangeText={(text) => setAccessPoint(text)}
            />
-                   <TextInput
+                   {/* <TextInput
            style={{
              backgroundColor: 'white',
              padding: 10,
@@ -131,8 +180,8 @@ export default function Order({ navigation }) {
              marginLeft:10
            }}
            placeholder={'Department'}
-           />
-                   <TextInput
+           /> */}
+                   {/* <TextInput
            style={{
              backgroundColor: 'white',
              padding: 10,
@@ -144,8 +193,8 @@ export default function Order({ navigation }) {
              marginLeft:10
            }}
            placeholder={'Room number'}
-           />
-                   <TextInput
+           /> */}
+          <TextInput
            style={{
              backgroundColor: 'white',
              padding: 10,
@@ -157,8 +206,23 @@ export default function Order({ navigation }) {
              marginLeft:10
            }}
            placeholder={'Phone Number'}
+           onChangeText={(text) => setPhoneNumber(text)}
            />
-          <Text style={{fontSize:25, marginLeft:10, marginTop:20}}>Payment Method</Text>
+          <TextInput
+           style={{
+             backgroundColor: 'white',
+             padding: 10,
+             borderRadius: 5,
+             borderColor:"#2FCBD8",
+             borderWidth:1,
+             width:350,
+             marginTop:20,
+             marginLeft:10
+           }}
+           placeholder={'Payment: if mobile payment write mobile else write cash'}
+           onChangeText={(text) => setPayment(text)}
+           />
+          {/* <Text style={{fontSize:25, marginLeft:10, marginTop:20}}>Payment Method</Text>
             <View>
       <Picker
         selectedValue={selectedOption}
@@ -178,18 +242,18 @@ export default function Order({ navigation }) {
         <Picker.Item label="Cash" value="option1" />
         <Picker.Item label="Mobile Pay" value="option2" />
       </Picker>
-    </View>
+    </View> */}
 
 
-     <View>
+     {/* <View>
       <Button title="Select Image" onPress={handleImageUpload} style={{color:'#2FCBD8', width:350}} />
       {selectedImage && <Image source={selectedImage} style={{ width: 200, height: 200 }} />}
-    </View>
+    </View> */}
     <View style={{marginTop:20}}>
-    <TouchableOpacity style={styles.confirmOrder} onPress={() => navigation.navigate('SignupScreen')}>
+    <TouchableOpacity style={styles.confirmOrder} onPress={() => handleOrder()}>
        <Text style={styles.confirmOrderText}>Confirm Order</Text>
      </TouchableOpacity>
-     <TouchableOpacity style={styles.cancelOrder} onPress={() => console.log('Button pressed')}>
+     <TouchableOpacity style={styles.cancelOrder} onPress={() => navigation.navigate('Main')}>
        <Text style={styles.cancelOrderText}>Cancel Order</Text>
      </TouchableOpacity>
     </View>
