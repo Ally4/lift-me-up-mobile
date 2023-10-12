@@ -23,6 +23,7 @@ export default function Order() {
 
   const dispatch = useDispatch();
   const handleOrder = async () => {
+    console.log("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyq", nameOfTest, firstName, lastName, sex, age, accessPoint, phoneNumber, payment)
     if (!nameOfTest || !firstName || !lastName || !sex || !age || !accessPoint || !phoneNumber || !payment) {
       dispatch(orderFailure('Please enter both email and password.'));
       return;
@@ -250,7 +251,7 @@ export default function Order() {
       {selectedImage && <Image source={selectedImage} style={{ width: 200, height: 200 }} />}
     </View> */}
     <View style={{marginTop:20}}>
-    <TouchableOpacity style={styles.confirmOrder} onPress={() => handleOrder()}>
+    <TouchableOpacity style={styles.confirmOrder} onPress={() => {handleOrder(), console.log("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy")}}>
        <Text style={styles.confirmOrderText}>Confirm Order</Text>
      </TouchableOpacity>
      <TouchableOpacity style={styles.cancelOrder} onPress={() => navigation.navigate('Main')}>
