@@ -115,7 +115,7 @@ export default function Login() {
             marginTop:20,
             marginLeft:40
           }}
-          placeholder={'Email'}
+          placeholder={'User'}
           onChangeText={(text) => setUser(text)}
           />
         <TextInput
