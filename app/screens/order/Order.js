@@ -1,8 +1,9 @@
 import 'react-native-gesture-handler';
 // import { StatusBar } from 'expo-status-bar';
+import axios from 'axios';
 import React, { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
-import { SafeAreaView, StyleSheet, Text, View, Image, Button, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Image, Button, TouchableOpacity, TextInput, ScrollView, Alert } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native'; 
@@ -21,26 +22,40 @@ export default function Order() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [payment, setPayment] = useState('');
 
+
+
+  const showAlert = () => {
+    Alert.alert(
+      'Order',
+      'Order submitted, if wrote mobile, pay on: 0941841870',
+      [
+        { text: 'OK', onPress: () => navigation.navigate('Main') },
+        // You can add more buttons with additional onPress handlers.
+      ],
+      { cancelable: false }
+    );
+  };
+
+
+
+
   const dispatch = useDispatch();
   const handleOrder = async () => {
     if (!nameOfTest || !firstName || !lastName || !sex || !age || !accessPoint || !phoneNumber || !payment) {
-      dispatch(orderFailure('Please enter both email and password.'));
+      dispatch(orderFailure('You miss something in your order.'));
       return;
     }
     dispatch(orderStart());
     try {
-
-      console.log('wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww', await axios.post("https://acubed-backend-production.up.railway.app/api/v1/tests/order-hospital",{ nameOfTest, firstName, lastName, sex, age, accessPoint, phoneNumber, payment}))
       const response = await axios.post("https://acubed-backend-production.up.railway.app/api/v1/tests/order-hospital",{ nameOfTest, firstName, lastName, sex, age, accessPoint, phoneNumber, payment});
-      console.log('wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww               hhhhhh')
       if ((response.data.status).toString() === '201') {
         dispatch(orderSuccess({ user: response.data.user, token: response.data.token }));
         navigation.navigate('Main');
       } else {
-        dispatch(orderFailure('Some of you input is not valid'));
+        dispatch(orderFailure('You miss something in your order.'));
       }
     } catch (error) {
-      dispatch(orderFailure('An error occurred during the signup.'));
+      dispatch(orderFailure('An error occurred during the order.'));
     }
   };
 
@@ -250,7 +265,7 @@ export default function Order() {
       {selectedImage && <Image source={selectedImage} style={{ width: 200, height: 200 }} />}
     </View> */}
     <View style={{marginTop:20}}>
-    <TouchableOpacity style={styles.confirmOrder} onPress={() => handleOrder()}>
+    <TouchableOpacity style={styles.confirmOrder} onPress={() => {handleOrder(), showAlert()}}>
        <Text style={styles.confirmOrderText}>Confirm Order</Text>
      </TouchableOpacity>
      <TouchableOpacity style={styles.cancelOrder} onPress={() => navigation.navigate('Main')}>

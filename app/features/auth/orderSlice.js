@@ -12,6 +12,7 @@ const OrderSlice = createSlice({
   initialState,
   reducers: {
     orderStart: (state) => {
+      console.log("in the start reducer")
       state.isLoading = true;
       state.error = null;
     },

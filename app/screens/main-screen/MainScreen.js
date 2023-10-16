@@ -104,7 +104,7 @@ export default function MainScreen() {
             <Text style={styles.buttonText1}>Order</Text>
            </TouchableOpacity>
          <Text style={styles.labText}>Our Facilities</Text>
-         <Image source={require("../../assets/photos/plus.png")} style={{width:100, height:100, marginTop:260, marginLeft:280}}/>
+         {/* <Image source={require("../../assets/photos/plus.png")} style={{width:100, height:100, marginTop:260, marginLeft:280}}/> */}
          </ScrollView>
       </SafeAreaView>
   );
