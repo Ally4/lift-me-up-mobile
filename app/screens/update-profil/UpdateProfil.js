@@ -30,8 +30,6 @@ export default function UpdateProfil() {
 
 
 const requestPermission = async () => {
-  // const result = await Permissions.askAsync(Permissions.MEDIA_LIBRARY, Permissions.LOCATION_BACKGROUND);
-  // result.grant
   const {granted} = await ImagePicker.requestMediaLibraryPermissionsAsync();
   if (!granted) alert("You need to unable permission to access the library")
 }
@@ -39,8 +37,6 @@ const requestPermission = async () => {
 const getToken = async ()=>{
   try {
     const theToken = await AsyncStorage.getItem('token');
-    console.log("kkkkkkkkkkkkkkkkkkkkkk", theToken)
-    // await AsyncStorage.setItem('token', theToken)
     setSecret(theToken);
   } catch (error) {
     
@@ -75,11 +71,6 @@ try {
     }
     dispatch(updateProfileStart());
     try {
-      // const response = await axios.patch("https://acubed-backend-production.up.railway.app/api/v1/auth/update-profile",{ firstName, lastName, email, dateOfBirth, gender, phoneNumber, image },{
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     'Authorization': `${secret}`,
-      //   }})
       const formData = new FormData();
       formData.append('firstName', firstName);
       formData.append('lastName', lastName);
@@ -110,7 +101,6 @@ try {
       }
     } catch (error) {
       console.log("This is the error on update profile", { firstName, lastName, email, dateOfBirth, gender, phoneNumber, image });
-      console.log('jjjjjjjjjjj', error);
       dispatch(updateProfileFailure('This error is from the server'));
     }
   };
@@ -124,11 +114,11 @@ try {
       <SafeAreaView style={styles.container}> 
       <ScrollView >
         <View style={{backgroundColor:"black", width:250, height:250, borderRadius:150, opacity:0.2, top: -90, left:-90}}></View>
-        <Image source={require("../../assets/photos/colab.png")} style={{marginBottom:20, marginLeft:70}}/>
-        <View style={{backgroundColor:"white", flex:2, borderTopRightRadius:30, borderTopLeftRadius:30}}>
+        <View style={styles.logo}><Image source={require("../../assets/photos/colab.png")} /></View>
+        <View style={styles.update}>
           <View>
           <Button title="Select Image" onPress={selectImage}></Button>
-          <Image source={{ uri: image}} style={{width:200, height: 200 }}/>
+          <Image source={{ uri: image}} style={{width:100, height: 200 }}/>
         </View>
         <TextInput
           style={{
@@ -139,7 +129,7 @@ try {
             borderWidth:1,
             width:300,
             marginTop:20,
-            marginLeft:40
+            // marginLeft:40
           }}
           placeholder={'First Name'}
           onChangeText={(text) => setFirstName(text)}
@@ -153,7 +143,7 @@ try {
             borderWidth:1,
             width:300,
             marginTop:20,
-            marginLeft:40
+            // marginLeft:40
           }}
           placeholder={'Last Name'}
           onChangeText={(text) => setLastName(text)}
@@ -167,7 +157,7 @@ try {
             borderWidth:1,
             width:300,
             marginTop:20,
-            marginLeft:40
+            // marginLeft:40
           }}
           placeholder={'Email'}
           onChangeText={(text) => setEmail(text)}
@@ -181,7 +171,7 @@ try {
             borderWidth:1,
             width:300,
             marginTop:20,
-            marginLeft:40
+            // marginLeft:40
           }}
           onChangeText={(text) => setDob(text)}
           placeholder={'Date of Birth'}
@@ -195,7 +185,7 @@ try {
             borderWidth:1,
             width:300,
             marginTop:20,
-            marginLeft:40
+            // marginLeft:40
           }}
           onChangeText={(text) => setGender(text)}
           placeholder={'Gender'}
@@ -209,7 +199,7 @@ try {
             borderWidth:1,
             width:300,
             marginTop:20,
-            marginLeft:40
+            // marginLeft:40
           }}
           onChangeText={(text) => setPhoneNumber(text)}
           placeholder={'Phone Number'}
@@ -235,7 +225,7 @@ button: {
   padding: 10,
   borderRadius: 5,
   width:300,
-  marginLeft:40
+  // marginLeft:40
 
   
 },
@@ -253,7 +243,7 @@ button1: {
   borderWidth:2,
   width:300,
   marginTop:20,
-  marginLeft:40
+  // marginLeft:40
 
   
 },
@@ -262,5 +252,20 @@ buttonText1: {
   fontSize: 16,
   fontWeight: 'bold',
   textAlign: 'center',
+},
+logo : {
+  display:'flex',
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginVertical: 10,
+},
+update : {
+  backgroundColor: '#FFFFff',
+  display:'flex',
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  paddingBottom: 10,
 },
 })

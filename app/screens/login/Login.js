@@ -43,14 +43,10 @@ export default function Login() {
     dispatch(loginStart());
     try {
       const response = await axios.post("https://acubed-backend-production.up.railway.app/api/v1/auth/login",{ user, password })
-      console.log('qqqqqqqqqqqqqqqqqqqqq...............', response.data.token);
       if (response.data.token) {
-      console.log('qqqqqqqqqqqqqqqqqqqqq', response.data.token, response.data );
        await AsyncStorage.setItem('AccessToken', response.data.token)
        await AsyncStorage.setItem('name', response.data.name)
-       console.log('qqqqqqqqqqqqqqqqqqqqq....>>>>>>>>>>>>>>>>>>>>>', response.data.token, response.data.name );
         dispatch(loginSuccess({ user: response.data.user, token: response.data.token }));
-        console.log('qqqqqqqqqqqqqqqqqqqqq....>>>>>>>>>>>>>>>>>>>>>', response.data.token);
         navigation.navigate('Main'); 
         setPassword('');
         setUser('');
@@ -99,11 +95,11 @@ export default function Login() {
       <SafeAreaView style={styles.container}>
         <ScrollView > 
         <View style={{backgroundColor:"black", width:250, height:250, borderRadius:150, opacity:0.2, top: -90, left:-90}}></View>
+        <View style={styles.logo}><Image source={require("../../assets/photos/colab.png")}/></View>
         <View style={styles.nameForm}>
-        <View style={styles.nameLogo}>
-        <Image source={require("../../assets/photos/colab.png")}/>
-        </View>
-        <View style={{backgroundColor:"white", borderTopRightRadius:30, borderTopLeftRadius:30, flex:3}}>
+        {/* <View style={styles.nameLogo}> */}
+        {/* </View> */}
+        <View style={styles.login}>
         <TextInput
           style={{
             backgroundColor: 'white',
@@ -113,7 +109,7 @@ export default function Login() {
             borderWidth:1,
             width:300,
             marginTop:20,
-            marginLeft:40
+            // marginLeft:40
           }}
           placeholder={'User'}
           onChangeText={(text) => setUser(text)}
@@ -127,7 +123,7 @@ export default function Login() {
             borderWidth:1,
             width:300,
             marginTop:20,
-            marginLeft:40
+            // marginLeft:40
           }}
           placeholder={'Password'}
           secureTextEntry={true}
@@ -139,18 +135,24 @@ export default function Login() {
           > 
             <Text style={styles.buttonText1}>Login</Text>
            </TouchableOpacity>
-           <View style={{marginLeft:20}} ><Text><CheckBox title='Remember Me' color='#2FCBD8'></CheckBox> <TouchableOpacity onPress={() => navigation.navigate('ResetUserScreen')}><Text style={{ color: '#2FCBD8', marginTop:2, marginLeft: 50}}> Forgot the password</Text></TouchableOpacity></Text></View>
-           <View style={styles.lineBox}>
-           <View style={styles.line} 
-           /> 
-           <Text style={styles.lineText}>Or Login</Text>
-           <View style={styles.line} /> 
+
+
+           <View style={styles.remember}>
+           <View style={styles.check}><Text><CheckBox title='Remember Me'></CheckBox> </Text></View>
+           <View style={styles.forgot}><TouchableOpacity onPress={() => navigation.navigate('ResetUserScreen')}><Text style={styles.forgot}> Forgot the password</Text></TouchableOpacity></View>
+           </View>
+
+
+           <View style={styles.lines}>
+           <View style={styles.horizontalLine} />
+           <Text style={styles.lineText}>Or Login with</Text>
+           <View style={styles.horizontalLine} />
            </View>
            <TouchableOpacity style={styles.button2} onPress={() => promptAsync()} >
             <Text style={styles.buttonText}><Image source={require("../../assets/photos/google.png")} style={{width:20, height:20}}  />  GOOGLE</Text>
             </TouchableOpacity>
-           <Text style={{marginLeft:90}}>Do you have an account?<TouchableOpacity onPress={() => navigation.navigate('Signup')}><Text style={{ color: '#2FCBD8', marginTop:2}}> Signup</Text></TouchableOpacity></Text>
-           <Image source={require("../../assets/photos/acubed.png")} style={{marginBottom:20, marginLeft:150}}/>
+           <Text>Do you have an account?<TouchableOpacity onPress={() => navigation.navigate('Signup')}><Text style={{ color: '#2FCBD8', marginTop:2}}> Signup</Text></TouchableOpacity></Text>
+           <Image source={require("../../assets/photos/acubed.png")} />
         </View>
         </View>
         </ScrollView>
@@ -175,8 +177,8 @@ button2: {
   padding: 10,
   borderRadius: 5,
   width:300,
-  marginLeft:40,
-  marginTop:20,
+  // marginLeft:40,
+  // marginTop:20,
   borderWidth: 2,
   borderColor: "#2FCBD8",
 },
@@ -194,7 +196,7 @@ button1: {
   borderWidth:2,
   width:300,
   marginTop:20,
-  marginLeft:40
+  // marginLeft:40
 },
 buttonText1: {
   color: 'white',
@@ -211,15 +213,64 @@ line: {
 lineBox: {
   marginLeft:150,
 },
-lineText: {
-  marginLeft:25,
-  marginTop:15,
-},
+// lineText: {
+//   marginLeft:25,
+//   marginTop:15,
+// },
 nameForm : {
-  display: 'flex',
+  backgroundColor: '#ffffff',
+  display:'flex',
   flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderTopRightRadius: 15,
+  borderTopLeftRadius: 15,
+  // padding: 1,
 },
-nameLogo : {
-  justifyContent: "center"
+login : {
+  // backgroundColor: '#FFFF00',
+  display:'flex',
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+},
+remember : {
+  // backgroundColor: '#FF0000',
+  display:'flex',
+  flex: 1,
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  marginTop: 20,
+},
+lines : {
+  // backgroundColor: '#FF0000',
+  display:'flex',
+  flex: 1,
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  marginVertical: 20,
+  width: '60%',
+},
+horizontalLine: {
+  width: '20%',
+  height: 1.5, // Adjust the height as needed
+  backgroundColor: 'black', // Change the color as needed
+},
+logo : {
+  display:'flex',
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginVertical: 20,
+},
+forgot : {
+  color: '#2FCBD8',
+  textDecorationLine: 'underline',
+},
+check : {
+  color:'#2FCBD8',
+  backgroundColor: 'transparent'
 }
 })

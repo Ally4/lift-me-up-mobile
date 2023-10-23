@@ -43,8 +43,9 @@ export default function Signup() {
       <SafeAreaView style={styles.container}> 
       <ScrollView >
         <View style={{backgroundColor:"black", width:250, height:250, borderRadius:150, opacity:0.2, top: -90, left:-90}}></View>
-        <Image source={require("../../assets/photos/colab.png")} style={{marginBottom:20, marginLeft:70}}/>
-        <View style={{backgroundColor:"white", flex:2, borderTopRightRadius:30, borderTopLeftRadius:30}}>
+        <View style={styles.logo}><Image source={require("../../assets/photos/colab.png")}/></View>
+        <View style={styles.nameForm}>
+        <View style={styles.signup}>
         <TextInput
           style={{
             backgroundColor: 'white',
@@ -54,7 +55,7 @@ export default function Signup() {
             borderWidth:1,
             width:300,
             marginTop:20,
-            marginLeft:40
+            // marginLeft:40
           }}
           placeholder={'User'}
           onChangeText={(text) => setUser(text)}
@@ -68,7 +69,7 @@ export default function Signup() {
             borderWidth:1,
             width:300,
             marginTop:20,
-            marginLeft:40
+            // marginLeft:40
           }}
           secureTextEntry={true}
           onChangeText={(text) => setPassword(text)}
@@ -84,7 +85,7 @@ export default function Signup() {
             borderWidth:1,
             width:300,
             marginTop:20,
-            marginLeft:40
+            // marginLeft:40
           }}
           secureTextEntry={true}
           onChangeText={(text) => setConfirmPassword(text)}
@@ -96,8 +97,9 @@ export default function Signup() {
            > 
             <Text style={styles.buttonText1}>Sign Up</Text>
            </TouchableOpacity>
-           <Text style={{marginLeft:90}}>Do you have an account?<TouchableOpacity onPress={() => navigation.navigate('Login')} ><Text style={{ color: '#2FCBD8', marginTop:2}}> Login</Text></TouchableOpacity></Text>
-           <Image source={require("../../assets/photos/acubed.png")} style={{marginBottom:20, marginLeft:150}}/>
+           <Text >Do you have an account?<TouchableOpacity onPress={() => navigation.navigate('Login')} ><Text style={{ color: '#2FCBD8', marginTop:2}}> Login</Text></TouchableOpacity></Text>
+           <Image source={require("../../assets/photos/acubed.png")} />
+        </View>
         </View>
         </ScrollView>
       </SafeAreaView>
@@ -114,7 +116,7 @@ button: {
   padding: 10,
   borderRadius: 5,
   width:300,
-  marginLeft:40
+  // marginLeft:40
 
   
 },
@@ -132,7 +134,7 @@ button1: {
   borderWidth:2,
   width:300,
   marginTop:20,
-  marginLeft:40
+  // marginLeft:40
 
   
 },
@@ -141,5 +143,29 @@ buttonText1: {
   fontSize: 16,
   fontWeight: 'bold',
   textAlign: 'center',
+},
+logo : {
+  display:'flex',
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginVertical: 20,
+},
+nameForm : {
+  backgroundColor: '#ffffff',
+  display:'flex',
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderTopRightRadius: 15,
+  borderTopLeftRadius: 15,
+  // padding: 1,
+},
+signup : {
+  // backgroundColor: '#FFFF00',
+  display:'flex',
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
 },
 })

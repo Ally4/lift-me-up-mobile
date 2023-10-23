@@ -18,22 +18,14 @@ export default function ResetPasswordEmail() {
 
   const handleReset = async () => {
 
-    console.log("======================================= in the screen")
-
     if (!email ) {
       dispatch(resetFailure('Please enter your email.'));
       return;
     }
 
-    console.log("======================================= in the screen, to check for the email")
-
     dispatch(resetStart());
 
-    console.log("======================================= in the screen, calling the dispatch start")
-
     try {
-
-      console.log("======================================= in the screen, now in the try")
       const response = await axios.post("https://acubed-backend-production.up.railway.app/api/v1/auth/forgotten-link",{ email })
 
 
@@ -63,11 +55,13 @@ export default function ResetPasswordEmail() {
 
   return (
       <SafeAreaView style={styles.container}>
+        <ScrollView >
         <View style={{backgroundColor:"black", width:250, height:250, borderRadius:150, opacity:0.2, top: -90, left:-90}}></View>
-        <Image source={require("../../assets/photos/colab.png")} style={{marginBottom:20, marginLeft:70}}/>
+        <View style={styles.logo}><Image source={require("../../assets/photos/colab.png")}/></View>
         <View style={{backgroundColor:"white", flex:2, borderTopRightRadius:30, borderTopLeftRadius:30}}>
           <Text style={styles.resetText}>Forgotten Password</Text>
           <Text style={styles.resetParagraph}>Enter the email address associated with your account so that we can send a code to reset your password</Text>
+          <View style={styles.reset}>
         <TextInput
           style={{
             backgroundColor: 'white',
@@ -77,7 +71,7 @@ export default function ResetPasswordEmail() {
             borderWidth:1,
             width:300,
             marginTop:20,
-            marginLeft:40
+            // marginLeft:40
           }}
           value={setEmail}
           onChangeText={(text) => setEmail(text)}
@@ -86,15 +80,17 @@ export default function ResetPasswordEmail() {
           <TouchableOpacity style={styles.button1} onPress={() => handleReset()}> 
             <Text style={styles.buttonText1}>Verify</Text>
            </TouchableOpacity>
-           <View style={{width:350, marginLeft:10, borderRadius:10,padding:1, backgroundColor:'#2FCBD8', marginTop:10}}>
-          <View style={{backgroundColor:'#2FCBD8', width:'50%', padding:15, borderRadius:10}}>
-            <TouchableOpacity onPress={() => navigation.navigate('Signup')}><Text style={{marginLeft:50, fontWeight:'bold', color:'white'}}>Signup</Text></TouchableOpacity>
+           <View style={styles.resetButton}>
+          <View style={styles.resetButton1}>
+            <TouchableOpacity onPress={() => navigation.navigate('Signup')}><Text style={{color:'white'}}>Signup</Text></TouchableOpacity>
           </View>
-          <View style={{backgroundColor:'white', width:'50%', marginLeft:'50%', marginTop:-49.5, padding:15, borderBottomRightRadius:10, borderTopRightRadius:10}}>
-            <TouchableOpacity onPress={() => navigation.navigate('Login')}><Text style={{marginLeft:50, fontWeight:'bold', fontSize:15, color:'#2FCBD8'}}>Login</Text></TouchableOpacity>
+          <View style={styles.resetButton2}>
+            <TouchableOpacity onPress={() => navigation.navigate('Login')}><Text style={{color:'#2FCBD8'}}>Login</Text></TouchableOpacity>
           </View>
         </View>
         </View>
+        </View>
+        </ScrollView>
       </SafeAreaView>
   );
 }
@@ -139,7 +135,7 @@ button1: {
   borderWidth:2,
   width:300,
   marginTop:20,
-  marginLeft:40
+  // marginLeft:40
 
   
 },
@@ -170,5 +166,43 @@ resetText: {
 resetParagraph: {
   textAlign: 'center',
   marginRight: 10,
+},
+logo : {
+  display:'flex',
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginVertical: 20,
+},
+reset : {
+  // backgroundColor: '#FFFF00',
+  display:'flex',
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+},
+resetButton : {
+  display:'flex',
+  flex: 1,
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  marginTop:30,
+  marginBottom: 20,
+  width:'80%'
+},
+resetButton1 : {
+  borderRadius:10,
+  backgroundColor:'#2FCBD8', 
+  color:'white',
+  padding:15,
+},
+resetButton2 : {
+  borderRadius:10,
+  backgroundColor:'white', 
+  color:'#2FCBD8', 
+  padding:15,
+  borderWidth: 1,
+  borderColor: '#2FCBD8',
 },
 })

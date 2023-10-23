@@ -60,7 +60,7 @@ export default function MainScreen() {
   return (
       <SafeAreaView style={styles.container1}> 
       <ScrollView >
-        <View style={{backgroundColor:"#2FCBD8", width:250, height:250, borderRadius:150, top: -90, left:-90}}></View>
+        <View style={{backgroundColor:"#2FCBD8", width:250, height:250, borderRadius:100, top: -140, left:-140}}></View>
         <View>
         <TouchableOpacity onPress={() => navigation.goBack()} ><Image  source={require("../../assets/photos/left-arrow.png")} style={{marginTop:-220, marginLeft:10, width:40, height:40}}/></TouchableOpacity>
         <Image src={picture} style={{marginTop:-150, marginLeft:10, width:50, height:50}}/>
@@ -69,6 +69,7 @@ export default function MainScreen() {
         </View>
         <Text style={styles.helloText}>Hello, <Text style={styles.abebeText}>{name}!</Text></Text>
         <Text style={styles.testText}>Which facility or test are you looking for today?</Text>
+        <View style={styles.main}>
         <TextInput
          style={{
           backgroundColor: 'white',
@@ -78,7 +79,7 @@ export default function MainScreen() {
           borderWidth:1,
           width:300,
           marginTop:20,
-          marginLeft:40
+          // marginLeft:40
           }}
           placeholder={'Search'}
            />
@@ -98,13 +99,18 @@ export default function MainScreen() {
           </View>
         )}
       /> */}
+      <View>
         <TouchableOpacity style={styles.button1}
           onPress={() => navigation.navigate('Order')}
            > 
             <Text style={styles.buttonText1}>Order</Text>
            </TouchableOpacity>
+           </View>
+           <View>
          <Text style={styles.labText}>Our Facilities</Text>
+         </View>
          {/* <Image source={require("../../assets/photos/plus.png")} style={{width:100, height:100, marginTop:260, marginLeft:280}}/> */}
+         </View>
          </ScrollView>
       </SafeAreaView>
   );
@@ -150,7 +156,7 @@ button1: {
   borderWidth:2,
   width:300,
   marginTop:20,
-  marginLeft:40
+  // marginLeft:40
 
   
 },
@@ -204,5 +210,12 @@ labText: {
   fontWeight:'bold',
   fontSize: 20,
   marginLeft:10,
+},
+main : {
+  // backgroundColor: '#FFFF00',
+  display:'flex',
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
 },
 })

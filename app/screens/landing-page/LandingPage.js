@@ -6,13 +6,15 @@ export default function LandingPage({navigation}) {
   <SafeAreaView style={styles.container}>
     <ScrollView >
       <View style={{backgroundColor:"black", width:250, height:250, borderRadius:150, opacity:0.2, top: -90, left:-90}}></View>
-      <Image source={require("../../assets/photos/logo.png")} style={{marginTop:150}}/>
+      <View style={styles.landing}>
+      <Image source={require("../../assets/photos/logo.png")} />
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button1} onPress={() => navigation.navigate('Signup')}>
         <Text style={styles.buttonText1}>Sign Up</Text>
       </TouchableOpacity>
+      </View>
     </ScrollView>
   </SafeAreaView>
   );
@@ -26,12 +28,21 @@ const styles = StyleSheet.create({
     // height:"auto",
     backgroundColor:"#2FCBD8",
 },
+//The right thing for flex box
+landing: {
+  // backgroundColor: '#ff0000',
+  display:'flex',
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  padding: 1,
+},
 button: {
   backgroundColor: 'white',
   padding: 10,
   borderRadius: 5,
   width:300,
-  marginLeft:40
+  // marginLeft:40
   
 },
 buttonText: {
@@ -48,7 +59,7 @@ button1: {
   borderWidth:2,
   width:300,
   marginTop:20,
-  marginLeft:40
+  // marginLeft:40
   
 },
 buttonText1: {
