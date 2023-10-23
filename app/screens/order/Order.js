@@ -99,6 +99,7 @@ export default function Order() {
             <TouchableOpacity><Text style={{marginLeft:50, fontWeight:'bold', fontSize:15}}>Others</Text></TouchableOpacity>
           </View>
         </View> */}
+        <View style={styles.order}>
         <TextInput
            style={{
              backgroundColor: 'white',
@@ -106,9 +107,9 @@ export default function Order() {
              borderRadius: 5,
              borderColor:"#2FCBD8",
              borderWidth:1,
-             width:350,
+             width:'90%',
              marginTop:20,
-             marginLeft:10
+            //  marginLeft:10
            }}
            placeholder={'Name of the test'}
            onChangeText={(text) => setNameOfTest(text)}
@@ -120,9 +121,9 @@ export default function Order() {
              borderRadius: 5,
              borderColor:"#2FCBD8",
              borderWidth:1,
-             width:350,
+             width:'90%',
              marginTop:20,
-             marginLeft:10
+            //  marginLeft:10
            }}
            placeholder={'First Name'}
            onChangeText={(text) => setFirstName(text)}
@@ -134,9 +135,9 @@ export default function Order() {
              borderRadius: 5,
              borderColor:"#2FCBD8",
              borderWidth:1,
-             width:350,
+             width:'90%',
              marginTop:20,
-             marginLeft:10
+            //  marginLeft:10
            }}
            placeholder={'Last Name'}
            onChangeText={(text) => setLastName(text)}
@@ -148,9 +149,9 @@ export default function Order() {
              borderRadius: 5,
              borderColor:"#2FCBD8",
              borderWidth:1,
-             width:350,
+             width:'90%',
              marginTop:20,
-             marginLeft:10
+            //  marginLeft:10
            }}
            placeholder={'Male or Female'}
            onChangeText={(text) => setSex(text)}
@@ -162,9 +163,9 @@ export default function Order() {
              borderRadius: 5,
              borderColor:"#2FCBD8",
              borderWidth:1,
-             width:350,
+             width:'90%',
              marginTop:20,
-             marginLeft:10
+            //  marginLeft:10
            }}
            placeholder={'Age'}
            onChangeText={(text) => setAge(text)}
@@ -176,9 +177,9 @@ export default function Order() {
              borderRadius: 5,
              borderColor:"#2FCBD8",
              borderWidth:1,
-             width:350,
+             width:'90%',
              marginTop:20,
-             marginLeft:10
+            //  marginLeft:10
            }}
            placeholder={'Hospital Name or access point'}
            onChangeText={(text) => setAccessPoint(text)}
@@ -190,7 +191,7 @@ export default function Order() {
              borderRadius: 5,
              borderColor:"#2FCBD8",
              borderWidth:1,
-             width:350,
+             width:'90%',
              marginTop:20,
              marginLeft:10
            }}
@@ -203,7 +204,7 @@ export default function Order() {
              borderRadius: 5,
              borderColor:"#2FCBD8",
              borderWidth:1,
-             width:350,
+             width:'90%',
              marginTop:20,
              marginLeft:10
            }}
@@ -216,9 +217,9 @@ export default function Order() {
              borderRadius: 5,
              borderColor:"#2FCBD8",
              borderWidth:1,
-             width:350,
+             width:'90%',
              marginTop:20,
-             marginLeft:10
+            //  marginLeft:10
            }}
            placeholder={'Phone Number'}
            onChangeText={(text) => setPhoneNumber(text)}
@@ -230,9 +231,9 @@ export default function Order() {
              borderRadius: 5,
              borderColor:"#2FCBD8",
              borderWidth:1,
-             width:350,
+             width:'90%',
              marginTop:20,
-             marginLeft:10
+            //  marginLeft:10
            }}
            placeholder={'Payment: if mobile payment write mobile else write cash'}
            onChangeText={(text) => setPayment(text)}
@@ -248,7 +249,7 @@ export default function Order() {
              borderRadius: 5,
              borderColor:"#2FCBD8",
              borderWidth:1,
-             width:350,
+             width:'90%',
              marginTop:20,
              marginLeft:10
            }}
@@ -261,7 +262,7 @@ export default function Order() {
 
 
      {/* <View>
-      <Button title="Select Image" onPress={handleImageUpload} style={{color:'#2FCBD8', width:350}} />
+      <Button title="Select Image" onPress={handleImageUpload} style={{color:'#2FCBD8', width:'90%'}} />
       {selectedImage && <Image source={selectedImage} style={{ width: 200, height: 200 }} />}
     </View> */}
     <View style={{marginTop:20}}>
@@ -272,6 +273,7 @@ export default function Order() {
        <Text style={styles.cancelOrderText}>Cancel Order</Text>
      </TouchableOpacity>
     </View>
+</View>
         </ScrollView>
       </SafeAreaView>
   );
@@ -358,8 +360,8 @@ confirmOrder: {
   backgroundColor: '#2FCBD8',
   padding: 10,
   borderRadius: 10,
-  width:350,
-  marginLeft:20
+  width:'400%',
+  // marginLeft:20
 
   
 },
@@ -375,9 +377,9 @@ cancelOrder: {
   borderRadius: 10,
   borderColor:'#2FCBD8',
   borderWidth:2,
-  width:350,
+  width:'400%',
   marginTop:20,
-  marginLeft:20,
+  // marginLeft:20,
   marginBottom:20,
   
 },
@@ -386,5 +388,12 @@ cancelOrderText: {
   fontSize: 16,
   fontWeight: 'bold',
   textAlign: 'center',
+},
+order : {
+  // backgroundColor: '#FFFFff',
+  display:'flex',
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
 },
 })

@@ -30,6 +30,7 @@ export default function ProfilPage({ navigation }) {
         <Image source={require("../../assets/photos/profile.png")} style={{marginTop:-60, marginLeft:140, width:130, height:130}}/>
         <Text style={styles.helloText}>Abebe David <Image source={require("../../assets/photos/edit.png")} style={{width:25, height:25}}/></Text>
          <Text style={styles.labText}>Personal Information</Text>
+         <View style={styles.profil}>
          <View style={{ borderRadius:30, borderColor: '#A5A6A6', borderWidth: 2, width:370, marginLeft:10, marginBottom:10}}>
          <Text style={styles.emailEditText}>E-mail                     <Text style={{color: '#A5A6A6', marginLeft:200}}>abebedavid@gmail.com <TouchableOpacity onPress={() => navigation.navigate('SignupScreen')}><Image source={require("../../assets/photos/right-arrow.png")} style={{width:10, height:10}}/></TouchableOpacity></Text></Text>
          <View style={{borderBottomColor:'grey', borderBottomWidth:1, width:300, marginLeft: 40, marginTop: 5}} />
@@ -44,6 +45,7 @@ export default function ProfilPage({ navigation }) {
          </View>
          <View style={{ borderRadius:30, borderColor: '#A5A6A6', borderWidth: 2, width:370, marginLeft:10}}>
          <Text style={styles.previousResultText}>Previous Test Results                <TouchableOpacity onPress={() => navigation.navigate('SignupScreen')}><Image source={require("../../assets/photos/arrow-down-sign-to-navigate.png")} style={{width:20, height:20}}/></TouchableOpacity></Text>
+         </View>
          </View>
          </ScrollView>
       </SafeAreaView>
@@ -167,5 +169,12 @@ labText: {
   fontWeight:'bold',
   fontSize: 20,
   marginLeft:10,
+},
+profil : {
+  // backgroundColor: '#FFFF00',
+  display:'flex',
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
 },
 })
