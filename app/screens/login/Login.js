@@ -19,16 +19,16 @@ WebBrowser.maybeCompleteAuthSession();
 
 export default function Login() {
 
-  const [userInfo, setUserInfo] = useState(null);
+  // const [userInfo, setUserInfo] = useState(null);
 
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    androidClientId: "940575008691-8q82fgplrpfarutqt2c92uqjfo7lh4nq.apps.googleusercontent.com",
-    iosClientId: "940575008691-3pgp6j422vp7dcvf4176tki3kt2s7he8.apps.googleusercontent.com",
-    webClientId: "940575008691-2jsitr933bn1ij3nur456s3kgnv1qsu2.apps.googleusercontent.com",
-    // androidClientId: process.env.coLabAndroidKey,
-    // iosClientId: process.env.coLabIosKey,
-    // webClientId: process.env.coLabWebKey,
-  })
+  // const [request, response, promptAsync] = Google.useAuthRequest({
+  //   androidClientId: "940575008691-8q82fgplrpfarutqt2c92uqjfo7lh4nq.apps.googleusercontent.com",
+  //   iosClientId: "940575008691-3pgp6j422vp7dcvf4176tki3kt2s7he8.apps.googleusercontent.com",
+  //   webClientId: "940575008691-2jsitr933bn1ij3nur456s3kgnv1qsu2.apps.googleusercontent.com",
+  //   // androidClientId: process.env.coLabAndroidKey,
+  //   // iosClientId: process.env.coLabIosKey,
+  //   // webClientId: process.env.coLabWebKey,
+  // })
 
   const navigation = useNavigation(); 
   const [password, setPassword] = useState('');
@@ -59,35 +59,35 @@ export default function Login() {
   };
 
 
-  useEffect(() => {
-    handleLoginWithGoogle();
-  }, [response])
+  // useEffect(() => {
+  //   handleLoginWithGoogle();
+  // }, [response])
 
 
-  async function handleLoginWithGoogle() {
-   const user =  await AsyncStorage.getItem("@user");
-   if (!user) {
-      if(response?.type === "success") {
-        await getUserInfo(response.authentication.accessToken);
-      }
-   } else {
-    setUserInfo(JSON.parse());
-   }
-  }
+  // async function handleLoginWithGoogle() {
+  //  const user =  await AsyncStorage.getItem("@user");
+  //  if (!user) {
+  //     if(response?.type === "success") {
+  //       await getUserInfo(response.authentication.accessToken);
+  //     }
+  //  } else {
+  //   setUserInfo(JSON.parse());
+  //  }
+  // }
 
-  const getUserInfo = async (token) => {
-    if (!token) return;
-    try {
-      const response = await fetch("https://www.googleapis.com/userinfo/v2/me",{
-        headers: {Authorization: `Bearer ${token}`},
-      });
-      const user = await response.json();
-      await AsyncStorage.setItem("@user", JSON.stringify(user));
-      setUserInfo(user);
-    } catch(error) {
-      console.log("This is the error for the login with google");
-    }
-  }
+  // const getUserInfo = async (token) => {
+  //   if (!token) return;
+  //   try {
+  //     const response = await fetch("https://www.googleapis.com/userinfo/v2/me",{
+  //       headers: {Authorization: `Bearer ${token}`},
+  //     });
+  //     const user = await response.json();
+  //     await AsyncStorage.setItem("@user", JSON.stringify(user));
+  //     setUserInfo(user);
+  //   } catch(error) {
+  //     console.log("This is the error for the login with google");
+  //   }
+  // }
 
 
 
@@ -148,7 +148,9 @@ export default function Login() {
            <Text style={styles.lineText}>Or Login with</Text>
            <View style={styles.horizontalLine} />
            </View>
-           <TouchableOpacity style={styles.button2} onPress={() => promptAsync()} >
+           <TouchableOpacity style={styles.button2} 
+          //  onPress={() => promptAsync()} 
+           >
             <Text style={styles.buttonText}><Image source={require("../../assets/photos/google.png")} style={{width:20, height:20}}  />  GOOGLE</Text>
             </TouchableOpacity>
            <Text>Do you have an account?<TouchableOpacity onPress={() => navigation.navigate('Signup')}><Text style={{ color: '#2FCBD8', marginTop:2}}> Signup</Text></TouchableOpacity></Text>
