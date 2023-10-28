@@ -13,22 +13,22 @@ export default function MainScreen() {
   const [name, setName] =  useState('');
   const [picture, setPicture] =  useState('')
 
-  const goToOrderUrine = () => navigation.navigate('Login');
-  const goToOrderSerum = () => navigation.navigate('Login');
-  const goToOrderSpecimen = () => navigation.navigate('Login');
-  const goToOrderSaliva = () => navigation.navigate('Login');
-  const goToOrderNursing = () => navigation.navigate('Login');
+  // const goToOrderUrine = () => navigation.navigate('Login');
+  // const goToOrderSerum = () => navigation.navigate('Login');
+  // const goToOrderSpecimen = () => navigation.navigate('Login');
+  // const goToOrderSaliva = () => navigation.navigate('Login');
+  // const goToOrderNursing = () => navigation.navigate('Login');
 
 
 
 
-    const data = [
-      { id: '1', title: 'Urine Analysis', func: goToOrderUrine()},
-      { id: '2', title: 'Serum Sodium', func: goToOrderSerum()},
-      { id: '3', title: 'Giving specimen', func: goToOrderSpecimen() },
-      { id: '4', title: 'Saliva test', func: goToOrderSaliva() },
-      { id: '5', title: 'Home nursing', func: goToOrderNursing() },
-    ];
+  //   const data = [
+  //     { id: '1', title: 'Urine Analysis', func: goToOrderUrine()},
+  //     { id: '2', title: 'Serum Sodium', func: goToOrderSerum()},
+  //     { id: '3', title: 'Giving specimen', func: goToOrderSpecimen() },
+  //     { id: '4', title: 'Saliva test', func: goToOrderSaliva() },
+  //     { id: '5', title: 'Home nursing', func: goToOrderNursing() },
+  //   ];
 
 
     const getData = async ()=>{
@@ -104,6 +104,13 @@ export default function MainScreen() {
           onPress={() => navigation.navigate('Order')}
            > 
             <Text style={styles.buttonText1}>Order</Text>
+           </TouchableOpacity>
+           </View>
+           <View>
+        <TouchableOpacity style={styles.button1}
+          onPress={() => navigation.navigate('Booking')}
+           > 
+            <Text style={styles.buttonText1}>Booking</Text>
            </TouchableOpacity>
            </View>
            <View>

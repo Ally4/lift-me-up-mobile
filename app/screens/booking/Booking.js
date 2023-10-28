@@ -7,27 +7,30 @@ import { SafeAreaView, StyleSheet, Text, View, Image, Button, TouchableOpacity, 
 import ImagePicker from 'react-native-image-picker';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native'; 
-import { orderStart, orderSuccess, orderFailure } from '../../features/auth/orderSlice';
+import { bookingStart, bookingSuccess, bookingFailure } from '../../features/auth/bookingSlice';
 
-export default function Order() {
+export default function Booking() {
 
   const navigation = useNavigation(); 
 
-  const [nameOfTest, setNameOfTest] = useState('');
+  const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [sex, setSex] = useState('');
   const [age, setAge] = useState('');
-  const [accessPoint, setAccessPoint] = useState('');
+  const [address, setAddress] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [payment, setPayment] = useState('');
+  const [healthFacility, setHealthFacility] = useState('');
+  const [department, setDepartment] = useState('');
+  const [particularDoctor, setParticularDoctor] = useState('');
+  const [rendezVous, setRendezVous] = useState('');
 
 
 
   const showAlert = () => {
     Alert.alert(
-      'Order',
-      'Order submitted, if wrote mobile, pay on: 0941841870',
+      'Booking',
+      'Booking submitted, for any further explaination you can call us on: 0941841870',
       [
         { text: 'OK', onPress: () => navigation.navigate('Main') },
         // You can add more buttons with additional onPress handlers.
@@ -40,22 +43,22 @@ export default function Order() {
 
 
   const dispatch = useDispatch();
-  const handleOrder = async () => {
-    if (!nameOfTest || !firstName || !lastName || !sex || !age || !accessPoint || !phoneNumber || !payment) {
-      dispatch(orderFailure('You miss something in your order.'));
+  const handleBooking = async () => {
+    if (!firstName || !lastName || !phoneNumber || !email || !sex || !age || !address || !healthFacility || !department || !particularDoctor || !rendezVous) {
+      dispatch(bookingFailure('You miss something in your booking.'));
       return;
     }
-    dispatch(orderStart());
+    dispatch(bookingStart());
     try {
-      const response = await axios.post("https://acubed-backend-production.up.railway.app/api/v1/tests/order-hospital",{ nameOfTest, firstName, lastName, sex, age, accessPoint, phoneNumber, payment});
+      const response = await axios.post("https://acubed-backend-production.up.railway.app/api/v1/book/appointment",{ firstName, lastName, phoneNumber, email, sex, age, address, healthFacility, department, particularDoctor, rendezVous});
       if ((response.data.status).toString() === '201') {
-        dispatch(orderSuccess({ user: response.data.user, token: response.data.token }));
+        dispatch(bookingSuccess({ user: response.data.user, token: response.data.token }));
         navigation.navigate('Main');
       } else {
-        dispatch(orderFailure('You miss something in your order.'));
+        dispatch(bookingFailure('You miss something in your booking.'));
       }
     } catch (error) {
-      dispatch(orderFailure('An error occurred during the order.'));
+      dispatch(bookingFailure('An error occurred during the booking.'));
     }
   };
 
@@ -68,21 +71,13 @@ export default function Order() {
       <SafeAreaView> 
         <ScrollView>
         <View style={{backgroundColor:'#2FCBD8', borderBottomRightRadius:30, borderBottomLeftRadius:30}}>
-        <TouchableOpacity onPress={() => navigation.goBack()} ><Image source={require("../../assets/photos/left-arrow.png")} style={{marginTop:50, marginLeft:10, width:40, height:40}}/><Text style={styles.orderText}>Order</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.goBack()} ><Image source={require("../../assets/photos/left-arrow.png")} style={{marginTop:50, marginLeft:10, width:40, height:40}}/><Text style={styles.bookingText}>Booking</Text></TouchableOpacity>
         <View >
          <View style={{marginTop:20, padding:20, width:350}}>
           <View style={{marginBottom:20}}>
-            <Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Welcome to co-lab order process</Text>
+            <Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Welcome to co-lab booking appointment process</Text>
             {/* <Text style={{fontWeight:'bold', marginLeft:180, marginTop:-25, fontSize:20}}>Urine Analysis</Text> */}
            </View>
-          <View style={{marginBottom:20}}>
-            <Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Here we process your lab test in the turn around of 1 hour</Text>
-            {/* <Text style={{fontWeight:'bold', marginLeft:160, marginTop:-25, fontSize:20}}>Alation Hospital</Text> */}
-          </View>
-          <View style={{marginBottom:20}}>
-            <Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Just proceed by filling the required field accordingly</Text>
-            {/* <Text style={{fontWeight:'bold', marginLeft:270, marginTop:-25, fontSize:20}}>50$</Text> */}
-          </View>
           {/* <View style={{marginBottom:20}}>
             <Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Here</Text>
             <Text style={{fontWeight:'bold', marginLeft:270, marginTop:-25, fontSize:20}}>1h</Text>
@@ -90,7 +85,7 @@ export default function Order() {
         </View>
         </View>
         </View>
-        <Text style={{fontSize:25, marginLeft:10, marginTop:20}}>Sample Collection Point</Text>
+        <Text style={{fontSize:25, marginLeft:10, marginTop:20}}>Patient Info</Text>
         {/* <View style={{width:350, marginLeft:10, borderRadius:10,padding:1, backgroundColor:'#2FCBD8', marginTop:10}}>
           <View style={{backgroundColor:'#2FCBD8', width:'50%', padding:15, borderRadius:10}}>
             <TouchableOpacity><Text style={{marginLeft:50, fontWeight:'bold', color:'white'}}>Hospital</Text></TouchableOpacity>
@@ -99,21 +94,7 @@ export default function Order() {
             <TouchableOpacity><Text style={{marginLeft:50, fontWeight:'bold', fontSize:15}}>Others</Text></TouchableOpacity>
           </View>
         </View> */}
-        <View style={styles.order}>
-        <TextInput
-           style={{
-             backgroundColor: 'white',
-             padding: 10,
-             borderRadius: 5,
-             borderColor:"#2FCBD8",
-             borderWidth:1,
-             width:'90%',
-             marginTop:20,
-            //  marginLeft:10
-           }}
-           placeholder={'Name of the test'}
-           onChangeText={(text) => setNameOfTest(text)}
-           />
+        <View style={styles.booking}>
         <TextInput
            style={{
              backgroundColor: 'white',
@@ -128,7 +109,7 @@ export default function Order() {
            placeholder={'First Name'}
            onChangeText={(text) => setFirstName(text)}
            />
-                <TextInput
+        <TextInput
            style={{
              backgroundColor: 'white',
              padding: 10,
@@ -142,6 +123,20 @@ export default function Order() {
            placeholder={'Last Name'}
            onChangeText={(text) => setLastName(text)}
            />
+                <TextInput
+           style={{
+             backgroundColor: 'white',
+             padding: 10,
+             borderRadius: 5,
+             borderColor:"#2FCBD8",
+             borderWidth:1,
+             width:'90%',
+             marginTop:20,
+            //  marginLeft:10
+           }}
+           placeholder={'Phone number'}
+           onChangeText={(text) => setPhoneNumber(text)}
+           />
                    <TextInput
            style={{
              backgroundColor: 'white',
@@ -153,10 +148,24 @@ export default function Order() {
              marginTop:20,
             //  marginLeft:10
            }}
-           placeholder={'Male or Female'}
-           onChangeText={(text) => setSex(text)}
+           placeholder={'Email'}
+           onChangeText={(text) => setEmail(text)}
            />
                    <TextInput
+           style={{
+             backgroundColor: 'white',
+             padding: 10,
+             borderRadius: 5,
+             borderColor:"#2FCBD8",
+             borderWidth:1,
+             width:'90%',
+             marginTop:20,
+            //  marginLeft:10
+           }}
+           placeholder={'Sex'}
+           onChangeText={(text) => setSex(text)}
+           />
+          <TextInput
            style={{
              backgroundColor: 'white',
              padding: 10,
@@ -169,20 +178,6 @@ export default function Order() {
            }}
            placeholder={'Age'}
            onChangeText={(text) => setAge(text)}
-           />
-                   <TextInput
-           style={{
-             backgroundColor: 'white',
-             padding: 10,
-             borderRadius: 5,
-             borderColor:"#2FCBD8",
-             borderWidth:1,
-             width:'90%',
-             marginTop:20,
-            //  marginLeft:10
-           }}
-           placeholder={'Hospital Name or access point'}
-           onChangeText={(text) => setAccessPoint(text)}
            />
                    {/* <TextInput
            style={{
@@ -221,8 +216,8 @@ export default function Order() {
              marginTop:20,
             //  marginLeft:10
            }}
-           placeholder={'Phone Number'}
-           onChangeText={(text) => setPhoneNumber(text)}
+           placeholder={'Address'}
+           onChangeText={(text) => setAddress(text)}
            />
           <TextInput
            style={{
@@ -235,8 +230,50 @@ export default function Order() {
              marginTop:20,
             //  marginLeft:10
            }}
-           placeholder={'Payment: if mobile payment write mobile else write cash'}
-           onChangeText={(text) => setPayment(text)}
+           placeholder={'Health Facility'}
+           onChangeText={(text) => setHealthFacility(text)}
+           />
+          <TextInput
+           style={{
+             backgroundColor: 'white',
+             padding: 10,
+             borderRadius: 5,
+             borderColor:"#2FCBD8",
+             borderWidth:1,
+             width:'90%',
+             marginTop:20,
+            //  marginLeft:10
+           }}
+           placeholder={'Department'}
+           onChangeText={(text) => setDepartment(text)}
+           />
+          <TextInput
+           style={{
+             backgroundColor: 'white',
+             padding: 10,
+             borderRadius: 5,
+             borderColor:"#2FCBD8",
+             borderWidth:1,
+             width:'90%',
+             marginTop:20,
+            //  marginLeft:10
+           }}
+           placeholder={'Any doctor in mind'}
+           onChangeText={(text) => setParticularDoctor(text)}
+           />
+          <TextInput
+           style={{
+             backgroundColor: 'white',
+             padding: 10,
+             borderRadius: 5,
+             borderColor:"#2FCBD8",
+             borderWidth:1,
+             width:'90%',
+             marginTop:20,
+            //  marginLeft:10
+           }}
+           placeholder={'The date of coming'}
+           onChangeText={(text) => setRendezVous(text)}
            />
           {/* <Text style={{fontSize:25, marginLeft:10, marginTop:20}}>Payment Method</Text>
             <View>
@@ -266,11 +303,11 @@ export default function Order() {
       {selectedImage && <Image source={selectedImage} style={{ width: 200, height: 200 }} />}
     </View> */}
     <View style={{marginTop:20}}>
-    <TouchableOpacity style={styles.confirmOrder} onPress={() => {handleOrder(), showAlert()}}>
-       <Text style={styles.confirmOrderText}>Confirm Order</Text>
+    <TouchableOpacity style={styles.confirmBooking} onPress={() => {handleBooking(), showAlert()}}>
+       <Text style={styles.confirmBookingText}>Confirm Booking</Text>
      </TouchableOpacity>
-     <TouchableOpacity style={styles.cancelOrder} onPress={() => navigation.navigate('Main')}>
-       <Text style={styles.cancelOrderText}>Cancel Order</Text>
+     <TouchableOpacity style={styles.cancelBooking} onPress={() => navigation.navigate('Main')}>
+       <Text style={styles.cancelBookingText}>Cancel Booking</Text>
      </TouchableOpacity>
     </View>
 </View>
@@ -323,7 +360,7 @@ button1: {
 
   
 },
-orderText: {
+bookingText: {
   color: 'white',
   fontSize: 30,
   fontWeight: 'bold',
@@ -354,7 +391,7 @@ resetParagraphEnter: {
 },
 
 
-confirmOrder: {
+confirmBooking: {
   borderWidth:1,
   borderColor:'#2FCBD8',
   backgroundColor: '#2FCBD8',
@@ -365,13 +402,13 @@ confirmOrder: {
 
   
 },
-confirmOrderText: {
+confirmBookingText: {
   color: 'white',
   fontSize: 16,
   fontWeight: 'bold',
   textAlign: 'center',
 },
-cancelOrder: {
+cancelBooking: {
   backgroundColor: 'white',
   padding: 10,
   borderRadius: 10,
@@ -383,13 +420,13 @@ cancelOrder: {
   marginBottom:20,
   
 },
-cancelOrderText: {
+cancelBookingText: {
   color: '#2FCBD8',
   fontSize: 16,
   fontWeight: 'bold',
   textAlign: 'center',
 },
-order : {
+booking : {
   // backgroundColor: '#FFFFff',
   display:'flex',
   flex: 1,
