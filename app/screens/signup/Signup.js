@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import { signupStart, signupSuccess, signupFailure } from '../../features/auth/authSignupSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Snackbar from 'react-native-snackbar';
 
 
 export default function Signup() {
@@ -34,6 +35,11 @@ export default function Signup() {
         dispatch(signupFailure('Some of you input is not valid'));
       }
     } catch (error) {
+      const err = error.response?.data?.message || error.message;
+      Snackbar.show({
+        text: err,
+        duration: Snackbar.LENGTH_SHORT,
+      });
       dispatch(signupFailure('An error occurred during the signup.'));
     }
   };
