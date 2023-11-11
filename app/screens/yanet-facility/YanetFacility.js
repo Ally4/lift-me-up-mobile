@@ -45,15 +45,15 @@ export default function AlationFacility() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <View style={{ backgroundColor: "#2FCBD8", width: 250, height: 250, borderRadius: 100, top: -140, left: -140 }}></View>
+        <View style={{ backgroundColor: "#2FCBD8", width: 250, height: 250, borderRadius: 180, top: -150, left: -120 }}></View>
         <View>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Image source={require("../../assets/photos/left-arrow.png")} style={{ marginTop: -220, marginLeft: 10, width: 40, height: 40 }} />
+            <Image source={require("../../assets/photos/left-chevron.png")} style={{ marginTop: -190, marginLeft: 10, width: 20, height: 20 }} />
           </TouchableOpacity>
         </View>
         <View style={styles.labtest}>
         <Text style={styles.lab}>Facility</Text>
-        <View style={styles.logoFacility}><Image source={require("../../assets/photos/healthcare.png")} style={{width:150, height:150}}></Image></View>
+        <View style={styles.logoFacility}><Image source={require("../../assets/photos/hospital.png")} style={{width:150, height:150}}></Image></View>
         <View style={styles.hospitalname}>
                 <View><Text style={styles.facilitytext}>Yanet Hospital</Text></View>
                 <View style={styles.correct}>

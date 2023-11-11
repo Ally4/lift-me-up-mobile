@@ -20,6 +20,7 @@ import PinScreen from './app/screens/reset-password-pin-screen/ResetPasswordScre
 import UpdateProfil from './app/screens/update-profil/UpdateProfil'
 import Profil from './app/screens/profil-page/ProfilPage'
 import Order from './app/screens/order/Order'
+import OrderOther from './app/screens/order-other/OrderOther'
 import Booking from './app/screens/booking/Booking'
 // import UrineAnalysis from './app/screens/urine-analysis/UrineAnalysis'
 import UrineAnalysis from './app/screens/urine-analysis-bottom/UrineAnalysisBottom'
@@ -53,17 +54,18 @@ const App = () => {
         {/* <Stack.Screen name="Login" component={Login}  options={{ headerShown: false }}/> */}
         {/* <Stack.Screen name="Signup" component={Signup}  options={{ headerShown: false }}/> */}
         {/* <Stack.Screen name="Order" component={Order} options={{ headerShown: false }} />  */}
+        {/* <Stack.Screen name="OrderOther" component={OrderOther} options={{ headerShown: false }} />  */}
         {/* <Stack.Screen name="Booking" component={Booking} options={{ headerShown: false }} />  */}
         <Stack.Screen name="Main" component={Main}  options={{ headerShown: false }}/>
         <Stack.Screen name="UrineAnalysis" component={UrineAnalysis}  options={{ headerShown: false }}/>
-        <Stack.Screen name="Saliva" component={Saliva}  options={{ headerShown: false }}/>
-        <Stack.Screen name="SerumSodium" component={SerumSodium}  options={{ headerShown: false }}/>
-        <Stack.Screen name="Specimen" component={Specimen}  options={{ headerShown: false }}/>
-        <Stack.Screen name="HomeNursing" component={HomeNursing}  options={{ headerShown: false }}/>
-        <Stack.Screen name="AlationFacility" component={AlationFacility}  options={{ headerShown: false }}/>
-        <Stack.Screen name="KibruFacility" component={KibruFacility}  options={{ headerShown: false }}/>
-        <Stack.Screen name="NaolFacility" component={NaolFacility}  options={{ headerShown: false }}/>
-        <Stack.Screen name="YanetFacility" component={YanetFacility}  options={{ headerShown: false }}/>
+        {/* <Stack.Screen name="Saliva" component={Saliva}  options={{ headerShown: false }}/> */}
+        {/* <Stack.Screen name="SerumSodium" component={SerumSodium}  options={{ headerShown: false }}/> */}
+        {/* <Stack.Screen name="Specimen" component={Specimen}  options={{ headerShown: false }}/> */}
+        {/* <Stack.Screen name="HomeNursing" component={HomeNursing}  options={{ headerShown: false }}/> */}
+        {/* <Stack.Screen name="AlationFacility" component={AlationFacility}  options={{ headerShown: false }}/> */}
+        {/* <Stack.Screen name="KibruFacility" component={KibruFacility}  options={{ headerShown: false }}/> */}
+        {/* <Stack.Screen name="NaolFacility" component={NaolFacility}  options={{ headerShown: false }}/> */}
+        {/* <Stack.Screen name="YanetFacility" component={YanetFacility}  options={{ headerShown: false }}/> */}
         {/* <Stack.Screen name="ResetEmailScreen" component={ResetEmailScreen}  /> */}
         {/* <Stack.Screen name="Pin-Screen" component={PinScreen}  /> */}
         {/* <Stack.Screen name="UpdateProfil" component={UpdateProfil}  options={{ headerShown: false }}/> */}

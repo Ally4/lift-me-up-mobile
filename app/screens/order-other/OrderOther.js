@@ -1,35 +1,63 @@
 import 'react-native-gesture-handler';
 // import { StatusBar } from 'expo-status-bar';
+import axios from 'axios';
 import React, { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
-import { SafeAreaView, StyleSheet, Text, View, Image, Button, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Image, Button, TouchableOpacity, TextInput, ScrollView, Alert } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native'; 
+import { orderOtherStart, orderOtherSuccess, orderOtherFailure } from '../../features/auth/orderOtherSlice';
+
+export default function OrderOther() {
+
+  const navigation = useNavigation(); 
+
+  const [nameOfTest, setNameOfTest] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [sex, setSex] = useState('');
+  const [age, setAge] = useState('');
+  const [accessPoint, setAccessPoint] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [payment, setPayment] = useState('');
 
 
-export default function OrderOther({ navigation }) {
 
-  const [selectedOption, setSelectedOption] = useState('');
-
-  const handleOptionChange = (option) => {
-    setSelectedOption(option);
+  const showAlert = () => {
+    Alert.alert(
+      'Order',
+      'Order submitted, if wrote mobile, pay on: 0941841870',
+      [
+        { text: 'OK', onPress: () => navigation.navigate('Main') },
+        // You can add more buttons with additional onPress handlers.
+      ],
+      { cancelable: false }
+    );
   };
 
 
-  const [selectedImage, setSelectedImage] = useState(null);
 
-  const handleImageUpload = () => {
-    ImagePicker.showImagePicker({ title: 'Select Image' }, (response) => {
-      if (response.didCancel) {
-        console.log('Image selection was canceled.');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
+
+  const dispatch = useDispatch();
+  const handleOrderOther = async () => {
+    if (!nameOfTest || !firstName || !lastName || !sex || !age || !accessPoint || !phoneNumber || !payment) {
+      dispatch(orderOtherFailure('You miss something in your order.'));
+      return;
+    }
+    dispatch(orderOtherStart());
+    try {
+      const response = await axios.post("https://acubed-backend-production.up.railway.app/api/v1/tests/order-hospital",{ nameOfTest, firstName, lastName, sex, age, accessPoint, phoneNumber, payment});
+      if ((response.data.status).toString() === '201') {
+        dispatch(orderOtherSuccess({ user: response.data.user, token: response.data.token }));
+        navigation.navigate('Main');
       } else {
-        const source = { uri: response.uri };
-        setSelectedImage(source);
+        dispatch(orderOtherFailure('You miss something in your order.'));
       }
-    });
+    } catch (error) {
+      dispatch(orderOtherFailure('An error occurred during the order.'));
+    }
   };
-
 
 
 
@@ -40,33 +68,51 @@ export default function OrderOther({ navigation }) {
       <SafeAreaView> 
         <ScrollView>
         <View style={{backgroundColor:'#2FCBD8', borderBottomRightRadius:30, borderBottomLeftRadius:30}}>
-        <TouchableOpacity onPress={() => navigation.goBack()} ><Image source={require("../../assets/photos/left-arrow.png")} style={{marginTop:50, marginLeft:10, width:40, height:40}}/><Text style={styles.orderText}>Order</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.goBack()} ><Image source={require("../../assets/photos/left-chevron.png")} style={{marginTop:50, marginLeft:10, width:20, height:20}}/><Text style={styles.orderText}>Order</Text></TouchableOpacity>
         <View >
-         <View style={{marginTop:20, padding:20, width:350, marginLeft:20}}>
-          <View style={{marginBottom:20}}>
-            <Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Test Type</Text><Text style={{fontWeight:'bold', marginLeft:180, marginTop:-25, fontSize:20}}>Urine Analysis</Text>
-           </View>
-          <View style={{marginBottom:20}}>
-            <Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Facility Name</Text><Text style={{fontWeight:'bold', marginLeft:160, marginTop:-25, fontSize:20}}>Alation Hospital</Text>
+         <View style={{padding:20}}>
+          <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between',marginBottom:20}}>
+            <View><Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Test Type </Text></View>
+            <View><Text style={{fontWeight:'bold', fontSize:20, color:'black'}}>Urine Analisys</Text></View>
           </View>
-          <View style={{marginBottom:20}}>
-            <Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Price</Text><Text style={{fontWeight:'bold', marginLeft:270, marginTop:-25, fontSize:20}}>50$</Text>
+          <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between',marginBottom:20}}>
+            <View><Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Facility Name</Text></View>
+            <View><Text style={{fontWeight:'bold', fontSize:20, color:'black'}}>Allation Hospital</Text></View>
           </View>
-          <View style={{marginBottom:20}}>
-            <Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Turn Around Time</Text><Text style={{fontWeight:'bold', marginLeft:270, marginTop:-25, fontSize:20}}>1h</Text>
+          <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between',marginBottom:20}}>
+            <View><Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Price </Text></View>
+            <View><Text style={{fontWeight:'bold', fontSize:20, color:'black'}}>$50</Text></View>
           </View>
+          <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between',marginBottom:20}}>
+            <View><Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Turnaround time</Text></View>
+            <View><Text style={{fontWeight:'bold', fontSize:20, color:'black'}}>1hour</Text></View>
+          </View>
+
         </View>
         </View>
         </View>
         <Text style={{fontSize:25, marginLeft:10, marginTop:20}}>Sample Collection Point</Text>
-        <View style={{width:350, marginLeft:10, borderRadius:10,padding:1, backgroundColor:'#2FCBD8', marginTop:10}}>
-          <View style={{ width:'50%', padding:15, backgroundColor:'white'}}>
-            <TouchableOpacity><Text style={{marginLeft:50, fontWeight:'bold'}}>Hospital</Text></TouchableOpacity>
+
+
+        <View style={{display:'flex', flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'row',padding: 1, width:'100%'}}>
+    <TouchableOpacity style={styles.fromHospital} onPress={() => navigation.navigate('Order')}>
+       <Text style={styles.confirmOrderText1}>Hospital</Text>
+     </TouchableOpacity>
+     <TouchableOpacity style={styles.fromOther} onPress={() => navigation.navigate('OrderOther')}>
+       <Text style={styles.cancelOrderText1}>Others</Text>
+     </TouchableOpacity>
+    </View>
+
+
+        {/* <View style={{width:350, marginLeft:10, borderRadius:10,padding:1, backgroundColor:'#2FCBD8', marginTop:10}}>
+          <View style={{backgroundColor:'#2FCBD8', width:'50%', padding:15, borderRadius:10}}>
+            <TouchableOpacity><Text style={{marginLeft:50, fontWeight:'bold', color:'white'}}>Hospital</Text></TouchableOpacity>
           </View>
-          <View style={{backgroundColor:'#2FCBD8', width:'50%', marginLeft:'50%', marginTop:-49.5, padding:15, borderBottomRightRadius:10, borderTopRightRadius:10}}>
-            <TouchableOpacity><Text style={{marginLeft:50, fontWeight:'bold', fontSize:15, color:'white'}}>Others</Text></TouchableOpacity>
+          <View style={{backgroundColor:'white', width:'50%', marginLeft:'50%', marginTop:-49.5, padding:15, borderBottomRightRadius:10, borderTopRightRadius:10}}>
+            <TouchableOpacity><Text style={{marginLeft:50, fontWeight:'bold', fontSize:15}}>Others</Text></TouchableOpacity>
           </View>
-        </View>
+        </View> */}
+        <View style={styles.order}>
         <TextInput
            style={{
              backgroundColor: 'white',
@@ -74,37 +120,40 @@ export default function OrderOther({ navigation }) {
              borderRadius: 5,
              borderColor:"#2FCBD8",
              borderWidth:1,
-             width:350,
+             width:'90%',
              marginTop:20,
-             marginLeft:10
+            //  marginLeft:10
            }}
            placeholder={'Name'}
+           onChangeText={(text) => setNameOfTest(text)}
            />
-                   <TextInput
+        <TextInput
            style={{
              backgroundColor: 'white',
              padding: 10,
              borderRadius: 5,
              borderColor:"#2FCBD8",
              borderWidth:1,
-             width:350,
+             width:'90%',
              marginTop:20,
-             marginLeft:10
+            //  marginLeft:10
            }}
-           placeholder={'Male or Female'}
+           placeholder={'Sex'}
+           onChangeText={(text) => setFirstName(text)}
            />
-                   <TextInput
+                <TextInput
            style={{
              backgroundColor: 'white',
              padding: 10,
              borderRadius: 5,
              borderColor:"#2FCBD8",
              borderWidth:1,
-             width:350,
+             width:'90%',
              marginTop:20,
-             marginLeft:10
+            //  marginLeft:10
            }}
            placeholder={'Age'}
+           onChangeText={(text) => setLastName(text)}
            />
                    <TextInput
            style={{
@@ -113,11 +162,12 @@ export default function OrderOther({ navigation }) {
              borderRadius: 5,
              borderColor:"#2FCBD8",
              borderWidth:1,
-             width:350,
+             width:'90%',
              marginTop:20,
-             marginLeft:10
+            //  marginLeft:10
            }}
            placeholder={'City'}
+           onChangeText={(text) => setSex(text)}
            />
                    <TextInput
            style={{
@@ -126,11 +176,12 @@ export default function OrderOther({ navigation }) {
              borderRadius: 5,
              borderColor:"#2FCBD8",
              borderWidth:1,
-             width:350,
+             width:'90%',
              marginTop:20,
-             marginLeft:10
+            //  marginLeft:10
            }}
            placeholder={'District'}
+           onChangeText={(text) => setAge(text)}
            />
                    <TextInput
            style={{
@@ -139,13 +190,41 @@ export default function OrderOther({ navigation }) {
              borderRadius: 5,
              borderColor:"#2FCBD8",
              borderWidth:1,
-             width:350,
+             width:'90%',
+             marginTop:20,
+            //  marginLeft:10
+           }}
+           placeholder={'Phone Number'}
+           onChangeText={(text) => setAccessPoint(text)}
+           />
+                   {/* <TextInput
+           style={{
+             backgroundColor: 'white',
+             padding: 10,
+             borderRadius: 5,
+             borderColor:"#2FCBD8",
+             borderWidth:1,
+             width:'90%',
              marginTop:20,
              marginLeft:10
            }}
-           placeholder={'Phone Number'}
-           />
-          <Text style={{fontSize:25, marginLeft:10, marginTop:20}}>Payment Method</Text>
+           placeholder={'Department'}
+           /> */}
+                   {/* <TextInput
+           style={{
+             backgroundColor: 'white',
+             padding: 10,
+             borderRadius: 5,
+             borderColor:"#2FCBD8",
+             borderWidth:1,
+             width:'90%',
+             marginTop:20,
+             marginLeft:10
+           }}
+           placeholder={'Room number'}
+           /> */}
+
+          {/* <Text style={{fontSize:25, marginLeft:10, marginTop:20}}>Payment Method</Text>
             <View>
       <Picker
         selectedValue={selectedOption}
@@ -156,7 +235,7 @@ export default function OrderOther({ navigation }) {
              borderRadius: 5,
              borderColor:"#2FCBD8",
              borderWidth:1,
-             width:350,
+             width:'90%',
              marginTop:20,
              marginLeft:10
            }}
@@ -165,21 +244,22 @@ export default function OrderOther({ navigation }) {
         <Picker.Item label="Cash" value="option1" />
         <Picker.Item label="Mobile Pay" value="option2" />
       </Picker>
-    </View>
+    </View> */}
 
 
-     <View>
-      <Button title="Select Image" onPress={handleImageUpload} style={{color:'#2FCBD8', width:350}} />
+     {/* <View>
+      <Button title="Select Image" onPress={handleImageUpload} style={{color:'#2FCBD8', width:'90%'}} />
       {selectedImage && <Image source={selectedImage} style={{ width: 200, height: 200 }} />}
-    </View>
-    <View style={{marginTop:20}}>
-    <TouchableOpacity style={styles.confirmOrder} onPress={() => navigation.navigate('SignupScreen')}>
-       <Text style={styles.confirmOrderText}>Confirm Order</Text>
+    </View> */}
+    <View style={{marginTop:20,   display:'flex', flex: 1, justifyContent: 'center', alignItems: 'center', padding: 1, width:'100%'}}>
+    <TouchableOpacity style={styles.confirmOrder} onPress={() => {handleOrder(), showAlert()}}>
+       <Text style={styles.confirmOrderText}>Confirm</Text>
      </TouchableOpacity>
-     <TouchableOpacity style={styles.cancelOrder} onPress={() => console.log('Button pressed')}>
+     <TouchableOpacity style={styles.cancelOrder} onPress={() => navigation.navigate('Main')}>
        <Text style={styles.cancelOrderText}>Cancel Order</Text>
      </TouchableOpacity>
     </View>
+</View>
         </ScrollView>
       </SafeAreaView>
   );
@@ -266,10 +346,26 @@ confirmOrder: {
   backgroundColor: '#2FCBD8',
   padding: 10,
   borderRadius: 10,
-  width:350,
-  marginLeft:20
-
-  
+  width:'90%',
+  // marginLeft:20  
+},
+fromHospital: {
+  zIndex:-1000,
+  borderWidth:1,
+  borderColor:'#2FCBD8',
+  backgroundColor: 'white',
+  padding: 10,
+  borderRadius: 10,
+  width:'47%',
+  // marginLeft:20  
+  marginRight:-10,
+  borderRadius:10,
+},
+confirmOrderText1: {
+  color: 'black',
+  fontSize: 16,
+  fontWeight: 'bold',
+  textAlign: 'center',
 },
 confirmOrderText: {
   color: 'white',
@@ -283,16 +379,40 @@ cancelOrder: {
   borderRadius: 10,
   borderColor:'#2FCBD8',
   borderWidth:2,
-  width:350,
+  width:'90%',
   marginTop:20,
-  marginLeft:20,
-  marginBottom:20,
-  
+  // marginLeft:20,
+  marginBottom:20,  
+},
+fromOther: {
+  backgroundColor: '#2FCBD8',
+  padding: 9,
+  borderTopRightRadius: 10,
+  borderBottomRightRadius: 10,
+  borderColor:'#2FCBD8',
+  borderWidth:2,
+  width:'45%',
+  // marginTop:20,
+  // marginLeft:-10,
+  // marginBottom:20,  
+},
+cancelOrderText1: {
+  color: 'white',
+  fontSize: 16,
+  fontWeight: 'bold',
+  textAlign: 'center',
 },
 cancelOrderText: {
   color: '#2FCBD8',
   fontSize: 16,
   fontWeight: 'bold',
   textAlign: 'center',
+},
+order : {
+  // backgroundColor: '#FFFFff',
+  display:'flex',
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
 },
 })

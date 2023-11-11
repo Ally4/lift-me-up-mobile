@@ -315,15 +315,19 @@ export default function MainScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <View style={{ backgroundColor: "#2FCBD8", width: 250, height: 250, borderRadius: 100, top: -140, left: -140 }}></View>
+      <View style={{ backgroundColor: "#2FCBD8", width: 250, height: 250, borderRadius: 180, top: -150, left: -120 }}></View>
         <View>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Image source={require("../../assets/photos/left-arrow.png")} style={{ marginTop: -220, marginLeft: 10, width: 40, height: 40 }} />
+            {/* <Image source={require("../../assets/photos/left-chevron.png")} style={{ marginTop: -190, marginLeft: 10, width: 20, height: 20 }} /> */}
+            <Image source={picture} style={{ marginTop: -190, marginLeft: 10, width: 20, height: 20 }} />
           </TouchableOpacity>
-          <Image source={picture} style={{ marginTop: -150, marginLeft: 10, width: 50, height: 50 }} />
-          <Image source={require("../../assets/photos/logo-blue.png")} style={{ marginTop: -40, marginLeft: 135 }} />
-          <Image source={require("../../assets/photos/bell.png")} style={{ marginTop: -30, marginLeft: 330, width: 35, height: 35 }} />
         </View>
+          {/* <Image source={picture} style={{ marginTop: -150, marginLeft: 10, width: 50, height: 50 }} /> */}
+          <View style={{marginBottom:150}}> 
+          <Image source={require("../../assets/photos/logo-blue.png")} style={{ marginTop: -80, marginLeft: 135 }} />
+          <Image source={require("../../assets/photos/bell.png")} style={{ marginTop: -10, marginLeft: 330, width: 35, height: 35 }} />
+          </View>
+          <View style={{marginTop:-100}}>
         <Text style={styles.helloText}>Hello, <Text style={styles.abebeText}>{name}!</Text></Text>
         <Text style={styles.testText}>Which facility or test are you looking for today?</Text>
         <View style={styles.main}>
@@ -382,13 +386,14 @@ export default function MainScreen() {
             <Text style={styles.labText}>Our Facilities</Text>
           </View>
           <View style={styles.facilities}>
-            <View style={{borderWidth:2, borderColor:'#C7C4B9', borderRadius:10}}><TouchableOpacity onPress={() => navigation.navigate('AlationFacility')}><Image source={require("../../assets/photos/healthcare.png")} style={{width:120, height:120, marginTop:10, marginRight:10}} /><Text>  Alation Hospital</Text></TouchableOpacity></View>
-            <View style={{borderWidth:2, borderColor:'#C7C4B9', borderRadius:10}}><TouchableOpacity onPress={() => navigation.navigate('KibruFacility')}><Image source={require("../../assets/photos/healthcare.png")} style={{width:120, height:120, marginTop:10, marginLeft:10}} /><Text>     Kibru Hospital</Text></TouchableOpacity></View>
+            <View style={{borderWidth:2, borderColor:'#C7C4B9', borderRadius:10}}><TouchableOpacity onPress={() => navigation.navigate('AlationFacility')}><Image source={require("../../assets/photos/hospital.png")} style={{width:120, height:120, marginTop:10, marginRight:10}} /><Text>  Alation Hospital</Text></TouchableOpacity></View>
+            <View style={{borderWidth:2, borderColor:'#C7C4B9', borderRadius:10}}><TouchableOpacity onPress={() => navigation.navigate('KibruFacility')}><Image source={require("../../assets/photos/hospital.png")} style={{width:120, height:120, marginTop:10, marginLeft:10}} /><Text>     Kibru Hospital</Text></TouchableOpacity></View>
           </View>
           <View style={styles.facilities}>
-            <View style={{borderWidth:2, borderColor:'#C7C4B9', borderRadius:10}}><TouchableOpacity onPress={() => navigation.navigate('NaolFacility')}><Image source={require("../../assets/photos/healthcare.png")} style={{width:120, height:120, marginTop:10, marginRight:10}} /><Text>   Naol Hospital</Text></TouchableOpacity></View>
-            <View style={{borderWidth:2, borderColor:'#C7C4B9', borderRadius:10}}><TouchableOpacity onPress={() => navigation.navigate('YanetFacility')}><Image source={require("../../assets/photos/healthcare.png")} style={{width:120, height:120, marginTop:10, marginLeft:10}} /><Text>     Yanet Hospital</Text></TouchableOpacity></View>
+            <View style={{borderWidth:2, borderColor:'#C7C4B9', borderRadius:10}}><TouchableOpacity onPress={() => navigation.navigate('NaolFacility')}><Image source={require("../../assets/photos/hospital.png")} style={{width:120, height:120, marginTop:10, marginRight:10}} /><Text>   Naol Hospital</Text></TouchableOpacity></View>
+            <View style={{borderWidth:2, borderColor:'#C7C4B9', borderRadius:10}}><TouchableOpacity onPress={() => navigation.navigate('YanetFacility')}><Image source={require("../../assets/photos/hospital.png")} style={{width:120, height:120, marginTop:10, marginLeft:10}} /><Text>     Yanet Hospital</Text></TouchableOpacity></View>
           </View>
+        </View>
         </View>
       </ScrollView>
     </SafeAreaView>
