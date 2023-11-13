@@ -355,11 +355,11 @@ fromHospital: {
   borderColor:'#2FCBD8',
   backgroundColor: 'white',
   padding: 10,
-  borderRadius: 10,
   width:'47%',
   // marginLeft:20  
   marginRight:-10,
-  borderRadius:10,
+  borderTopLeftRadius: 10,
+  borderBottomLeftRadius: 10,
 },
 confirmOrderText1: {
   color: 'black',
@@ -387,11 +387,10 @@ cancelOrder: {
 fromOther: {
   backgroundColor: '#2FCBD8',
   padding: 9,
-  borderTopRightRadius: 10,
-  borderBottomRightRadius: 10,
+  borderRadius:10,
   borderColor:'#2FCBD8',
   borderWidth:2,
-  width:'45%',
+  width:'47%',
   // marginTop:20,
   // marginLeft:-10,
   // marginBottom:20,  

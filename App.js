@@ -53,11 +53,11 @@ const App = () => {
         {/* <Stack.Screen name="Home" component={LandingPage} options={{ headerShown: false }}/> */}
         {/* <Stack.Screen name="Login" component={Login}  options={{ headerShown: false }}/> */}
         {/* <Stack.Screen name="Signup" component={Signup}  options={{ headerShown: false }}/> */}
-        {/* <Stack.Screen name="Order" component={Order} options={{ headerShown: false }} />  */}
-        {/* <Stack.Screen name="OrderOther" component={OrderOther} options={{ headerShown: false }} />  */}
+        <Stack.Screen name="Order" component={Order} options={{ headerShown: false }} /> 
+        <Stack.Screen name="OrderOther" component={OrderOther} options={{ headerShown: false }} /> 
         {/* <Stack.Screen name="Booking" component={Booking} options={{ headerShown: false }} />  */}
-        <Stack.Screen name="Main" component={Main}  options={{ headerShown: false }}/>
-        <Stack.Screen name="UrineAnalysis" component={UrineAnalysis}  options={{ headerShown: false }}/>
+        {/* <Stack.Screen name="Main" component={Main}  options={{ headerShown: false }}/> */}
+        {/* <Stack.Screen name="UrineAnalysis" component={UrineAnalysis}  options={{ headerShown: false }}/> */}
         {/* <Stack.Screen name="Saliva" component={Saliva}  options={{ headerShown: false }}/> */}
         {/* <Stack.Screen name="SerumSodium" component={SerumSodium}  options={{ headerShown: false }}/> */}
         {/* <Stack.Screen name="Specimen" component={Specimen}  options={{ headerShown: false }}/> */}
@@ -69,7 +69,7 @@ const App = () => {
         {/* <Stack.Screen name="ResetEmailScreen" component={ResetEmailScreen}  /> */}
         {/* <Stack.Screen name="Pin-Screen" component={PinScreen}  /> */}
         {/* <Stack.Screen name="UpdateProfil" component={UpdateProfil}  options={{ headerShown: false }}/> */}
-        {/* <Stack.Screen name="Profil" component={Profil}  /> */}
+        {/* <Stack.Screen name="Profil" component={Profil}  options={{ headerShown: false }}/> */}
       </Stack.Navigator>
      </NavigationContainer>
      </Provider>

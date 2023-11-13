@@ -99,7 +99,7 @@ export default function Order() {
        <Text style={styles.confirmOrderText1}>Hospital</Text>
      </TouchableOpacity>
      <TouchableOpacity style={styles.fromOther} onPress={() => navigation.navigate('OrderOther')}>
-       <Text style={styles.cancelOrderText}>Others</Text>
+       <Text style={styles.cancelOrderText1}>Others</Text>
      </TouchableOpacity>
     </View>
 
@@ -363,13 +363,14 @@ confirmOrder: {
   // marginLeft:20  
 },
 fromHospital: {
-  zIndex:-1000,
+  zIndex:1000,
   borderWidth:1,
   borderColor:'#2FCBD8',
   backgroundColor: '#2FCBD8',
   padding: 10,
   borderRadius: 10,
-  width:'45%',
+  width:'47%',
+  marginRight:-10,
   // marginLeft:20  
 },
 confirmOrderText1: {
@@ -398,22 +399,20 @@ cancelOrder: {
 fromOther: {
   backgroundColor: 'white',
   padding: 9,
-  borderRadius:10,
   borderColor:'#2FCBD8',
   borderWidth:2,
-  width:'50%',
-  // marginTop:20,
-  // marginLeft:30,
-  // marginBottom:20,  
+  width:'45%',
+  borderBottomRightRadius:10,
+  borderTopRightRadius:10, 
 },
 cancelOrderText1: {
-  color: '#2FCBD8',
+  color: 'black',
   fontSize: 16,
   fontWeight: 'bold',
   textAlign: 'center',
 },
 cancelOrderText: {
-  color: 'black',
+  color: '#2FCBD8',
   fontSize: 16,
   fontWeight: 'bold',
   textAlign: 'center',
