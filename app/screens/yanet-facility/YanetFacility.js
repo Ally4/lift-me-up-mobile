@@ -74,6 +74,7 @@ export default function AlationFacility() {
               height: 50,
               marginTop: 20,
             }}
+            onPress={() => navigation.navigate('OrderYanetUrine')}
           >
             <View style={styles.hospital}>
               <View style={styles.hospitalname}>
@@ -93,6 +94,7 @@ export default function AlationFacility() {
               height: 50,
               marginTop: 20,
             }}
+            onPress={() => navigation.navigate('OrderYanetcbc')}
           >
             <View style={styles.hospital}>
               <View style={styles.hospitalname}>
@@ -112,6 +114,7 @@ export default function AlationFacility() {
               height: 50,
               marginTop: 20,
             }}
+            onPress={() => navigation.navigate('OrderYanetSerumCreatine')}
           >
             <View style={styles.hospital}>
               <View style={styles.hospitalname}>
@@ -131,6 +134,7 @@ export default function AlationFacility() {
               height: 50,
               marginTop: 20,
             }}
+            onPress={() => navigation.navigate('OrderYanetSerumPotassium')}
           >
             <View style={styles.hospital}>
               <View style={styles.hospitalname}>
@@ -150,6 +154,7 @@ export default function AlationFacility() {
               height: 50,
               marginTop: 20,
             }}
+            onPress={() => navigation.navigate('OrderYanetSerumSodium')}
           >
             <View style={styles.hospital}>
               <View style={styles.hospitalname}>
@@ -169,6 +174,7 @@ export default function AlationFacility() {
               height: 50,
               marginTop: 20,
             }}
+            onPress={() => navigation.navigate('OrderYanetLipase')}
           >
             <View style={styles.hospital}>
               <View style={styles.hospitalname}>
@@ -188,10 +194,11 @@ export default function AlationFacility() {
               height: 50,
               marginTop: 20,
             }}
+            onPress={() => navigation.navigate('OrderYanetAmylase')}
           >
             <View style={styles.hospital}>
               <View style={styles.hospitalname}>
-                <View><Text>Amalase</Text></View>
+                <View><Text>Amylase</Text></View>
               </View>
               <View><Image source={require("../../assets/photos/right-arrow.png" )} style={{width:35, height:35,}} /></View>
             </View>

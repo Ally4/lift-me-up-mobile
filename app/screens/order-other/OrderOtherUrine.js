@@ -10,7 +10,7 @@ import { useNavigation } from '@react-navigation/native';
 import { orderStart, orderSuccess, orderFailure } from '../../features/auth/orderSlice';
 import Snackbar from 'react-native-snackbar';
 
-export default function Order() {
+export default function OrderOtherUrine() {
 
   const navigation = useNavigation(); 
 
@@ -91,10 +91,6 @@ export default function Order() {
             <View><Text style={{fontWeight:'bold', fontSize:20, color:'black'}}>Urine Analisys</Text></View>
           </View>
           <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between',marginBottom:20}}>
-            <View><Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Facility Name</Text></View>
-            <View><Text style={{fontWeight:'bold', fontSize:20, color:'black'}}>Allation Hospital</Text></View>
-          </View>
-          <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between',marginBottom:20}}>
             <View><Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Price </Text></View>
             <View><Text style={{fontWeight:'bold', fontSize:20, color:'black'}}>$50</Text></View>
           </View>
@@ -113,7 +109,7 @@ export default function Order() {
     <TouchableOpacity style={styles.fromHospital} onPress={() => navigation.navigate('Order')}>
        <Text style={styles.confirmOrderText1}>Hospital</Text>
      </TouchableOpacity>
-     <TouchableOpacity style={styles.fromOther} onPress={() => navigation.navigate('OrderOther')}>
+     <TouchableOpacity style={styles.fromOther} onPress={() => navigation.navigate('OrderOtherUrine')}>
        <Text style={styles.cancelOrderText1}>Others</Text>
      </TouchableOpacity>
     </View>

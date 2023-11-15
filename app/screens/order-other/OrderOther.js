@@ -76,10 +76,6 @@ export default function OrderOther() {
             <View><Text style={{fontWeight:'bold', fontSize:20, color:'black'}}>Urine Analisys</Text></View>
           </View>
           <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between',marginBottom:20}}>
-            <View><Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Facility Name</Text></View>
-            <View><Text style={{fontWeight:'bold', fontSize:20, color:'black'}}>Allation Hospital</Text></View>
-          </View>
-          <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between',marginBottom:20}}>
             <View><Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Price </Text></View>
             <View><Text style={{fontWeight:'bold', fontSize:20, color:'black'}}>$50</Text></View>
           </View>

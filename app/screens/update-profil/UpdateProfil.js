@@ -10,6 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import { Button } from 'react-native-elements';
+import Snackbar from 'react-native-snackbar';
 
 
 export default function UpdateProfil() {
@@ -18,6 +19,8 @@ export default function UpdateProfil() {
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [city, setCity] = useState('');
+  const [occupation, setOccupation] = useState('');
   const [email, setEmail] = useState('');
   const [dateOfBirth, setDob] = useState('');
   const [gender, setGender] = useState('');
@@ -65,7 +68,12 @@ try {
 
   const dispatch = useDispatch();
   const handleUpdateProfile = async () => {
-    if (!firstName || !lastName || !email || !dateOfBirth || !gender || !phoneNumber) {
+    if (!firstName || !lastName || !city || !occupation ||!email || !dateOfBirth || !gender || !phoneNumber) {    
+      const err = 'Please enter the required field.';
+      Snackbar.show({
+        text: err,
+        duration: Snackbar.LENGTH_LONG,
+      });
       dispatch(updateProfileFailure('Please enter the required field.'));
       return;
     }
@@ -74,6 +82,8 @@ try {
       const formData = new FormData();
       formData.append('firstName', firstName);
       formData.append('lastName', lastName);
+      formData.append('city', city);
+      formData.append('occupation', occupation);
       formData.append('email', email);
       formData.append('dateOfBirth', dateOfBirth);
       formData.append('gender', gender);
@@ -92,15 +102,26 @@ try {
 
       const resultData = response.data;
       if ((resultData.status).toString() === '200') {
-        await AsyncStorage.setItem('profilPicture', resultData.data.profilPicture)
+        // await AsyncStorage.setItem('profilPicture', resultData.data.profilPicture)
         await AsyncStorage.setItem('name', resultData.data.firstname)
+
+        
         dispatch(updateProfileSucess({ user: resultData.data.firstname, token: secret }));
         navigation.navigate('Main');
-      } else {
-        dispatch(updateProfileFailure('Something might be wrong'));
+      } else {   
+        const err = 'check well the input you are entering';
+        Snackbar.show({
+          text: err,
+          duration: Snackbar.LENGTH_LONG,
+        });
+        dispatch(updateProfileFailure('check well the input you are entering'));
       }
-    } catch (error) {
-      console.log("This is the error on update profile", { firstName, lastName, email, dateOfBirth, gender, phoneNumber, image });
+    } catch (error) { 
+      const err = error.response?.data?.message || error.message;;
+      Snackbar.show({
+        text: err,
+        duration: Snackbar.LENGTH_LONG,
+      });
       dispatch(updateProfileFailure('This error is from the server'));
     }
   };
@@ -114,6 +135,7 @@ try {
       <SafeAreaView style={styles.container}> 
       <ScrollView >
         <View style={{backgroundColor:"black", width:250, height:250, borderRadius:150, opacity:0.2, top: -90, left:-90}}></View>
+        <TouchableOpacity onPress={() => navigation.goBack()} ><Image source={require("../../assets/photos/left-chevron.png")} style={{marginTop:-200, marginLeft:10, width:20, height:20}}/></TouchableOpacity>
         <View style={styles.logo}><Image source={require("../../assets/photos/colab.png")} /></View>
         <View style={styles.update}>
           <View>
@@ -147,6 +169,34 @@ try {
           }}
           placeholder={'Last Name'}
           onChangeText={(text) => setLastName(text)}
+          />
+                  <TextInput
+          style={{
+            backgroundColor: 'white',
+            padding: 10,
+            borderRadius: 5,
+            borderColor:"#2FCBD8",
+            borderWidth:1,
+            width:300,
+            marginTop:20,
+            // marginLeft:40
+          }}
+          placeholder={'City'}
+          onChangeText={(text) => setCity(text)}
+          />
+                  <TextInput
+          style={{
+            backgroundColor: 'white',
+            padding: 10,
+            borderRadius: 5,
+            borderColor:"#2FCBD8",
+            borderWidth:1,
+            width:300,
+            marginTop:20,
+            // marginLeft:40
+          }}
+          placeholder={'Occupation'}
+          onChangeText={(text) => setOccupation(text)}
           />
           <TextInput
           style={{

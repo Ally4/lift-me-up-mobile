@@ -10,7 +10,7 @@ import { useNavigation } from '@react-navigation/native';
 import { orderStart, orderSuccess, orderFailure } from '../../features/auth/orderSlice';
 import Snackbar from 'react-native-snackbar';
 
-export default function Order() {
+export default function OrderYanetSerumPotassium() {
 
   const navigation = useNavigation(); 
 
@@ -88,11 +88,11 @@ export default function Order() {
          <View style={{padding:20}}>
           <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between',marginBottom:20}}>
             <View><Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Test Type </Text></View>
-            <View><Text style={{fontWeight:'bold', fontSize:20, color:'black'}}>Urine Analisys</Text></View>
+            <View><Text style={{fontWeight:'bold', fontSize:20, color:'black'}}>Serum Potassium</Text></View>
           </View>
           <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between',marginBottom:20}}>
             <View><Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Facility Name</Text></View>
-            <View><Text style={{fontWeight:'bold', fontSize:20, color:'black'}}>Allation Hospital</Text></View>
+            <View><Text style={{fontWeight:'bold', fontSize:20, color:'black'}}>Yanet Hospital</Text></View>
           </View>
           <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between',marginBottom:20}}>
             <View><Text style={{fontWeight:'bold', fontSize:20, color:'white'}}>Price </Text></View>
@@ -113,7 +113,7 @@ export default function Order() {
     <TouchableOpacity style={styles.fromHospital} onPress={() => navigation.navigate('Order')}>
        <Text style={styles.confirmOrderText1}>Hospital</Text>
      </TouchableOpacity>
-     <TouchableOpacity style={styles.fromOther} onPress={() => navigation.navigate('OrderOther')}>
+     <TouchableOpacity style={styles.fromOther} onPress={() => navigation.navigate('OrderOtherSerumPotassium')}>
        <Text style={styles.cancelOrderText1}>Others</Text>
      </TouchableOpacity>
     </View>

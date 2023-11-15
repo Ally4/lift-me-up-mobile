@@ -43,42 +43,55 @@ export default function Login() {
       dispatch(loginFailure('Please enter both user and password.'));
       Snackbar.show({
         text: 'Please enter both user and password.',
-        duration: Snackbar.LENGTH_SHORT,
+        duration: Snackbar.LENGTH_LONG,
       });
       return;
     }
     dispatch(loginStart());
     try {
-      // const error = useSelector((state) => state.authLogSlice);
-      console.log('from the redux tool kit>>>>>>..........////////////', error),
-      console.log('====================================')
-      console.log("error from the response.......................................", response, user, password)
       const response = await axios.post("https://acubed-backend-production.up.railway.app/api/v1/auth/login",{ user, password })
-      console.log("error from the response>>>>>>>>>>>>>>>>>>>>", response)
+
+      // const toStore = await axios.get(`https://acubed-backend-production.up.railway.app/api/v1/auth/${response.data.user}`);
+
+      // console.log('the store---------------------------------', toStore.data.user.profilPicture)
+
+
       if (response.data.token) {
        await AsyncStorage.setItem('AccessToken', response.data.token)
        await AsyncStorage.setItem('name', response.data.name)
+
+      //  await AsyncStorage.setItem('picture', toStore.data.user.profilPicture)
+      //  await AsyncStorage.setItem('email', toStore.data.user.email)
+      //  await AsyncStorage.setItem('dob', toStore.data.user.dateOfBirth)
+      //  await AsyncStorage.setItem('gender', toStore.data.user.gender)
+      //  await AsyncStorage.setItem('city', toStore.data.user.city)
+      //  await AsyncStorage.setItem('lastName', toStore.data.user.lastName)
+      //  await AsyncStorage.setItem('occupation', toStore.data.user.occupation)
+        
+      // const toStore = await axios.get(`https://acubed-backend-production.up.railway.app/api/v1/auth/${response.data.user}`);
+
+      // console.log('the store---------------------------------', toStore)
+
+
         dispatch(loginSuccess({ user: response.data.user, token: response.data.token }));
         navigation.navigate('Main'); 
         setPassword('');
         setUser('');
-      } else {
-        console.log("dunia ...................1", error)
-        setError(error)
+      } else {      
+        const err = error.response?.data?.message || error.message;
+        Snackbar.show({
+          text: err,
+          duration: Snackbar.LENGTH_LONG,
+        });
         dispatch(loginFailure(error));
-        console.log("dunia ..............2.....", error)
       }
     } catch (error) {
-      console.log("dunia ..............3.....", error)
       const err = error.response?.data?.message || error.message;
       Snackbar.show({
         text: err,
-        duration: Snackbar.LENGTH_SHORT,
+        duration: Snackbar.LENGTH_LONG,
       });
       dispatch(loginFailure(error));
-      
-      console.log("dunia ..............4.....", error)
-      setError(error)
     }
   };
 

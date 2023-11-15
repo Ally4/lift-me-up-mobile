@@ -20,25 +20,51 @@ export default function Signup() {
 
   const dispatch = useDispatch();
   const handleSignup = async () => {
-    if (!user || !password || !confirmPassword) {
+    if (!user || !password || !confirmPassword) {     
+      const err = 'Please enter email or phone number and password.';
+      Snackbar.show({
+        text: err,
+        duration: Snackbar.LENGTH_LONG,
+      });
       dispatch(signupFailure('Please enter both email and password.'));
       return;
     }
     dispatch(signupStart());
     try {
       const response = await axios.post("https://acubed-backend-production.up.railway.app/api/v1/auth/register",{ user, password, confirmPassword});
+
+      const toStore = await axios.get(`https://acubed-backend-production.up.railway.app/api/v1/auth/${response.data.user}`);
+
+      console.log('the store', toStore.data.user.profilPicture)
+
+
+
       if ((response.data.status).toString() === '201') {
         await AsyncStorage.setItem('token', response.data.token)
+        console.log('the store', toStore.data.user)
+        await AsyncStorage.setItem('profilPicture', toStore.data?.user?.profilPicture)
+        await AsyncStorage.setItem('email', toStore.data?.user?.email)
+        await AsyncStorage.setItem('dob', toStore.data?.user?.dateOfBirth)
+        await AsyncStorage.setItem('gender', toStore.data?.user?.gender)
+        await AsyncStorage.setItem('city', toStore.data?.user?.city)
+        await AsyncStorage.setItem('occupation', toStore.data?.user?.occupation)
+        // await AsyncStorage.setItem('lastName', toStore.data?.user?.lastName)
+
         dispatch(signupSuccess({ user: response.data.user, token: response.data.token }));
-        navigation.navigate('UpdateProfil');
-      } else {
+        navigation.navigate('Main');
+      } else {      
+        const err = 'Some of you input is not valid';
+        Snackbar.show({
+          text: err,
+          duration: Snackbar.LENGTH_LONG,
+        });
         dispatch(signupFailure('Some of you input is not valid'));
       }
     } catch (error) {
       const err = error.response?.data?.message || error.message;
       Snackbar.show({
         text: err,
-        duration: Snackbar.LENGTH_SHORT,
+        duration: Snackbar.LENGTH_LONG,
       });
       dispatch(signupFailure('An error occurred during the signup.'));
     }
