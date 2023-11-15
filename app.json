@@ -7,7 +7,7 @@
     "icon": "./app/assets/acubed-logo.jpeg",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./app/assets/splash.png",
+      "image": "./app/assets/loading.jpeg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

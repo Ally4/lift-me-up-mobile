@@ -7,10 +7,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 
 import { loginStart, loginSuccess, loginFailure } from '../../features/auth/authLoginSlice'; 
+import authLogSlice from '../../features/auth/authLoginSlice'; 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as SecureStore from 'expo-secure-store';
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
+import Snackbar from 'react-native-snackbar';
 // import dotenv from 'dotenv';
 
 // dotenv.config();
@@ -33,28 +35,63 @@ export default function Login() {
   const navigation = useNavigation(); 
   const [password, setPassword] = useState('');
   const [user, setUser] = useState('');
+  const [error, setError] = useState('');
 
   const dispatch = useDispatch();
   const handleLogin = async () => {
     if (!user || !password) {
       dispatch(loginFailure('Please enter both user and password.'));
+      Snackbar.show({
+        text: 'Please enter both user and password.',
+        duration: Snackbar.LENGTH_LONG,
+      });
       return;
     }
     dispatch(loginStart());
     try {
       const response = await axios.post("https://acubed-backend-production.up.railway.app/api/v1/auth/login",{ user, password })
+
+      // const toStore = await axios.get(`https://acubed-backend-production.up.railway.app/api/v1/auth/${response.data.user}`);
+
+      // console.log('the store---------------------------------', toStore.data.user.profilPicture)
+
+
       if (response.data.token) {
        await AsyncStorage.setItem('AccessToken', response.data.token)
        await AsyncStorage.setItem('name', response.data.name)
+
+      //  await AsyncStorage.setItem('picture', toStore.data.user.profilPicture)
+      //  await AsyncStorage.setItem('email', toStore.data.user.email)
+      //  await AsyncStorage.setItem('dob', toStore.data.user.dateOfBirth)
+      //  await AsyncStorage.setItem('gender', toStore.data.user.gender)
+      //  await AsyncStorage.setItem('city', toStore.data.user.city)
+      //  await AsyncStorage.setItem('lastName', toStore.data.user.lastName)
+      //  await AsyncStorage.setItem('occupation', toStore.data.user.occupation)
+        
+      // const toStore = await axios.get(`https://acubed-backend-production.up.railway.app/api/v1/auth/${response.data.user}`);
+
+      // console.log('the store---------------------------------', toStore)
+
+
         dispatch(loginSuccess({ user: response.data.user, token: response.data.token }));
         navigation.navigate('Main'); 
         setPassword('');
         setUser('');
-      } else {
-        dispatch(loginFailure('Invalid username or password.'));
+      } else {      
+        const err = error.response?.data?.message || error.message;
+        Snackbar.show({
+          text: err,
+          duration: Snackbar.LENGTH_LONG,
+        });
+        dispatch(loginFailure(error));
       }
     } catch (error) {
-      dispatch(loginFailure('An error occurred during login.'));
+      const err = error.response?.data?.message || error.message;
+      Snackbar.show({
+        text: err,
+        duration: Snackbar.LENGTH_LONG,
+      });
+      dispatch(loginFailure(error));
     }
   };
 
@@ -155,9 +192,22 @@ export default function Login() {
             </TouchableOpacity>
            <Text>Do you have an account?<TouchableOpacity onPress={() => navigation.navigate('Signup')}><Text style={{ color: '#2FCBD8', marginTop:2}}> Signup</Text></TouchableOpacity></Text>
            <Image source={require("../../assets/photos/acubed.png")} />
-        </View>
-        </View>
-        </ScrollView>
+        </View>    
+        {/* <View style={{backgroundColor:"red", width:40, height:60}}>
+          <Text style={{color:'black'}}>{error}</Text>
+        </View> */}
+        </View>          
+        {/* <Snackbar
+          visible={error.length > 0}
+          onDismiss={() => setError('')}
+          action={{
+            label: 'Close',
+            onPress: () => setError(''),
+          }}
+        >
+          {error}
+        </Snackbar> */}
+        </ScrollView>  
       </SafeAreaView>
   );
 }

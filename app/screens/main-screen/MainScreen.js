@@ -1,133 +1,205 @@
-import 'react-native-gesture-handler';
-// import { StatusBar } from 'expo-status-bar';
+import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView, StyleSheet, Text, View, Image, TextInput, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useEffect, useState } from 'react';
-
-
+import axios from 'axios';
 
 export default function MainScreen() {
-
   const navigation = useNavigation();
-  const [name, setName] =  useState('');
-  const [picture, setPicture] =  useState('')
+  const [name, setName] = useState('');
+  const [picture, setPicture] = useState('');
 
-  // const goToOrderUrine = () => navigation.navigate('Login');
-  // const goToOrderSerum = () => navigation.navigate('Login');
-  // const goToOrderSpecimen = () => navigation.navigate('Login');
-  // const goToOrderSaliva = () => navigation.navigate('Login');
-  // const goToOrderNursing = () => navigation.navigate('Login');
+  const data = [
+    { id: '1', title: 'Urine Analysis' },
+    { id: '2', title: 'Amylase' },
+    { id: '3', title: 'Complete Body Count (cbc)' },
+    { id: '4', title: 'Lipase' },
+    { id: '5', title: 'Serum Creatine' },
+    { id: '6', title: 'Serum Potassium' },
+    { id: '7', title: 'Serum Sodium' },
+  ];
 
-
-
-
-  //   const data = [
-  //     { id: '1', title: 'Urine Analysis', func: goToOrderUrine()},
-  //     { id: '2', title: 'Serum Sodium', func: goToOrderSerum()},
-  //     { id: '3', title: 'Giving specimen', func: goToOrderSpecimen() },
-  //     { id: '4', title: 'Saliva test', func: goToOrderSaliva() },
-  //     { id: '5', title: 'Home nursing', func: goToOrderNursing() },
-  //   ];
-
-
-    const getData = async ()=>{
-      try {
-        const username = await AsyncStorage.getItem('name')
-        setName(username);
-      } catch (error) {
-        
-      }
+  const getData = async () => {
+    try {
+      const username = await AsyncStorage.getItem('name');
+      setName(username);
+    } catch (error) {
+      // Handle errors
     }
+  }
 
-    const getPic = async ()=>{
-      try {
-        const proPicture = await AsyncStorage.getItem('profilPicture')
-        setPicture(proPicture);
-      } catch (error) {
-        
-      }
+  const getPic = async () => {
+    try {
+      const proPicture = await AsyncStorage.getItem('profilPicture');
+      setPicture(proPicture);
+    } catch (error) {
+      // Handle errors
     }
+  }
 
-    useEffect(()=>{
-      getData();
-    },[])
+  useEffect(() => {
+    getData();
+  }, []);
 
-    useEffect(()=>{
-      getPic();
-    },[])
+  useEffect(() => {
+    getPic();
+  }, []);
+
+
+  const user = async () => {
+    try {
+
+
+      const toStore = await axios.get(`https://acubed-backend-production.up.railway.app/api/v1/auth/${response.data.user}`);
+
+
+
+      await AsyncStorage.setItem('picture', toStore.data?.user?.profilPicture)
+      await AsyncStorage.setItem('email', toStore.data?.user?.email)
+      await AsyncStorage.setItem('dob', toStore.data?.user?.dateOfBirth)
+      await AsyncStorage.setItem('gender', toStore.data?.user?.gender)
+      await AsyncStorage.setItem('city', toStore.data?.user?.city)
+      await AsyncStorage.setItem('lastName', toStore.data?.user?.lastName)
+      await AsyncStorage.setItem('occupation', toStore.data?.user?.occupation)
+
+
+
+      const proPicture = await AsyncStorage.getItem('picture');
+
+      console.log('the pic is here', proPicture)
+
+
+      setPicture(proPicture);
+    } catch (error) {
+      // Handle errors
+    }
+  }
+
+
+  console.log('the picture----------------------',picture )
+
+
+      // const toStore = await axios.get(`https://acubed-backend-production.up.railway.app/api/v1/auth/${response.data.user}`);
+
+
+
+      //  await AsyncStorage.setItem('picture', toStore.data.user.profilPicture)
+      //  await AsyncStorage.setItem('email', toStore.data.user.email)
+      //  await AsyncStorage.setItem('dob', toStore.data.user.dateOfBirth)
+      //  await AsyncStorage.setItem('gender', toStore.data.user.gender)
+      //  await AsyncStorage.setItem('city', toStore.data.user.city)
+      //  await AsyncStorage.setItem('lastName', toStore.data.user.lastName)
+      //  await AsyncStorage.setItem('occupation', toStore.data.user.occupation)
+
 
   return (
-      <SafeAreaView style={styles.container1}> 
-      <ScrollView >
-        <View style={{backgroundColor:"#2FCBD8", width:250, height:250, borderRadius:100, top: -140, left:-140}}></View>
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+      <View style={{ backgroundColor: "#2FCBD8", width: 250, height: 250, borderRadius: 180, top: -150, left: -120 }}></View>
         <View>
-        <TouchableOpacity onPress={() => navigation.goBack()} ><Image  source={require("../../assets/photos/left-arrow.png")} style={{marginTop:-220, marginLeft:10, width:40, height:40}}/></TouchableOpacity>
-        <Image src={picture} style={{marginTop:-150, marginLeft:10, width:50, height:50}}/>
-        <Image source={require("../../assets/photos/logo-blue.png")} style={{marginTop:-40, marginLeft:135}}/>
-        <Image source={require("../../assets/photos/bell.png")} style={{marginTop:-30,marginLeft:330, width:35, height:35}}/>
+          <TouchableOpacity onPress={() => navigation.navigate('Profil')} >
+            {/* <Image source={require("../../assets/photos/left-chevron.png")} style={{ marginTop: -190, marginLeft: 10, width: 20, height: 20 }} /> */}
+            <Image source={{uri:picture}} style={{ marginTop: -210, marginLeft: 10, width: 50, height: 50, borderWidth:2}} />
+
+
+          {/* <Image
+  source={{ uri: `https://res.cloudinary.com/bomayee/image/upload/v1699862446/acubed-profil-pictures/profile_oyc28d.png` }}
+  style={{ marginTop: -210, marginLeft: 10, borderWidth: 2, width:50, height:50}}
+  onError={(error) => console.error("Image load error", error)}
+/> */}
+
+
+
+          </TouchableOpacity>
         </View>
-        <Text style={styles.helloText}>Hello, <Text style={styles.abebeText}>{name}!</Text></Text>
+          {/* <Image source={picture} style={{ marginTop: -150, marginLeft: 10, width: 50, height: 50 }} /> */}
+          <View style={{marginBottom:150}}> 
+          <Image source={require("../../assets/photos/logo-blue.png")} style={{ marginTop: -80, marginLeft: 135 }} />
+          <Image source={require("../../assets/photos/bell.png")} style={{ marginTop: -10, marginLeft: 330, width: 35, height: 35 }} />
+          </View>
+          <View style={{marginTop:-100}}>
+        <Text style={styles.helloText}>Hello <Text style={styles.abebeText}>{name}!</Text></Text>
         <Text style={styles.testText}>Which facility or test are you looking for today?</Text>
         <View style={styles.main}>
-        <TextInput
-         style={{
-          backgroundColor: 'white',
-          padding: 10,
-          borderRadius: 10,
-          borderColor:"#2FCBD8",
-          borderWidth:1,
-          width:300,
-          marginTop:20,
-          // marginLeft:40
-          }}
-          placeholder={'Search'}
-           />
-         <Text style={styles.labText}>Lab Tests</Text>
-         {/* <FlatList
-        horizontal
-        data={data}
-        keyExtractor={(item) => item.id}
-        renderItem={(item) => (
-          <View style={{ margin: 10,   backgroundColor: 'white',
-          padding: 10,
-          borderRadius: 10,
-          borderColor:"#2FCBD8",
-          borderWidth:2,
-          width:150}}>
-           <TouchableOpacity onPress={item.func}><Text>{item.name}</Text></TouchableOpacity>
+          <TextInput
+            style={{
+              backgroundColor: 'white',
+              padding: 10,
+              borderRadius: 10,
+              borderColor: "#2FCBD8",
+              borderWidth: 1,
+              width: 300,
+              marginTop: 20,
+            }}
+            placeholder={'Search'}
+          />
+          <Text style={styles.labText}>Lab Tests</Text>
+
+          <FlatList
+            horizontal
+            data={data}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                onPress={() => {
+                  if (item.id === '1') {
+                    navigation.navigate('OrderAllationUrine');
+                  } else if (item.id === '2') {
+                    navigation.navigate('OrderAllationAmylase');
+                  } else if (item.id === '3') {
+                    navigation.navigate('OrderAllationcbc');
+                  } else if (item.id === '4') {
+                    navigation.navigate('OrderAllationLipase');
+                  } else if (item.id === '5') {
+                    navigation.navigate('OrderAllationSerumCreatine');
+                  } else if (item.id === '6') {
+                    navigation.navigate('OrderAllationSerumPotassium');
+                  } else if (item.id === '7') {
+                    navigation.navigate('OrderAllationSerumSodium');
+                  }
+                }}
+              >
+                <View style={styles.flat}>
+                  <Text>{item.title}</Text>
+                </View>
+              </TouchableOpacity>
+            )}
+          />
+
+          {/* <View>
+            <TouchableOpacity style={styles.button1} onPress={() => navigation.navigate('Order')}>
+              <Text style={styles.buttonText1}>Order</Text>
+            </TouchableOpacity>
           </View>
-        )}
-      /> */}
-      <View>
-        <TouchableOpacity style={styles.button1}
-          onPress={() => navigation.navigate('Order')}
-           > 
-            <Text style={styles.buttonText1}>Order</Text>
-           </TouchableOpacity>
-           </View>
-           <View>
-        <TouchableOpacity style={styles.button1}
-          onPress={() => navigation.navigate('Booking')}
-           > 
-            <Text style={styles.buttonText1}>Booking</Text>
-           </TouchableOpacity>
-           </View>
-           <View>
-         <Text style={styles.labText}>Our Facilities</Text>
-         </View>
-         {/* <Image source={require("../../assets/photos/plus.png")} style={{width:100, height:100, marginTop:260, marginLeft:280}}/> */}
-         </View>
-         </ScrollView>
-      </SafeAreaView>
+          <View>
+            <TouchableOpacity style={styles.button1} onPress={() => navigation.navigate('Booking')}>
+              <Text style={styles.buttonText1}>Booking</Text>
+            </TouchableOpacity>
+          </View> */}
+          <View>
+            <Text style={styles.labText}>Our Facilities</Text>
+          </View>
+          <View style={styles.facilities}>
+            <View style={{borderWidth:2, borderColor:'#C7C4B9', borderRadius:10}}><TouchableOpacity onPress={() => navigation.navigate('AlationFacility')}><Image source={require("../../assets/photos/hospital.png")} style={{width:120, height:120, marginTop:10, marginRight:10}} /><Text>  Alation Hospital</Text></TouchableOpacity></View>
+            <View style={{borderWidth:2, borderColor:'#C7C4B9', borderRadius:10}}><TouchableOpacity onPress={() => navigation.navigate('KibruFacility')}><Image source={require("../../assets/photos/hospital.png")} style={{width:120, height:120, marginTop:10, marginLeft:10}} /><Text>     Kibru Hospital</Text></TouchableOpacity></View>
+          </View>
+          <View style={styles.facilities}>
+            <View style={{borderWidth:2, borderColor:'#C7C4B9', borderRadius:10}}><TouchableOpacity onPress={() => navigation.navigate('NaolFacility')}><Image source={require("../../assets/photos/hospital.png")} style={{width:120, height:120, marginTop:10, marginRight:10}} /><Text>   Naol Hospital</Text></TouchableOpacity></View>
+            <View style={{borderWidth:2, borderColor:'#C7C4B9', borderRadius:10}}><TouchableOpacity onPress={() => navigation.navigate('YanetFacility')}><Image source={require("../../assets/photos/hospital.png")} style={{width:120, height:120, marginTop:10, marginLeft:10}} /><Text>     Yanet Hospital</Text></TouchableOpacity></View>
+          </View>
+        </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:"white",
-},
+    backgroundColor: "white",
+  },
+  
 button: {
   backgroundColor: 'white',
   padding: 10,
@@ -216,7 +288,8 @@ labText: {
   color: 'black',
   fontWeight:'bold',
   fontSize: 20,
-  marginLeft:10,
+  textAlign:'left',
+  // marginLeft:10,
 },
 main : {
   // backgroundColor: '#FFFF00',
@@ -225,4 +298,23 @@ main : {
   justifyContent: 'center',
   alignItems: 'center',
 },
-})
+flat: {
+  paddingLeft:5,
+  paddingRight:5,
+  paddingTop:7,
+  paddingBottom:7,
+  borderColor: '#2FCBD8',
+  borderRadius: 5,
+  borderWidth: 1,
+  margin: 7,
+},
+facilities: {
+  display:'flex',
+  flexDirection: 'row',
+  flex: 1,
+  justifyContent: 'space-around',
+  alignItems: 'center',
+  marginBottom:10,
+  marginTop:10,
+}
+});

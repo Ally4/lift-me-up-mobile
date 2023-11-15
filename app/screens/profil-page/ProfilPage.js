@@ -1,52 +1,284 @@
 import 'react-native-gesture-handler';
 // import { StatusBar } from 'expo-status-bar';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, Alert, ScrollView} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export default function ProfilPage({ navigation }) {
+
+  const [pic, setPic] = useState('');
+  const [email, setEmail] = useState('');
+  const [lname, setLName] = useState('');
+  const [dob, setDOB] = useState('');
+  const [gender, setGender] = useState('');
+  const [city, setCity] = useState('');
+  const [name, setName] = useState('');
+  const [occupation, setOccupation] = useState('');
 
 
 
 
   const createTwoButtonAlert = () =>
-  Alert.alert('Profil Options', 'Make your choice', [
+  Alert.alert('What do you want', [
     {
       text: 'Logout',
-      onPress: () => console.log('Cancel Pressed'),
-      style: 'cancel',
+      onPress: () => navigation.navigate('Signup'),
     },
-    {text: 'Switch Account', onPress: () => console.log('OK Pressed')},
+    {
+      text: 'Switch Account', 
+      onPress: () => navigation.navigate('Login')},
   ]);
 
+
+
+
+  const getPic= async () => {
+    try {
+      const pic = await AsyncStorage.getItem('profilPicture');
+      setPic(pic);
+    } catch (error) {
+      // Handle errors
+    }
+  }
+
+  const getEmail= async () => {
+    try {
+      const email = await AsyncStorage.getItem('email');
+      setEmail(email);
+    } catch (error) {
+      // Handle errors
+    }
+  }
+
+
+  const getLastName = async () => {
+    try {
+      const lname = await AsyncStorage.getItem('LastName');
+      setLName(lname);
+    } catch (error) {
+      // Handle errors
+    }
+  }
+
+  const getDob = async () => {
+    try {
+      const dob = await AsyncStorage.getItem('dob');
+      setDOB(dob);
+    } catch (error) {
+      // Handle errors
+    }
+  }
+  const getGender = async () => {
+    try {
+      const gender = await AsyncStorage.getItem('gender');
+      setGender(gender);
+    } catch (error) {
+      // Handle errors
+    }
+  }
+
+  const getCity = async () => {
+    try {
+      const city = await AsyncStorage.getItem('city');
+      setCity(city);
+    } catch (error) {
+      // Handle errors
+    }
+  }
+  const getOccupation = async () => {
+    try {
+      const occupation = await AsyncStorage.getItem('occupation');
+      setOccupation(occupation);
+    } catch (error) {
+      // Handle errors
+    }
+  }
+
+  const getName = async () => {
+    try {
+      const username = await AsyncStorage.getItem('name');
+      setName(username);
+    } catch (error) {
+      // Handle errors
+    }
+  }
+
+  useEffect(() => {
+    getEmail();
+  }, []);
+
+  useEffect(() => {
+    getDob();
+  }, []);
+
+  useEffect(() => {
+    getGender();
+  }, []);
+
+  useEffect(() => {
+    getCity();
+  }, []);
+
+  useEffect(() => {
+    getOccupation();
+  }, []);
+
+  useEffect(() => {
+    getName();
+  }, []);
+  
+
+  useEffect(() => {
+    getLastName();
+  }, []);
+
+  useEffect(() => {
+    getPic();
+  }, []);
+  
+
+console.log('the values', name, lname, name )
+
+
+
   return (
-      <SafeAreaView style={styles.container1}> 
+      <SafeAreaView > 
       <ScrollView >
-        <View style={{backgroundColor:"#2FCBD8", width:500, height:250}}></View>
-        <View>
-        <TouchableOpacity onPress={createTwoButtonAlert}><Image source={require("../../assets/photos/dots.png")} style={{marginTop:-200, marginLeft:320, width:40, height:40}}/></TouchableOpacity>
+        <View style={{backgroundColor:"#2FCBD8", width:'auto', height:150}}></View>
+      <View style={styles.proUpper}>
+      <View>
+        <TouchableOpacity onPress={() => navigation.goBack()} ><Image source={require("../../assets/photos/left-chevron.png")} style={{ width:20, height:20}}/></TouchableOpacity>
         </View>
         <View>
-        <TouchableOpacity onPress={() => navigation.goBack()} ><Image source={require("../../assets/photos/left-arrow.png")} style={{marginTop:-200, marginLeft:10, width:40, height:40}}/></TouchableOpacity>
+        {/* <TouchableOpacity onPress={createTwoButtonAlert()}><Image source={require("../../assets/photos/dots.png")} style={{ width:20, height:20}}/></TouchableOpacity> */}
         </View>
-        <Image source={require("../../assets/photos/profile.png")} style={{marginTop:-60, marginLeft:140, width:130, height:130}}/>
-        <Text style={styles.helloText}>Abebe David <Image source={require("../../assets/photos/edit.png")} style={{width:25, height:25}}/></Text>
+      </View>
+
+        <View style={styles.pro}>
+        <View style={styles.proPic}>
+        <TouchableOpacity onPress={() => navigation.navigate('UpdateProfil')} ><Image source={{uri:pic}} style={{borderRadius:65, width:130, height:130}}/></TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('UpdateProfil')} ><Image source={require("../../assets/photos/photo-camera.png")} onPress={() => navigation.navigate('UpdateProfil')} style={{marginLeft:'50%',marginTop:-25, width:20, height:20}}/></TouchableOpacity>
+        </View>
+        <View style={styles.proDes}>
+        <View style={styles.proText}>
+        <Text style={styles.helloText}>{name} {lname}</Text>
+        </View>
+        <View style={styles.proEdit}>
+        <TouchableOpacity onPress={() => navigation.navigate('UpdateProfil')} ><Image source={require("../../assets/photos/edit.png")} style={{width:25, height:25}}/></TouchableOpacity>
+        </View>
+        </View>
+        </View>
+
          <Text style={styles.labText}>Personal Information</Text>
+
+
+
+
          <View style={styles.profil}>
-         <View style={{ borderRadius:30, borderColor: '#A5A6A6', borderWidth: 2, width:370, marginLeft:10, marginBottom:10}}>
-         <Text style={styles.emailEditText}>E-mail                     <Text style={{color: '#A5A6A6', marginLeft:200}}>abebedavid@gmail.com <TouchableOpacity onPress={() => navigation.navigate('SignupScreen')}><Image source={require("../../assets/photos/right-arrow.png")} style={{width:10, height:10}}/></TouchableOpacity></Text></Text>
-         <View style={{borderBottomColor:'grey', borderBottomWidth:1, width:300, marginLeft: 40, marginTop: 5}} />
-         <Text style={styles.dobEditText}>Date of birth                                 <Text style={{color: '#A5A6A6'}}>12.12.1993 <TouchableOpacity onPress={() => navigation.navigate('SignupScreen')}><Image source={require("../../assets/photos/right-arrow.png")} style={{width:10, height:10}}/></TouchableOpacity></Text></Text>
-         <View style={{borderBottomColor:'grey', borderBottomWidth:1, width:300, marginLeft: 40, marginTop: 5}} />
-         <Text style={styles.genderEditText}>Gender                                                     <Text style={{color: '#A5A6A6'}}>Male <TouchableOpacity onPress={() => navigation.navigate('SignupScreen')}><Image source={require("../../assets/photos/right-arrow.png")} style={{width:10, height:10}}/></TouchableOpacity></Text></Text>
+
+         <View style={styles.proLine}>
+          <View style={styles.proField}>
+          <View >
+         <Text style={styles.proLabel}>E-mail</Text>
          </View>
-         <View style={{ borderRadius:30, borderColor: '#A5A6A6', borderWidth: 2, width:370, marginLeft:10, marginBottom:10}}>
-         <Text style={styles.emailEditText}>City                                          <Text style={{color: '#A5A6A6', marginLeft:200}}>New York, USA <TouchableOpacity onPress={() => navigation.navigate('SignupScreen')}><Image source={require("../../assets/photos/right-arrow.png")} style={{width:10, height:10}}/></TouchableOpacity></Text></Text>
-         <View style={{borderBottomColor:'grey', borderBottomWidth:1, width:300, marginLeft: 40, marginTop: 5}} />
-         <Text style={styles.dobEditText}>Occupation                                         <Text style={{color: '#A5A6A6'}}>Designer <TouchableOpacity onPress={() => navigation.navigate('SignupScreen')}><Image source={require("../../assets/photos/right-arrow.png")} style={{width:10, height:10}}/></TouchableOpacity></Text></Text>
+         <View style={styles.proWithArrow}>
+          <View>
+         <Text style={{color: '#A5A6A6'}}>{email}</Text>
          </View>
-         <View style={{ borderRadius:30, borderColor: '#A5A6A6', borderWidth: 2, width:370, marginLeft:10}}>
-         <Text style={styles.previousResultText}>Previous Test Results                <TouchableOpacity onPress={() => navigation.navigate('SignupScreen')}><Image source={require("../../assets/photos/arrow-down-sign-to-navigate.png")} style={{width:20, height:20}}/></TouchableOpacity></Text>
+         <View>
+         <TouchableOpacity onPress={() => navigation.navigate('SignupScreen')}><Image source={require("../../assets/photos/right-arrow.png")} style={{width:10, height:10}}/></TouchableOpacity>
          </View>
          </View>
+         </View>
+
+
+
+         <View style={styles.proLine} />
+
+         <View style={styles.proField}>
+          <View >
+         <Text style={styles.proLabel}>Date of birth</Text>
+         </View>
+         <View style={styles.proWithArrow}>
+          <View>
+         <Text style={{color: '#A5A6A6'}}>{dob}</Text>
+         </View>
+         <View>
+         <TouchableOpacity onPress={() => navigation.navigate('SignupScreen')}><Image source={require("../../assets/photos/right-arrow.png")} style={{width:10, height:10}}/></TouchableOpacity>
+         </View>
+         </View>
+         </View>
+
+
+         <View style={styles.proLine} />
+         <View style={styles.proField}>
+          <View >
+         <Text style={styles.proLabel}>Gender</Text>
+         </View>
+         <View style={styles.proWithArrow}>
+          <View>
+         <Text style={{color: '#A5A6A6'}}>{gender}</Text>
+         </View>
+         <View>
+         <TouchableOpacity onPress={() => navigation.navigate('SignupScreen')}><Image source={require("../../assets/photos/right-arrow.png")} style={{width:10, height:10}}/></TouchableOpacity>
+         </View>
+         </View>
+         </View>
+         </View>
+
+
+
+
+         <View style={styles.proLine}>
+         <View style={styles.proField}>
+          <View >
+         <Text style={styles.proLabel}>City</Text>
+         </View>
+         <View style={styles.proWithArrow}>
+          <View>
+         <Text style={{color: '#A5A6A6'}}>{city}</Text>
+         </View>
+         <View>
+         <TouchableOpacity onPress={() => navigation.navigate('SignupScreen')}><Image source={require("../../assets/photos/right-arrow.png")} style={{width:10, height:10}}/></TouchableOpacity>
+         </View>
+         </View>
+         </View>
+
+
+         <View style={styles.proLine} />
+
+         <View style={styles.proField}>
+          <View >        
+         <Text style={styles.proLabel}>Occupation</Text>
+         </View>
+         <View style={styles.proWithArrow}>
+          <View>
+         <Text style={{color: '#A5A6A6'}}>{occupation}</Text>
+         </View>
+         <View>
+         <TouchableOpacity onPress={() => navigation.navigate('SignupScreen')}><Image source={require("../../assets/photos/right-arrow.png")} style={{width:10, height:10}}/></TouchableOpacity>
+         </View>
+         </View>
+         </View>
+         </View>
+
+
+         <View style={styles.proLine}>
+         <View style={styles.proField}>
+          <View >
+         <Text style={styles.proLabel}>Previous Test Results</Text> 
+         </View>
+         <View style={styles.proWithArrow}>
+         <View>
+         <TouchableOpacity onPress={() => navigation.navigate('SignupScreen')}><Image source={require("../../assets/photos/arrow-down-sign-to-navigate.png")} style={{width:20, height:20}}/></TouchableOpacity>
+         </View>
+         </View>
+         {/* </View> */}
+         </View>
+         </View>
+         </View>
+
          </ScrollView>
       </SafeAreaView>
   );
@@ -115,26 +347,11 @@ lineText: {
   marginLeft:25,
   marginTop:15,
 },
-emailEditText: {
-  marginTop: 20,
-  marginBottom: 10,
+proLabel: {
   fontWeight: 'bold',
   textAlign: 'center',
   color: 'black',
-},
-dobEditText: {
-  marginTop: 20,
-  marginBottom: 10,
-  fontWeight: 'bold',
-  textAlign: 'center',
-  color: 'black',
-},
-genderEditText: {
-  marginTop: 20,
-  marginBottom: 20,
-  fontWeight: 'bold',
-  textAlign: 'center',
-  color: 'black',
+  marginLeft:10,
 },
 previousResultText: {
   fontSize:20,
@@ -151,7 +368,7 @@ resetParagraphEnter: {
 helloText: {
   fontWeight:'bold',
   fontSize: 30,
-  marginLeft:110,
+  // marginLeft:80,
 },
 abebeText: {
   color: '#2FCBD8',
@@ -168,7 +385,7 @@ labText: {
   color: 'black',
   fontWeight:'bold',
   fontSize: 20,
-  marginLeft:10,
+  marginLeft:20,
 },
 profil : {
   // backgroundColor: '#FFFF00',
@@ -176,5 +393,53 @@ profil : {
   flex: 1,
   justifyContent: 'center',
   alignItems: 'center',
+},
+pro : {
+  display: 'flex',
+  flex:1,
+  justifyContent:'center',
+  alignItems:'center',
+  marginTop:25
+},
+proDes : {
+  display: 'flex',
+  flex:1,
+  flexDirection:'row',
+  justifyContent:'center',
+  alignItems:'center'
+},
+proField : {
+  display: 'flex',
+  flex:1,
+  flexDirection:'row',
+  // justifyContent:'space-around',
+  alignItems:'center',
+  marginTop:20,
+  marginBottom:10
+},
+proWithArrow : {
+  display: 'flex',
+  flex:1,
+  flexDirection:'row',
+  justifyContent:'flex-end',
+  alignItems:'center',
+  padding:10
+},
+proLine : {
+  borderRadius:30, 
+  borderColor: '#A5A6A6', 
+  borderWidth: 1, 
+  width:'90%',
+  marginTop:10,
+  alignItems:'center'
+},
+proUpper : {
+  display: 'flex',
+  flex:1,
+  flexDirection:'row',
+  justifyContent:'space-between',
+  alignItems:'center',
+  padding:10,
+  marginTop:-130
 },
 })
