@@ -131,7 +131,12 @@ export default function Login() {
   return (
       <SafeAreaView style={styles.container}>
         <ScrollView > 
-        <View style={{backgroundColor:"black", width:250, height:250, borderRadius:150, opacity:0.2, top: -90, left:-90}}></View>
+        <View style={{backgroundColor:"black", width:250, height:250, borderRadius:150, opacity:0.2, top: -150, left:-90}}></View>
+        <View>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Image source={require("../../assets/photos/left-chevron.png")} style={{ marginTop: -190, marginLeft: 10, width: 20, height: 20 }} />
+          </TouchableOpacity>
+        </View>
         <View style={styles.logo}><Image source={require("../../assets/photos/colab.png")}/></View>
         <View style={styles.nameForm}>
         {/* <View style={styles.nameLogo}> */}
@@ -148,7 +153,7 @@ export default function Login() {
             marginTop:20,
             // marginLeft:40
           }}
-          placeholder={'User'}
+          placeholder={'Email or Phone number'}
           onChangeText={(text) => setUser(text)}
           />
         <TextInput

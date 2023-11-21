@@ -76,9 +76,6 @@ export default function MainScreen() {
   }
 
 
-  console.log('the picture----------------------',picture )
-
-
       // const toStore = await axios.get(`https://acubed-backend-production.up.railway.app/api/v1/auth/${response.data.user}`);
 
 
@@ -176,16 +173,16 @@ export default function MainScreen() {
               <Text style={styles.buttonText1}>Booking</Text>
             </TouchableOpacity>
           </View> */}
-          <View>
-            <Text style={styles.labText}>Our Facilities</Text>
+          <View style={{alignSelf:'flex-start'}}>
+            <Text style={styles.facText}>Our Facilities</Text>
           </View>
           <View style={styles.facilities}>
-            <View style={{borderWidth:2, borderColor:'#C7C4B9', borderRadius:10}}><TouchableOpacity onPress={() => navigation.navigate('AlationFacility')}><Image source={require("../../assets/photos/hospital.png")} style={{width:120, height:120, marginTop:10, marginRight:10}} /><Text>  Alation Hospital</Text></TouchableOpacity></View>
-            <View style={{borderWidth:2, borderColor:'#C7C4B9', borderRadius:10}}><TouchableOpacity onPress={() => navigation.navigate('KibruFacility')}><Image source={require("../../assets/photos/hospital.png")} style={{width:120, height:120, marginTop:10, marginLeft:10}} /><Text>     Kibru Hospital</Text></TouchableOpacity></View>
+            <View style={{borderWidth:2, borderColor:'#C7C4B9', borderRadius:10, marginRight:10}}><TouchableOpacity onPress={() => navigation.navigate('AlationFacility')}><Image source={require("../../assets/photos/hospital.png")} style={{width:120, height:120, marginTop:10, marginRight:10}} /><Text>  Alation Hospital</Text></TouchableOpacity></View>
+            <View style={{borderWidth:2, borderColor:'#C7C4B9', borderRadius:10, marginLeft:10}}><TouchableOpacity onPress={() => navigation.navigate('KibruFacility')}><Image source={require("../../assets/photos/hospital.png")} style={{width:120, height:120, marginTop:10, marginLeft:10}} /><Text>     Kibru Hospital</Text></TouchableOpacity></View>
           </View>
           <View style={styles.facilities}>
-            <View style={{borderWidth:2, borderColor:'#C7C4B9', borderRadius:10}}><TouchableOpacity onPress={() => navigation.navigate('NaolFacility')}><Image source={require("../../assets/photos/hospital.png")} style={{width:120, height:120, marginTop:10, marginRight:10}} /><Text>   Naol Hospital</Text></TouchableOpacity></View>
-            <View style={{borderWidth:2, borderColor:'#C7C4B9', borderRadius:10}}><TouchableOpacity onPress={() => navigation.navigate('YanetFacility')}><Image source={require("../../assets/photos/hospital.png")} style={{width:120, height:120, marginTop:10, marginLeft:10}} /><Text>     Yanet Hospital</Text></TouchableOpacity></View>
+            <View style={{borderWidth:2, borderColor:'#C7C4B9', borderRadius:10, marginRight:10}}><TouchableOpacity onPress={() => navigation.navigate('NaolFacility')}><Image source={require("../../assets/photos/hospital.png")} style={{width:120, height:120, marginTop:10, marginRight:10}} /><Text>   Naol Hospital</Text></TouchableOpacity></View>
+            <View style={{borderWidth:2, borderColor:'#C7C4B9', borderRadius:10, marginLeft:10}}><TouchableOpacity onPress={() => navigation.navigate('YanetFacility')}><Image source={require("../../assets/photos/hospital.png")} style={{width:120, height:120, marginTop:10, marginLeft:10}} /><Text>     Yanet Hospital</Text></TouchableOpacity></View>
           </View>
         </View>
         </View>
@@ -288,8 +285,17 @@ labText: {
   color: 'black',
   fontWeight:'bold',
   fontSize: 20,
-  textAlign:'left',
-  // marginLeft:10,
+  // textAlign:'center',
+  marginLeft:10,
+  alignSelf:'flex-start'
+},
+facText: {
+  color: 'black',
+  fontWeight:'bold',
+  fontSize: 20,
+  // textAlign:'center',
+  marginLeft:10,
+  alignSelf:'flex-start'
 },
 main : {
   // backgroundColor: '#FFFF00',
