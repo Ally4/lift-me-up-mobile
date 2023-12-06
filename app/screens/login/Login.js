@@ -13,24 +13,10 @@ import * as SecureStore from 'expo-secure-store';
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
 import Snackbar from 'react-native-snackbar';
-// import dotenv from 'dotenv';
-
-// dotenv.config();
 
 WebBrowser.maybeCompleteAuthSession();  
 
 export default function Login() {
-
-  // const [userInfo, setUserInfo] = useState(null);
-
-  // const [request, response, promptAsync] = Google.useAuthRequest({
-  //   androidClientId: "940575008691-8q82fgplrpfarutqt2c92uqjfo7lh4nq.apps.googleusercontent.com",
-  //   iosClientId: "940575008691-3pgp6j422vp7dcvf4176tki3kt2s7he8.apps.googleusercontent.com",
-  //   webClientId: "940575008691-2jsitr933bn1ij3nur456s3kgnv1qsu2.apps.googleusercontent.com",
-  //   // androidClientId: process.env.coLabAndroidKey,
-  //   // iosClientId: process.env.coLabIosKey,
-  //   // webClientId: process.env.coLabWebKey,
-  // })
 
   const navigation = useNavigation(); 
   const [password, setPassword] = useState('');
@@ -50,27 +36,11 @@ export default function Login() {
     dispatch(loginStart());
     try {
       const response = await axios.post("https://acubed-backend-production.up.railway.app/api/v1/auth/login",{ user, password })
-
-      // const toStore = await axios.get(`https://acubed-backend-production.up.railway.app/api/v1/auth/${response.data.user}`);
-
-      // console.log('the store---------------------------------', toStore.data.user.profilPicture)
-
+      
 
       if (response.data.token) {
        await AsyncStorage.setItem('AccessToken', response.data.token)
        await AsyncStorage.setItem('name', response.data.name)
-
-      //  await AsyncStorage.setItem('picture', toStore.data.user.profilPicture)
-      //  await AsyncStorage.setItem('email', toStore.data.user.email)
-      //  await AsyncStorage.setItem('dob', toStore.data.user.dateOfBirth)
-      //  await AsyncStorage.setItem('gender', toStore.data.user.gender)
-      //  await AsyncStorage.setItem('city', toStore.data.user.city)
-      //  await AsyncStorage.setItem('lastName', toStore.data.user.lastName)
-      //  await AsyncStorage.setItem('occupation', toStore.data.user.occupation)
-        
-      // const toStore = await axios.get(`https://acubed-backend-production.up.railway.app/api/v1/auth/${response.data.user}`);
-
-      // console.log('the store---------------------------------', toStore)
 
 
         dispatch(loginSuccess({ user: response.data.user, token: response.data.token }));
@@ -95,36 +65,6 @@ export default function Login() {
     }
   };
 
-
-  // useEffect(() => {
-  //   handleLoginWithGoogle();
-  // }, [response])
-
-
-  // async function handleLoginWithGoogle() {
-  //  const user =  await AsyncStorage.getItem("@user");
-  //  if (!user) {
-  //     if(response?.type === "success") {
-  //       await getUserInfo(response.authentication.accessToken);
-  //     }
-  //  } else {
-  //   setUserInfo(JSON.parse());
-  //  }
-  // }
-
-  // const getUserInfo = async (token) => {
-  //   if (!token) return;
-  //   try {
-  //     const response = await fetch("https://www.googleapis.com/userinfo/v2/me",{
-  //       headers: {Authorization: `Bearer ${token}`},
-  //     });
-  //     const user = await response.json();
-  //     await AsyncStorage.setItem("@user", JSON.stringify(user));
-  //     setUserInfo(user);
-  //   } catch(error) {
-  //     console.log("This is the error for the login with google");
-  //   }
-  // }
 
 
 

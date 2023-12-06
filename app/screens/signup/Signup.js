@@ -73,7 +73,7 @@ export default function Signup() {
 
   return (
       <SafeAreaView style={styles.container}> 
-      {/* <ScrollView > */}
+      <ScrollView >
         <View style={{backgroundColor:"black", width:250, height:250, borderRadius:150, opacity:0.2, top: -150, left:-90}}></View>
         <View>
           <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -140,7 +140,7 @@ export default function Signup() {
            </View>
         </View>
         </View>
-        {/* </ScrollView> */}
+        </ScrollView>
       </SafeAreaView>
   );
 }

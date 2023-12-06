@@ -5,7 +5,7 @@ export default function LandingPage({navigation}) {
   return (
   <SafeAreaView style={styles.container}>
     <ScrollView >
-      <View style={{backgroundColor:"black", width:250, height:250, borderRadius:150, opacity:0.2, top: -90, left:-90}}></View>
+      <View style={{backgroundColor:"black", width:250, height:250, borderRadius:150, opacity:0.2, top: -170, left:-90}}></View>
       <View style={styles.landing}>
       <Image source={require("../../assets/photos/logo.png")} />
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
