@@ -74,7 +74,12 @@ export default function Signup() {
   return (
       <SafeAreaView style={styles.container}> 
       <ScrollView >
-        <View style={{backgroundColor:"black", width:250, height:250, borderRadius:150, opacity:0.2, top: -90, left:-90}}></View>
+        <View style={{backgroundColor:"black", width:250, height:250, borderRadius:150, opacity:0.2, top: -150, left:-90}}></View>
+        <View>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Image source={require("../../assets/photos/left-chevron.png")} style={{ marginTop: -190, marginLeft: 10, width: 20, height: 20 }} />
+          </TouchableOpacity>
+        </View>
         <View style={styles.logo}><Image source={require("../../assets/photos/colab.png")}/></View>
         <View style={styles.nameForm}>
         <View style={styles.signup}>
@@ -89,7 +94,7 @@ export default function Signup() {
             marginTop:20,
             // marginLeft:40
           }}
-          placeholder={'User'}
+          placeholder={'Email or Phone number'}
           onChangeText={(text) => setUser(text)}
           />  
           <TextInput
@@ -129,8 +134,10 @@ export default function Signup() {
            > 
             <Text style={styles.buttonText1}>Sign Up</Text>
            </TouchableOpacity>
+           <View style={{ justifyContent:"center", alignItems:"center"}}>
            <Text >Do you have an account?<TouchableOpacity onPress={() => navigation.navigate('Login')} ><Text style={{ color: '#2FCBD8', marginTop:2}}> Login</Text></TouchableOpacity></Text>
            <Image source={require("../../assets/photos/acubed.png")} />
+           </View>
         </View>
         </View>
         </ScrollView>
@@ -177,27 +184,29 @@ buttonText1: {
   textAlign: 'center',
 },
 logo : {
-  display:'flex',
-  flex: 1,
+  // display:'flex',
+  // flex: 1,
   justifyContent: 'center',
   alignItems: 'center',
-  marginVertical: 20,
+  marginTop:-60,
+  // marginVertical: 20,
 },
 nameForm : {
   backgroundColor: '#ffffff',
-  display:'flex',
-  flex: 1,
+  // display:'flex',
+  // flex: 1,
   justifyContent: 'center',
   alignItems: 'center',
   borderTopRightRadius: 15,
   borderTopLeftRadius: 15,
+  paddingBottom:30,
   // padding: 1,
 },
-signup : {
-  // backgroundColor: '#FFFF00',
-  display:'flex',
-  flex: 1,
-  justifyContent: 'center',
-  alignItems: 'center',
-},
+// signup : {
+//   // backgroundColor: '#FFFF00',
+//   display:'flex',
+//   flex: 1,
+//   justifyContent: 'center',
+//   alignItems: 'center',
+// },
 })

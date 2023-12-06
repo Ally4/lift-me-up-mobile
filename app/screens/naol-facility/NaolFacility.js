@@ -53,7 +53,7 @@ export default function AlationFacility() {
         </View>
         <View style={styles.labtest}>
         <Text style={styles.lab}>Facility</Text>
-        <View style={styles.logoFacility}><Image source={require("../../assets/photos/hospital.png")} style={{width:150, height:150}}></Image></View>
+        <View style={styles.logoFacility}><Image source={require("../../assets/photos/med.png")} style={{width:150, height:150}}></Image></View>
         <View style={styles.hospitalname}>
                 <View><Text style={styles.facilitytext}>Naol Hospital</Text></View>
                 <View style={styles.correct}>

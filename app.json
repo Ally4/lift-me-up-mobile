@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "co-lab",
+    "name": "CO-LAB",
     "slug": "lift-me-up-mobile",
     "version": "2.0.0",
     "orientation": "portrait",
-    "icon": "./app/assets/acubed-logo.jpeg",
+    "icon": "./app/assets/photos/acubed-logo.jpeg",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./app/assets/loading.jpeg",
+      "image": "./app/assets/photos/loading.jpeg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -20,7 +20,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./app/assets/adaptive-icon.png",
+        "foregroundImage": "./app/assets/photos/loading.jpeg",
         "backgroundColor": "#ffffff"
       },
       "package": "com.ally4.liftmeupmobile"
