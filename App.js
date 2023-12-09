@@ -86,6 +86,10 @@ import TestSerumSodium from './app/screens/tests/SerumSodiumTest'
 import TestUrine from './app/screens/tests/UrineTest'
 
 
+import Results from './app/screens/result/Result'
+import ViewResults from './app/screens/viewResult/ViewResult'
+
+
 
 
 const Stack = createNativeStackNavigator();
@@ -106,9 +110,9 @@ const App = () => {
     <NavigationContainer options={{ headerShown: false }}>
       <Stack.Navigator mode="modal" options={{ headerShown: false }}>
         {/* This */}
-        <Stack.Screen name="Home" component={LandingPage} options={{ headerShown: false }}/>
+        {/* <Stack.Screen name="Home" component={LandingPage} options={{ headerShown: false }}/>
         <Stack.Screen name="Login" component={Login}  options={{ headerShown: false }}/>
-        <Stack.Screen name="Signup" component={Signup}  options={{ headerShown: false }}/>
+        <Stack.Screen name="Signup" component={Signup}  options={{ headerShown: false }}/> */}
 
 
         {/* <Stack.Screen name="Order" component={Order} options={{ headerShown: false }} />  */}
@@ -116,7 +120,7 @@ const App = () => {
         {/* <Stack.Screen name="Booking" component={Booking} options={{ headerShown: false }} />  */}
 
         {/* This */}
-        <Stack.Screen name="Main" component={Main}  options={{ headerShown: false }}/>
+        {/* <Stack.Screen name="Main" component={Main}  options={{ headerShown: false }}/> */}
 
 
         {/* <Stack.Screen name="TestAmylase" component={TestAmylase}  options={{ headerShown: false }}/>
@@ -134,24 +138,24 @@ const App = () => {
         {/* <Stack.Screen name="HomeNursing" component={HomeNursing}  options={{ headerShown: false }}/> */}
 
         {/* This */}
-        <Stack.Screen name="AlationFacility" component={AlationFacility}  options={{ headerShown: false }}/>
+        {/* <Stack.Screen name="AlationFacility" component={AlationFacility}  options={{ headerShown: false }}/>
         <Stack.Screen name="KibruFacility" component={KibruFacility}  options={{ headerShown: false }}/>
         <Stack.Screen name="NaolFacility" component={NaolFacility}  options={{ headerShown: false }}/>
-        <Stack.Screen name="YanetFacility" component={YanetFacility}  options={{ headerShown: false }}/>
+        <Stack.Screen name="YanetFacility" component={YanetFacility}  options={{ headerShown: false }}/> */}
 
 
         {/* <Stack.Screen name="ResetEmailScreen" component={ResetEmailScreen}  /> */}
         {/* <Stack.Screen name="Pin-Screen" component={PinScreen}  /> */}
 
         {/* This */}
-        <Stack.Screen name="UpdateProfil" component={UpdateProfil}  options={{ headerShown: false }}/>
+        {/* <Stack.Screen name="UpdateProfil" component={UpdateProfil}  options={{ headerShown: false }}/>
         <Stack.Screen name="Profil" component={Profil}  options={{ headerShown: false }}/>
-        <Stack.Screen name="Result" component={Result}  options={{ headerShown: false }}/>
+        <Stack.Screen name="Result" component={Result}  options={{ headerShown: false }}/> */}
 
 
         {/* <Stack.Screen name="LabTest" component={LabTest}  options={{ headerShown: false }}/> */}
 
-        <Stack.Screen name="OrderAllationAmylase" component={OrderAllationAmylase}  options={{ headerShown: false }}/>
+        {/* <Stack.Screen name="OrderAllationAmylase" component={OrderAllationAmylase}  options={{ headerShown: false }}/>
         <Stack.Screen name="OrderAllationcbc" component={OrderAllationcbc}  options={{ headerShown: false }}/>
         <Stack.Screen name="OrderAllationLipase" component={OrderAllationLipase}  options={{ headerShown: false }}/>
         <Stack.Screen name="OrderAllationSerumCreatine" component={OrderAllationSerumCreatine}  options={{ headerShown: false }}/>
@@ -189,7 +193,14 @@ const App = () => {
         <Stack.Screen name="OrderOtherSerumCreatine" component={OrderOtherSerumCreatine}  options={{ headerShown: false }}/>
         <Stack.Screen name="OrderOtherSerumPotassium" component={OrderOtherSerumPotassium}  options={{ headerShown: false }}/>
         <Stack.Screen name="OrderOtherSerumSodium" component={OrderOtherSerumSodium}  options={{ headerShown: false }}/>
-        <Stack.Screen name="OrderOtherUrine" component={OrderOtherUrine}  options={{ headerShown: false }}/>
+        <Stack.Screen name="OrderOtherUrine" component={OrderOtherUrine}  options={{ headerShown: false }}/> */}
+
+
+        <Stack.Screen name="Results" component={Results}  options={{ headerShown: false }}/>
+
+
+        <Stack.Screen name="ViewResults" component={ViewResults}  options={{ headerShown: false }}/>
+
 
       </Stack.Navigator>
      </NavigationContainer>

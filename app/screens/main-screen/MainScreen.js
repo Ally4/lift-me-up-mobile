@@ -8,6 +8,9 @@ export default function MainScreen() {
   const navigation = useNavigation();
   const [name, setName] = useState('');
   const [picture, setPicture] = useState('');
+  const [facilities, setFacilities] = useState([]);
+  const [facilityData, setFacilityData] = useState([]);
+  const [dataArray, setDataArray] = useState([]);
 
   const data = [
     { id: '1', title: 'Urine Analysis' },
@@ -27,6 +30,79 @@ export default function MainScreen() {
       // Handle errors
     }
   }
+
+
+
+
+
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get('https://acubed-backend-production.up.railway.app/api/v1/health-facility/facilities');
+
+  //       console.log('oooooooooooooooooooooooooooooo', response);
+
+  //       Object.entries(response).map(x=> console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', x));
+
+
+  //       setFacilities(response.data);
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
+
+
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://acubed-backend-production.up.railway.app/api/v1/health-facility/facilities');
+        setDataArray(response?.data?.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+
+
+
+
+
+
+
+
+
+
+  // useEffect(() => {
+  //   fetch('https://acubed-backend-production.up.railway.app/api/v1/health-facility/facilities')
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       const results = data.results;
+  //       setFacilityData(results);
+  //     })
+  //     .catch(error => console.error(error));
+  // }, []);
+
+  // useEffect(() => {
+  //   fetch('https://acubed-backend-production.up.railway.app/api/v1/health-facility/facilities')
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       const results = data.results;
+  //       setFacilityData(results);
+  //     })
+  //     .catch(error => console.error(error));
+  // }, []);
+
+
 
 
 
@@ -58,6 +134,8 @@ export default function MainScreen() {
 
 
       const toStore = await axios.get(`https://acubed-backend-production.up.railway.app/api/v1/auth/${response.data.user}`);
+
+      // const fac = await axios.get(`https://acubed-backend-production.up.railway.app/api/v1/health-facility/facilities`);
 
 
 
@@ -119,7 +197,7 @@ export default function MainScreen() {
           {/* <Image source={picture} style={{ marginTop: -150, marginLeft: 10, width: 50, height: 50 }} /> */}
           <View style={{marginBottom:150}}> 
           <Image source={require("../../assets/photos/logo-blue.png")} style={{ marginTop: -80, marginLeft: 135 }} />
-          <Image source={require("../../assets/photos/bell.png")} style={{ marginTop: -10, marginLeft: 330, width: 35, height: 35 }} />
+          {/* <Image source={require("../../assets/photos/bell.png")} style={{ marginTop: -10, marginLeft: 330, width: 35, height: 35 }} /> */}
           </View>
           <View style={{marginTop:-100}}>
         <Text style={styles.helloText}>Hello <Text style={styles.abebeText}>{name}!</Text></Text>
@@ -170,17 +248,7 @@ export default function MainScreen() {
             )}
           />
 
-          {/* <View>
-            <TouchableOpacity style={styles.button1} onPress={() => navigation.navigate('Order')}>
-              <Text style={styles.buttonText1}>Order</Text>
-            </TouchableOpacity>
-          </View>
-          <View>
-            <TouchableOpacity style={styles.button1} onPress={() => navigation.navigate('Booking')}>
-              <Text style={styles.buttonText1}>Booking</Text>
-            </TouchableOpacity>
-          </View> */}
-          <View style={{alignSelf:'flex-start'}}>
+          {/* <View style={{alignSelf:'flex-start'}}>
             <Text style={styles.facText}>Our Facilities</Text>
           </View>
           <View style={styles.facilities}>
@@ -190,8 +258,76 @@ export default function MainScreen() {
           <View style={styles.facilities}>
             <View style={{borderWidth:2, borderColor:'#C7C4B9', borderRadius:10, marginRight:10}}><TouchableOpacity onPress={() => navigation.navigate('NaolFacility')}><Image source={require("../../assets/photos/med.png")} style={{width:120, height:120, marginTop:10, marginRight:10}} /><Text>   Naol Hospital</Text></TouchableOpacity></View>
             <View style={{borderWidth:2, borderColor:'#C7C4B9', borderRadius:10, marginLeft:10}}><TouchableOpacity onPress={() => navigation.navigate('YanetFacility')}><Image source={require("../../assets/photos/med.png")} style={{width:120, height:120, marginTop:10, marginLeft:10}} /><Text>     Yanet Hospital</Text></TouchableOpacity></View>
+          </View> */}
+
+
+
+
+
+
+
+
+         {/* <View key={item.id} style={{ marginBottom: 20, alignItems: 'center' }}>
+           <Text>{item.name}</Text>
+           <Image source={{ uri: item.profilPicture }} style={{ width: 100, height: 100, borderRadius: 50, marginTop: 10 }} />
+         </View> */}
+
+
+
+{/* <View style={{backgroundColor:"red"}}>
+  {facilityData && facilityData.map((facility, index) => (
+    <View key={index}>
+      <Text>{facility.name}</Text>
+      <Image source={{ uri: facility.profilPicture }} />
+    </View>
+  ))}
+</View> */}
+
+
+{/* <View style={styles.facilities}>
+          {facilityData && facilityData.map((facility, index) => (
+            <View key={index}>
+              <Text style={styles.facText}>{facility.name}</Text>
+              <Image source={{ uri: facility.profilPicture }} style={{ width: 50, height: 50, borderRadius: 25 }} />
+            </View>
+          ))}
+        </View> */}
+
+
+
+
+{/* <View>
+      <Text>List of Health Facilities:</Text>
+      <FlatList
+        data={facilities}
+        keyExtractor={(facility) => facility.id.toString()}
+        renderItem={({ item }) => (
+          <View>
+            <Text>{item.name}</Text>
+            <Image source={{ uri: item.profilPicture }} style={{ width: 50, height: 50 }} />
           </View>
+        )}
+      />
+    </View> */}
+
+
+
+
+
+
+
+
         </View>
+        <View >
+<Text style={styles.facText}>Our Facilities</Text>
+<View style={styles.theDisplays}>
+      {dataArray?.map((itemFac) => (
+        <View style={styles.facilities}>
+          <View key={itemFac.id}  style={{borderWidth:2, borderColor:'#C7C4B9', borderRadius:10, marginRight:10}}><TouchableOpacity onPress={() => navigation.navigate('AlationFacility')}><Image source={{ uri: itemFac.profilPicture }} style={{width:120, height:120, marginTop:10, marginRight:10}} /><Text style={{alignSelf:'center'}}>{itemFac.name}</Text></TouchableOpacity></View>
+        </View>
+      ))}
+      </View>
+    </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -322,12 +458,24 @@ flat: {
   margin: 7,
 },
 facilities: {
+  // backgroundColor:"red",
+  // display:'flex',
+  // flexDirection: 'column',
+  // flex: 1,
+  // justifyContent: 'space-around',
+  // alignItems: 'center',
+  marginBottom:10,
+  marginTop:10,
+},
+theDisplays: {
+  // backgroundColor:"yellow",
   display:'flex',
   flexDirection: 'row',
   flex: 1,
+  flexWrap: "nowrap",
   justifyContent: 'space-around',
-  alignItems: 'center',
-  marginBottom:10,
-  marginTop:10,
+  // alignItems: 'center',
+  // marginBottom:10,
+  // marginTop:10,
 }
 });

@@ -36,14 +36,16 @@ export default function Login() {
     dispatch(loginStart());
     try {
       const response = await axios.post("https://acubed-backend-production.up.railway.app/api/v1/auth/login",{ user, password })
+
+      console.log('==============================================================================', response)
       
 
-      if (response.data.token) {
-       await AsyncStorage.setItem('AccessToken', response.data.token)
-       await AsyncStorage.setItem('name', response.data.name)
+      if (response?.data?.token) {
+       await AsyncStorage.setItem('AccessToken', response?.data?.token)
+       await AsyncStorage.setItem('name', response?.data?.name)
 
 
-        dispatch(loginSuccess({ user: response.data.user, token: response.data.token }));
+        dispatch(loginSuccess({ user: response?.data?.user, token: response?.data?.token }));
         navigation.navigate('Main'); 
         setPassword('');
         setUser('');
